@@ -1,0 +1,429 @@
+﻿@model BioGC.Areas.Admin.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var statusClasses = new Dictionary<string, string>
+    {
+        { "Pending", "badge-status-pending" },
+        { "Shipped", "badge-status-shipped" },
+        { "Delivered", "badge-status-delivered" },
+        { "Cancelled", "badge-status-cancelled" }
+    };
+}
+
+<style>
+    .chart-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .no-data-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 250px;
+        color: var(--text-light);
+        font-style: italic;
+    }
+</style>
+
+<h1 class="mb-4" data-ar="لوحة المعلومات" data-en="Dashboard">Dashboard</h1>
+
+<!-- Top Statistic Cards -->
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card stat-card border-primary h-100">
+            <div class="card-body">
+                <div>
+                    <div class="fs-4 fw-bold">@Model.TotalOrders</div>
+                    <div class="text-muted" data-ar="إجمالي الطلبات" data-en="Total Orders">Total Orders</div>
+                </div>
+                <div class="stat-icon bg-primary"><i class="fas fa-shopping-cart"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card stat-card border-success h-100">
+            <div class="card-body">
+                <div>
+                    <div class="fs-4 fw-bold">$@Model.TotalRevenue.ToString("N0")</div>
+                    <div class="text-muted" data-ar="إجمالي الإيرادات" data-en="Total Revenue">Total Revenue</div>
+                </div>
+                <div class="stat-icon bg-success"><i class="fas fa-dollar-sign"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card stat-card border-danger h-100">
+            <div class="card-body">
+                <div>
+                    <div class="fs-4 fw-bold">@Model.TotalUsers</div>
+                    <div class="text-muted" data-ar="إجمالي المستخدمين" data-en="Total Users">Total Users</div>
+                </div>
+                <div class="stat-icon bg-danger"><i class="fas fa-users"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card stat-card border-info h-100">
+            <div class="card-body">
+                <div>
+                    <div class="fs-4 fw-bold">@Model.TotalProducts</div>
+                    <div class="text-muted" data-ar="إجمالي المنتجات" data-en="Total Products">Total Products</div>
+                </div>
+                <div class="stat-icon bg-info"><i class="fas fa-boxes"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 1 -->
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-chart-line me-2"></i> <span data-ar="الإيرادات الشهرية" data-en="Monthly Revenue">Monthly Revenue</span></div>
+            <div class="card-body">
+                @if (Model.RevenueChartData != null && Model.RevenueChartData.Any(d => d > 0))
+                {
+                    <div class="chart-container" style="height:320px;">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card">
+                        <span data-ar="لا توجد بيانات إيرادات لعرضها." data-en="No revenue data to display.">No revenue data to display.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-chart-pie me-2"></i> <span data-ar="المنتجات حسب الفئة" data-en="Products by Category">Products by Category</span></div>
+            <div class="card-body">
+                @if (Model.ProductsByCategoryData != null && Model.ProductsByCategoryData.Any())
+                {
+                    <div class="chart-container" style="height:320px;">
+                        <canvas id="productsByCategoryChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card">
+                        <span data-ar="لا توجد منتجات لعرضها." data-en="No products to display.">No products to display.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 2 -->
+<div class="row">
+    <div class="col-lg-7 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-trophy me-2"></i> <span data-ar="أفضل 5 منتجات مبيعًا" data-en="Top 5 Selling Products">Top 5 Selling Products</span></div>
+            <div class="card-body">
+                @if (Model.TopProductsData != null && Model.TopProductsData.Any())
+                {
+                    <div class="chart-container" style="height:250px;">
+                        <canvas id="topProductsChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card">
+                        <span data-ar="لا توجد بيانات مبيعات لعرضها." data-en="No sales data to display.">No sales data to display.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-tasks me-2"></i> <span data-ar="حالة الطلبات" data-en="Orders Status">Orders Status</span></div>
+            <div class="card-body">
+                @if (Model.OrderStatusData != null && Model.OrderStatusData.Any())
+                {
+                    <div class="chart-container" style="height:250px;">
+                        <canvas id="orderStatusChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card">
+                        <span data-ar="لا توجد طلبات لعرضها." data-en="No orders to display.">No orders to display.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 3 -->
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-users-cog me-2"></i> <span data-ar="المستخدمون حسب الدور" data-en="Users by Role">Users by Role</span></div>
+            <div class="card-body">
+                @if (Model.UsersByRoleData != null && Model.UsersByRoleData.Any())
+                {
+                    <div class="chart-container" style="height:250px;">
+                        <canvas id="usersByRoleChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card">
+                        <span data-ar="لا توجد بيانات أدوار لعرضها." data-en="No role data to display.">No role data to display.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-star me-2"></i> <span data-ar="حالة التقييمات" data-en="Reviews Status">Reviews Status</span></div>
+            <div class="card-body">
+                @if (Model.ReviewsStatusData != null && Model.ReviewsStatusData.Any())
+                {
+                    <div class="chart-container" style="height:250px;">
+                        <canvas id="reviewsStatusChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card">
+                        <span data-ar="لا توجد تقييمات لعرضها." data-en="No reviews to display.">No reviews to display.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity Tables -->
+<div class="row">
+    <div class="col-lg-7 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-receipt me-2"></i> <span data-ar="آخر الطلبات" data-en="Recent Orders">Recent Orders</span></div>
+            <div class="card-body p-0">
+                @if (Model.RecentOrders.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-activity mb-0">
+                            <thead>
+                                <tr>
+                                    <th data-ar="العميل" data-en="Customer">Customer</th>
+                                    <th data-ar="الحالة" data-en="Status">Status</th>
+                                    <th class="text-end" data-ar="الإجمالي" data-en="Total">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.RecentOrders)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="fw-bold">@order.ApplicationUser.FullName</div>
+                                            <div class="small text-muted">@order.OrderDate.ToString("dd MMM yyyy")</div>
+                                        </td>
+                                        <td>
+                                            <span style="color:#000 !important" class="badge @(statusClasses.ContainsKey(order.OrderStatus) ? statusClasses[order.OrderStatus] : "") ">
+                                                @order.OrderStatus
+                                            </span>
+                                        </td>
+                                        <td class="text-end fw-bold">$@order.TotalAmount.ToString("N2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-data-card" style="min-height: 200px;">
+                        <span data-ar="لا توجد طلبات حديثة." data-en="No recent orders.">No recent orders.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 mb-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="fas fa-user-plus me-2"></i> <span data-ar="آخر المستخدمين المسجلين" data-en="Recent Users">Recent Users</span></div>
+            <div class="card-body">
+                @if (Model.RecentUsers.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var user in Model.RecentUsers)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <div class="fw-bold">@user.FullName</div>
+                                    <div class="small text-muted">@user.Email</div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <div class="no-data-card" style="min-height: 200px;">
+                        <span data-ar="لا يوجد مستخدمون جدد." data-en="No recent users.">No recent users.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        @{
+                var reviewsData = Model.ReviewsStatusData != null && Model.ReviewsStatusData.Any() ? Model.ReviewsStatusData : new List<int> { 0 };
+                var maxReviewCount = reviewsData.Any() ? reviewsData.Max() : 0;
+                var radarStepSize = Math.Ceiling(maxReviewCount / 4.0);
+                if (radarStepSize == 0) radarStepSize = 1;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const primaryColor = '#0d9488';
+            const primaryColorRGB = '13, 148, 136';
+            const chartColors = ['#0d9488', '#14b8a6', '#0ea5e9', '#64748b', '#f97316', '#ec4899'];
+            const statusColors = {
+                'Pending': '#f59e0b', 'Shipped': '#0ea5e9', 'Delivered': '#22c55e',
+                'Cancelled': '#ef4444', 'Approved': '#22c55e', 'Rejected': '#ef4444'
+            };
+
+            Chart.defaults.maintainAspectRatio = false;
+            Chart.defaults.responsive = true;
+            Chart.defaults.plugins.legend.position = 'bottom';
+            Chart.defaults.font.family = "'Cairo', sans-serif";
+            Chart.defaults.color = '#64748b';
+
+            if (document.getElementById("revenueChart")) {
+                const revenueCtx = document.getElementById("revenueChart").getContext('2d');
+                const gradient = revenueCtx.createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, `rgba(${primaryColorRGB}, 0.6)`);
+                gradient.addColorStop(1, `rgba(${primaryColorRGB}, 0.05)`);
+                new Chart(revenueCtx, {
+                    type: 'line',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(Model.RevenueChartLabels)),
+                        datasets: [{
+                            label: "Revenue", backgroundColor: gradient, borderColor: primaryColor,
+                            data: @Html.Raw(Json.Serialize(Model.RevenueChartData)),
+                            fill: true, tension: 0.4, pointBackgroundColor: primaryColor, pointBorderColor: '#fff',
+                            pointHoverRadius: 6, pointHoverBackgroundColor: '#fff', pointHoverBorderColor: primaryColor
+                        }],
+                    },
+                    options: {
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { ticks: { callback: (value) => '$' + value }, grid: { color: '#e2e8f0' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById("productsByCategoryChart")) {
+                const productsByCategoryCtx = document.getElementById("productsByCategoryChart").getContext('2d');
+                new Chart(productsByCategoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(Model.ProductsByCategoryLabels)),
+                        datasets: [{
+                            data: @Html.Raw(Json.Serialize(Model.ProductsByCategoryData)),
+                            backgroundColor: chartColors, borderColor: '#fff', borderWidth: 2, hoverOffset: 8
+                        }],
+                    },
+                    options: { plugins: { legend: { position: 'right' } } }
+                });
+            }
+
+            if (document.getElementById("orderStatusChart")) {
+                const orderStatusCtx = document.getElementById("orderStatusChart").getContext('2d');
+                const orderStatusLabelsJS = @Html.Raw(Json.Serialize(Model.OrderStatusLabels));
+                new Chart(orderStatusCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: orderStatusLabelsJS,
+                        datasets: [{
+                            data: @Html.Raw(Json.Serialize(Model.OrderStatusData)),
+                            backgroundColor: orderStatusLabelsJS.map(label => statusColors[label] || '#6c757d'),
+                            borderColor: '#fff', borderWidth: 2, hoverOffset: 8
+                        }],
+                    },
+                    options: { plugins: { legend: { position: 'bottom' } } }
+                });
+            }
+
+            if (document.getElementById("topProductsChart")) {
+                const topProductsCtx = document.getElementById("topProductsChart").getContext('2d');
+                new Chart(topProductsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(Model.TopProductsLabels)),
+                        datasets: [{
+                            label: 'Quantity Sold', data: @Html.Raw(Json.Serialize(Model.TopProductsData)),
+                            backgroundColor: chartColors, borderColor: chartColors, borderWidth: 1, borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', plugins: { legend: { display: false } },
+                        scales: { x: { grid: { display: false } }, y: { grid: { display: false } } }
+                    }
+                });
+            }
+
+            if (document.getElementById("usersByRoleChart")) {
+                const usersByRoleCtx = document.getElementById("usersByRoleChart").getContext('2d');
+                const usersByRoleLabelsJS = @Html.Raw(Json.Serialize(Model.UsersByRoleLabels));
+                new Chart(usersByRoleCtx, {
+                    type: 'polarArea',
+                    data: {
+                        labels: usersByRoleLabelsJS, 
+                        datasets: [{
+                            data: @Html.Raw(Json.Serialize(Model.UsersByRoleData)),
+                            backgroundColor: chartColors.slice(0, usersByRoleLabelsJS.length).map(c => `${c}B3`),
+                            borderColor: chartColors.slice(0, usersByRoleLabelsJS.length), borderWidth: 1
+                        }],
+                    },
+                    options: { plugins: { legend: { position: 'bottom' } } }
+                });
+            }
+
+            if (document.getElementById("reviewsStatusChart")) {
+                const reviewsStatusCtx = document.getElementById("reviewsStatusChart").getContext('2d');
+                new Chart(reviewsStatusCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(Model.ReviewsStatusLabels)),
+                        datasets: [{
+                            label: 'Reviews', data: @Html.Raw(Json.Serialize(Model.ReviewsStatusData)), fill: true,
+                            backgroundColor: `rgba(${primaryColorRGB}, 0.2)`, borderColor: `rgba(${primaryColorRGB}, 1)`,
+                            pointBackgroundColor: `rgba(${primaryColorRGB}, 1)`, pointBorderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            r: {
+                                angleLines: { color: '#e2e8f0' }, grid: { color: '#e2e8f0' },
+                                pointLabels: { font: { size: 12 } },
+                                ticks: {
+                                    display: false,
+                                    stepSize: @radarStepSize
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}

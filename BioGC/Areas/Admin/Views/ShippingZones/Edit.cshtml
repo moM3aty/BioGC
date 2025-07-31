@@ -1,0 +1,45 @@
+﻿@model BioGC.Areas.Admin.ViewModels.ShippingZoneViewModel
+@{
+    ViewData["Title"] = "Edit Shipping Zone";
+}
+
+<h1 data-ar="تعديل منطقة الشحن" data-en="Edit Shipping Zone">Edit Shipping Zone</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-edit me-1"></i>
+                <span data-ar="تعديل تفاصيل المنطقة" data-en="Edit Zone Details">Edit Zone Details</span>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="mb-3">
+                        <label asp-for="ZoneNameEn" class="form-label"></label>
+                        <input asp-for="ZoneNameEn" class="form-control" />
+                        <span asp-validation-for="ZoneNameEn" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ZoneNameAr" class="form-label"></label>
+                        <input asp-for="ZoneNameAr" class="form-control" />
+                        <span asp-validation-for="ZoneNameAr" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ShippingCost" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input asp-for="ShippingCost" class="form-control" />
+                        </div>
+                        <span asp-validation-for="ShippingCost" class="text-danger"></span>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i> <span data-ar="حفظ التغييرات" data-en="Save Changes">Save Changes</span></button>
+                        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i> <span data-ar="العودة للقائمة" data-en="Back to List">Back to List</span></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

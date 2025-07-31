@@ -1,0 +1,48 @@
+﻿@model BioGC.Areas.Admin.ViewModels.CategoryViewModel
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<h1 data-ar="تعديل الفئة" data-en="Edit Category">Edit Category</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-edit me-1"></i>
+                <span data-ar="تعديل تفاصيل الفئة" data-en="Edit Category Details">Edit Category Details</span>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="mb-3">
+                        <label for="NameEn" class="form-label" data-en="Name (English)" data-ar="الاسم (الإنجليزية)"></label>
+                        <input asp-for="NameEn" class="form-control" />
+                        <span asp-validation-for="NameEn" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="NameAr" class="form-label" data-en="Name (Arabic)" data-ar="الاسم (العربية)"></label>
+                        <input asp-for="NameAr" class="form-control" />
+                        <span asp-validation-for="NameAr" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ParentCategoryId" class="form-label" data-en="Parent Category (Optional)" data-ar="الفئة الرئيسية (اختياري)"></label>
+                        <div class="input-group">
+                            <select asp-for="ParentCategoryId" class="form-select" asp-items="@Model.ParentCategoryList">
+                                <option value="">-- None (This is a Parent Category) --</option>
+                            </select>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#parentCategoryManagementModal" title="Manage Parent Categories">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i> <span data-ar="حفظ التغييرات" data-en="Save Changes">Save Changes</span></button>
+                        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i> <span data-ar="العودة للقائمة" data-en="Back to List">Back to List</span></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

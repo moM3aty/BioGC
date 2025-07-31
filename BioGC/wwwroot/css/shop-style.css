@@ -1,0 +1,147 @@
+﻿.filter-bar {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2.5rem;
+}
+
+    .filter-bar .form-control,
+    .filter-bar .form-select {
+        border-radius: 8px;
+        border-color: #ced4da;
+        height: 48px;
+    }
+
+        .filter-bar .form-control:focus,
+        .filter-bar .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(44, 90, 160, 0.25);
+        }
+
+    .filter-bar .input-group .btn-primary {
+        border-radius: 0 8px 8px 0;
+    }
+
+[dir="rtl"] .filter-bar .input-group .btn-primary {
+    border-radius: 8px 0 0 8px;
+}
+
+/* --- Product List Page Layout --- */
+.product-list-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.product-list-sidebar {
+    flex: 0 0 280px;
+}
+
+.product-list-main {
+    flex-grow: 1;
+}
+
+.category-sidebar .card-header {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.category-sidebar .list-group-item {
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+    .category-sidebar .list-group-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+        border-radius: 8px;
+    }
+
+    .category-sidebar .list-group-item:not(.active):hover {
+        background-color: #f1f3f5;
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+[dir="rtl"] .category-sidebar .list-group-item:not(.active):hover {
+    transform: translateX(-5px);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .product-list-container {
+        flex-direction: column;
+    }
+
+    .product-list-sidebar {
+        flex: 0 0 auto; /* Reset flex basis */
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-bar .row > * {
+        width: 100%;
+    }
+}
+
+/* --- Home Page Shop Section --- */
+.home-shop-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+    .home-shop-header .h2 {
+        margin-bottom: 0;
+    }
+
+    .home-shop-header .form-select {
+        min-width: 250px;
+        max-width: 100%;
+    }
+
+.view-more-container {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.stock-badge {
+    position: absolute;
+    top: 15px;
+    background: var(--dark-color);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+[dir="ltr"] .stock-badge {
+    left: 15px;
+}
+
+[dir="rtl"] .stock-badge {
+    right: 15px;
+    left: auto;
+}
+
+.stock-badge.out-of-stock {
+    background-color: var(--danger-color);
+}
+
+.btn-cart:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}

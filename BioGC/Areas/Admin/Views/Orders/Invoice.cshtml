@@ -1,0 +1,267 @@
+﻿@model BioGC.Models.Order
+@{
+    Layout = null; // This page doesn't need the admin layout
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var dir = lang == "ar" ? "rtl" : "ltr";
+    var subtotal = Model.OrderItems.Sum(i => i.Price * i.Quantity);
+}
+
+<!DOCTYPE html>
+<html lang="@lang" dir="@dir">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice #@Model.Id</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Cairo', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        .invoice-container {
+            max-width: 850px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        .invoice-header {
+            padding: 40px;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1a4480 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .invoice-header img {
+            filter: brightness(0) invert(1);
+        }
+        .invoice-body {
+            padding: 40px;
+        }
+        .invoice-details strong, .customer-details strong {
+            display: block;
+            color: #6c757d;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .invoice-footer {
+            padding: 30px 40px;
+            text-align: center;
+            background: #f8f9fa;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        .print-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        [dir="rtl"] .print-controls {
+            right: auto;
+            left: 20px;
+        }
+        .table thead {
+            background-color: #f8f9fa;
+        }
+        .total-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+      @@media print {
+    body {
+        background-color: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        margin: 0;
+    }
+
+    .print-controls {
+        display: none !important;
+    }
+
+    .invoice-container {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .invoice-header {
+        background: #e9ecef !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .invoice-header img {
+        filter: none !important;
+    }
+
+    .invoice-body, .invoice-footer {
+        padding: 30px !important;
+    }
+
+    .table thead {
+        background-color: #e9ecef !important;
+    }
+
+    .total-section {
+        background-color: #f1f3f5 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    @@page {
+        size: A4;
+        margin: 0 20mm ;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="print-controls">
+        <button id="langToggleBtn" class="btn btn-light border"><i class="fas fa-language me-2"></i><span id="langToggleText"></span></button>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i><span data-ar="العودة" data-en="Back">Back</span></a>
+        <button onclick="window.print()" class="btn btn-primary"><i class="fas fa-print me-2"></i><span data-ar="طباعة" data-en="Print">Print</span></button>
+    </div>
+
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <img src="/images/logo.png" style="max-height: 60px;" alt="Company Logo" />
+            <div>
+                <h1 class="h2 mb-0" data-ar="فاتورة" data-en="INVOICE">INVOICE</h1>
+                <p class="text-white-50 mb-0">#@Model.Id</p>
+            </div>
+        </div>
+
+        <div class="invoice-body">
+            <div class="row customer-details mb-5">
+                <div class="col-md-6">
+                    <strong data-ar="فاتورة إلى" data-en="BILL TO">BILL TO</strong>
+                    <span>@Model.ApplicationUser.FullName</span><br>
+                    <span>@Model.ApplicationUser.Email</span><br>
+                    <span>@Model.ShippingAddress</span>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <strong data-ar="تاريخ الطلب" data-en="ORDER DATE">ORDER DATE</strong>
+                    <span>@Model.OrderDate.ToLocalTime().ToString("dd MMMM yyyy")</span>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th data-ar="المنتج" data-en="Product">Product</th>
+                        <th class="text-center" data-ar="الكمية" data-en="Quantity">Quantity</th>
+                        <th class="text-end" data-ar="السعر" data-en="Price">Price</th>
+                        <th class="text-end" data-ar="الإجمالي" data-en="Total">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td>@(lang == "ar" ? item.Product.NameAr : item.Product.NameEn)</td>
+                            <td class="text-center">@item.Quantity</td>
+                            <td class="text-end">$@item.Price.ToString("F2")</td>
+                            <td class="text-end">$@((item.Price * item.Quantity).ToString("F2"))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="row justify-content-end mt-4">
+                <div class="col-md-5">
+                    <div class="total-section">
+                        <div class="d-flex justify-content-between">
+                            <span data-ar="الإجمالي الفرعي" data-en="Subtotal">Subtotal:</span>
+                            <span>$@subtotal.ToString("F2")</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span data-ar="الشحن" data-en="Shipping">Shipping:</span>
+                            <span>$@Model.ShippingCost.ToString("F2")</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between fw-bold h5">
+                            <span data-ar="الإجمالي الكلي" data-en="Grand Total">Grand Total:</span>
+                            <span>$@Model.TotalAmount.ToString("F2")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-footer">
+            <p class="mb-1"><strong>Bio Constructions Group Ltd</strong></p>
+            <p class="mb-0">71-75, Shelton Street, Covent Garden, London, WC2H 9JQ, UNITED KINGDOM</p>
+            <p class="mb-0" data-ar="شكراً لتعاملكم معنا." data-en="Thank you for your business.">Thank you for your business.</p>
+        </div>
+    </div>
+    
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.cookie = `language=${lang};path=/;max-age=31536000`; 
+            
+            // Translate static text
+            document.querySelectorAll('[data-en], [data-ar]').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text !== null) el.textContent = text;
+            });
+
+            // Translate table headers
+            const table = document.querySelector('table');
+            if (table) {
+                const headers = table.querySelectorAll('th');
+                headers.forEach(th => {
+                    const text = th.getAttribute(`data-${lang}`);
+                    if(text) th.textContent = text;
+                });
+            }
+
+            // Update language toggle button text
+            const langToggleText = document.getElementById('langToggleText');
+            if(langToggleText) {
+                langToggleText.textContent = lang === 'en' ? 'العربية' : 'English';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const langToggleBtn = document.getElementById('langToggleBtn');
+            let currentLanguage = getCookie('language') || 'en';
+
+            // Initial setup
+            setLanguage(currentLanguage);
+
+            // Toggle language on button click
+            langToggleBtn.addEventListener('click', function() {
+                currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+                setLanguage(currentLanguage);
+            });
+        });
+    </script>
+</body>
+</html>

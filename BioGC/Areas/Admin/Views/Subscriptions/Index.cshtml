@@ -1,0 +1,116 @@
+﻿@model IEnumerable<BioGC.Models.RelaxationSubscription>
+@{
+    ViewData["Title"] = "Relaxation Subscriptions";
+}
+
+<h1 data-ar="اشتراكات خدمة الاسترخاء" data-en="Relaxation Service Subscriptions">Relaxation Service Subscriptions</h1>
+<p data-ar="مراجعة طلبات الاشتراك والموافقة عليها لترقية المستخدمين." data-en="Review and approve subscription requests to upgrade users.">Review and approve subscription requests to upgrade users.</p>
+
+<div id="toast-container-local" class="mb-3"></div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-user-check me-1"></i>
+        <span data-ar="قائمة الاشتراكات" data-en="Subscriptions List">Subscriptions List</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th data-ar="المستخدم" data-en="User">User</th>
+                        <th data-ar="البريد الإلكتروني" data-en="Email">Email</th>
+                        <th data-ar="تاريخ الاشتراك" data-en="Subscription Date">Subscription Date</th>
+                        <th data-ar="حالة الاشتراك" data-en="Status">Status</th>
+                        <th class="text-end" data-ar="الإجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4" data-ar="لا توجد اشتراكات حالياً." data-en="No subscriptions found.">No subscriptions found.</td>
+                        </tr>
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ApplicationUser.FullName</td>
+                            <td>@item.ApplicationUser.Email</td>
+                            <td>@item.SubscriptionDate.ToLocalTime().ToString("g")</td>
+                            <td>
+                                @{
+                                    var statusClass = item.Status switch
+                                    {
+                                        "Approved" => "badge-status-approved",
+                                        "Cancelled" => "badge-status-cancelled",
+                                        _ => "badge-status-pending"
+                                    };
+                                }
+                                <span class="badge @statusClass">@item.Status</span>
+                            </td>
+                            <td class="text-end">
+                                <!-- FIX: Rewrote logic with if/else if for clarity and to handle all cases -->
+                                @if (item.Status == "Approved")
+                                {
+                                    <form asp-action="Cancel" asp-route-id="@item.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-times me-1"></i> <span data-ar="إلغاء الاشتراك" data-en="Cancel Subscription">Cancel Subscription</span>
+                                        </button>
+                                    </form>
+                                }
+                                else if (item.Status == "Pending Approval" || item.Status == "Cancelled")
+                                {
+                                    <form asp-action="Approve" asp-route-id="@item.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            <i class="fas fa-check me-1"></i> <span data-ar="موافقة وترقية" data-en="Approve & Upgrade">Approve & Upgrade</span>
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toastMessage = @Html.Raw(TempData["ToastMessage"] != null ? $"'{TempData["ToastMessage"]}'" : "null");
+
+            const translations = {
+                "UserUpgraded": { en: "User has been upgraded to PremiumUser!", ar: "تمت ترقية المستخدم إلى عضو مميز بنجاح!" },
+                "SubscriptionCancelled": { en: "Subscription has been cancelled successfully.", ar: "تم إلغاء الاشتراك بنجاح." },
+                "SubscriptionNotFound": { en: "Subscription record not found.", ar: "لم يتم العثور على سجل الاشتراك." },
+                "UserNotFound": { en: "Associated user could not be found.", ar: "لم يتم العثور على المستخدم المرتبط." },
+                "RoleUpgradeFailed": { en: "Failed to upgrade the user's role.", ar: "فشلت عملية ترقية دور المستخدم." },
+                "RoleDowngradeFailed": { en: "Failed to downgrade the user's role.", ar: "فشلت عملية إلغاء ترقية دور المستخدم." }
+            };
+
+            if (toastMessage) {
+                const [type, key] = toastMessage.split(':');
+                const messageData = translations[key];
+
+                if (messageData) {
+                    const lang = document.documentElement.lang || 'en';
+                    const message = messageData[lang];
+                    const isError = type.toLowerCase() === 'error';
+
+                    const alertType = isError ? 'alert-danger' : 'alert-success';
+                    const container = document.getElementById('toast-container-local');
+                    if(container) {
+                        const toastElement = document.createElement('div');
+                        toastElement.className = `alert ${alertType} alert-dismissible fade show`;
+                        toastElement.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+                        container.appendChild(toastElement);
+                    }
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,1554 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "J:\\Developer\\Github\\BioGC\\BioGC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\viewmodels\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\viewmodels\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Migrations\\20250729134809_AddRelaxationContent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BioGC\\Migrations\\20250729134809_AddRelaxationContent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\relaxation\\contentnotavailable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\relaxation\\contentnotavailable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\relaxation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\relaxation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\relaxationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\relaxationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\relaxation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\relaxation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\relaxationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\relaxationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\relaxationcontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\relaxationcontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\js\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\js\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\js\\product-details.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\js\\product-details.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\js\\shop.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\js\\shop.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\js\\admin.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\js\\admin.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\engineeringconsulting.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\engineeringconsulting.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\reviews\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\reviews\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\products\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\products\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\viewmodels\\productdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\viewmodels\\productdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\viewmodels\\profileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\viewmodels\\profileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\wishlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\wishlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\viewmodels\\contactviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\viewmodels\\contactviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\js\\checkout.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\js\\checkout.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\checkout\\thankyou.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\checkout\\thankyou.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\viewmodels\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\viewmodels\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\products\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\products\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\categories\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\categories\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\categories\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\categories\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\categories\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\categories\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\viewmodels\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\viewmodels\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\users\\manageroles.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\users\\manageroles.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\viewmodels\\usermanagementviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\viewmodels\\usermanagementviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\css\\admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\css\\admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\messages\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\messages\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\messages\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\messages\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\messages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\messages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\areas\\admin\\controllers\\adminbasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\areas\\admin\\controllers\\adminbasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\js\\account.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\js\\account.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\fav.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\fav.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\contactmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\contactmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\biogc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\biogc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\it_ai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\it_ai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\courses.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\courses.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\views\\home\\cosmeticsmanufacturing.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\views\\home\\cosmeticsmanufacturing.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\css\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\css\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\css\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\css\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|j:\\developer\\github\\biogc\\biogc\\biogc\\wwwroot\\css\\all.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A26E6DA8-4FB7-49AB-8939-EBDA30E34A0F}|BioGC\\BioGC.csproj|solutionrelative:biogc\\wwwroot\\css\\all.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20250729134809_AddRelaxationContent.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Migrations\\20250729134809_AddRelaxationContent.cs",
+              "RelativeDocumentMoniker": "BioGC\\Migrations\\20250729134809_AddRelaxationContent.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Migrations\\20250729134809_AddRelaxationContent.cs",
+              "RelativeToolTip": "BioGC\\Migrations\\20250729134809_AddRelaxationContent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T13:48:09.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ContentNotAvailable.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Relaxation\\ContentNotAvailable.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Relaxation\\ContentNotAvailable.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Relaxation\\ContentNotAvailable.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Relaxation\\ContentNotAvailable.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T13:47:41.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Relaxation\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Relaxation\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Relaxation\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Relaxation\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T13:47:19.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RelaxationController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\RelaxationController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\RelaxationController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\RelaxationController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\RelaxationController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T13:46:44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Relaxation\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Relaxation\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Relaxation\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Relaxation\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T13:46:13.282Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RelaxationController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\RelaxationController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\RelaxationController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\RelaxationController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\RelaxationController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T13:45:44.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DbInitializer.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Data\\DbInitializer.cs",
+              "RelativeDocumentMoniker": "BioGC\\Data\\DbInitializer.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Data\\DbInitializer.cs",
+              "RelativeToolTip": "BioGC\\Data\\DbInitializer.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwCcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:54:06.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountViewModels.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\AccountViewModels.cs",
+              "RelativeDocumentMoniker": "BioGC\\ViewModels\\AccountViewModels.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\AccountViewModels.cs",
+              "RelativeToolTip": "BioGC\\ViewModels\\AccountViewModels.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAADwvzAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:34:04.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\AccountController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAADgv2AAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:39:23.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Account\\Login.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T09:40:05.377Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RelaxationContent.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\RelaxationContent.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\RelaxationContent.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\RelaxationContent.cs",
+              "RelativeToolTip": "BioGC\\Models\\RelaxationContent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T13:44:06.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Checkout\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAADwvzIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:37:34.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "engineeringConsulting.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\engineeringConsulting.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\engineeringConsulting.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\engineeringConsulting.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\engineeringConsulting.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAIwGoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:56:02.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "admin.js",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\admin.js",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\js\\admin.js",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\admin.js",
+              "RelativeToolTip": "BioGC\\wwwroot\\js\\admin.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-29T11:16:49.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "shop.js",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\shop.js",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\js\\shop.js",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\shop.js",
+              "RelativeToolTip": "BioGC\\wwwroot\\js\\shop.js",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAIwJAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-29T10:03:08.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "product-details.js",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\product-details.js",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\js\\product-details.js",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\product-details.js",
+              "RelativeToolTip": "BioGC\\wwwroot\\js\\product-details.js",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAwwDIAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-29T12:59:51.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "main.js",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\main.js",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\js\\main.js",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\main.js",
+              "RelativeToolTip": "BioGC\\wwwroot\\js\\main.js",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAAACEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-29T07:54:17.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "BioGC\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "BioGC\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:34:48.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Account\\Profile.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Account\\Profile.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Account\\Profile.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Account\\Profile.cshtml",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAQwKkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:57:12.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "WishlistController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\WishlistController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\WishlistController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\WishlistController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\WishlistController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAADwv0IAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:50:07.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAKABAAAAAAAAAAAUwMUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:46:20.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAFkAAAAAAAAAAADwv00AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:16:05.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:41:21.614Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\DashboardController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAADwv00AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T11:14:12.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\ViewModels\\HomeViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\HomeViewModel.cs",
+              "RelativeToolTip": "BioGC\\ViewModels\\HomeViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:30:25.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\HomeController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAYwCgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T06:52:22.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABUAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:15:36.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Reviews\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Reviews\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Reviews\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Reviews\\Index.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAwwDQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:59:27.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ReviewsController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\ReviewsController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\ReviewsController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\ReviewsController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\ReviewsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:59:00.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Products\\Details.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Products\\Details.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Products\\Details.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Products\\Details.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAwwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:58:39.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\ProductsController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwC4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:57:00.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ReviewsController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\ReviewsController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\ReviewsController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\ReviewsController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\ReviewsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:57:49.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ProductDetailViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\ProductDetailViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\ViewModels\\ProductDetailViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\ProductDetailViewModel.cs",
+              "RelativeToolTip": "BioGC\\ViewModels\\ProductDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:56:35.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ProfileViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\ProfileViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\ViewModels\\ProfileViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\ProfileViewModel.cs",
+              "RelativeToolTip": "BioGC\\ViewModels\\ProfileViewModel.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAiwCgAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:20:56.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Wishlist.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Wishlist.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\Wishlist.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Wishlist.cs",
+              "RelativeToolTip": "BioGC\\Models\\Wishlist.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAgwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:48:51.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Review.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Review.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\Review.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Review.cs",
+              "RelativeToolTip": "BioGC\\Models\\Review.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:32:12.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\ViewModels\\ProductViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\ProductViewModel.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\ViewModels\\ProductViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:13:13.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ContactViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\ContactViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\ViewModels\\ContactViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\ContactViewModel.cs",
+              "RelativeToolTip": "BioGC\\ViewModels\\ContactViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:54:36.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Orders\\Details.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Orders\\Details.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Orders\\Details.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Orders\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:40:01.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Orders\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Orders\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Orders\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Orders\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:39:38.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\OrdersController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwvxcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:39:13.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "checkout.js",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\checkout.js",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\js\\checkout.js",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\checkout.js",
+              "RelativeToolTip": "BioGC\\wwwroot\\js\\checkout.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-29T12:38:13.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ThankYou.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Checkout\\ThankYou.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Checkout\\ThankYou.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Checkout\\ThankYou.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Checkout\\ThankYou.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:37:49.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "CheckoutController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\CheckoutController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\CheckoutController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\CheckoutController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\CheckoutController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:34:44.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "CheckoutViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\CheckoutViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\ViewModels\\CheckoutViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\ViewModels\\CheckoutViewModel.cs",
+              "RelativeToolTip": "BioGC\\ViewModels\\CheckoutViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:34:18.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Delete.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Products\\Delete.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Delete.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Products\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:17:29.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Edit.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Products\\Edit.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Edit.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Products\\Edit.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAADwv0MAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:14:59.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAwwEAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:14:43.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Products\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Products\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Products\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:14:22.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\ProductsController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwB0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:13:48.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Delete.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Categories\\Delete.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Delete.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Categories\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:11:26.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Edit.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Categories\\Edit.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Edit.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Categories\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:11:09.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Create.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Categories\\Create.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Create.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Categories\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:10:52.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Categories\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Categories\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Categories\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:10:28.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\CategoriesController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:09:52.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "CategoryViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\CategoryViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\ViewModels\\CategoryViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\CategoryViewModel.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\ViewModels\\CategoryViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:09:23.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "ManageRoles.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Users\\ManageRoles.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Users\\ManageRoles.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Users\\ManageRoles.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Users\\ManageRoles.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:04:57.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T12:04:25.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACUAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:04:06.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "UserManagementViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\UserManagementViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\ViewModels\\UserManagementViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\ViewModels\\UserManagementViewModel.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\ViewModels\\UserManagementViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T12:03:13.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Messages\\Delete.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Messages\\Delete.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Messages\\Delete.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Messages\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:45:59.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Messages\\Details.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Messages\\Details.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Messages\\Details.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Messages\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:45:35.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Messages\\Index.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\Messages\\Index.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\Messages\\Index.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\Messages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:45:14.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "admin.css",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\admin.css",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\css\\admin.css",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\admin.css",
+              "RelativeToolTip": "BioGC\\wwwroot\\css\\admin.css",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAowCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-29T11:16:34.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "MessagesController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\MessagesController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\MessagesController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\MessagesController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\MessagesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T11:44:59.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:15:04.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:14:50.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "AdminBaseController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\AdminBaseController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Areas\\Admin\\Controllers\\AdminBaseController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Areas\\Admin\\Controllers\\AdminBaseController.cs",
+              "RelativeToolTip": "BioGC\\Areas\\Admin\\Controllers\\AdminBaseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T11:13:45.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "ContactController.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\ContactController.cs",
+              "RelativeDocumentMoniker": "BioGC\\Controllers\\ContactController.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Controllers\\ContactController.cs",
+              "RelativeToolTip": "BioGC\\Controllers\\ContactController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:55:07.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:46:23.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "account.js",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\account.js",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\js\\account.js",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\js\\account.js",
+              "RelativeToolTip": "BioGC\\wwwroot\\js\\account.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-29T07:53:49.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "cart.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\cart.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\cart.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\cart.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\cart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:55:09.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "fav.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\fav.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\fav.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\fav.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\fav.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:56:30.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "Program.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Program.cs",
+              "RelativeDocumentMoniker": "BioGC\\Program.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Program.cs",
+              "RelativeToolTip": "BioGC\\Program.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAADwv08AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:26:25.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\appsettings.json",
+              "RelativeDocumentMoniker": "BioGC\\appsettings.json",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\appsettings.json",
+              "RelativeToolTip": "BioGC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-29T07:03:12.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "ContactMessage.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\ContactMessage.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\ContactMessage.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\ContactMessage.cs",
+              "RelativeToolTip": "BioGC\\Models\\ContactMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:33:11.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\OrderItem.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\OrderItem.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\OrderItem.cs",
+              "RelativeToolTip": "BioGC\\Models\\OrderItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:32:53.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Order.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\Order.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Order.cs",
+              "RelativeToolTip": "BioGC\\Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:32:31.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "Product.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\Product.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Product.cs",
+              "RelativeToolTip": "BioGC\\Models\\Product.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wB0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:31:49.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "Category.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\Category.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\Category.cs",
+              "RelativeToolTip": "BioGC\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:31:30.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\ApplicationUser.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "BioGC\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:31:06.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "BioGC",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\BioGC.csproj",
+              "RelativeDocumentMoniker": "BioGC\\BioGC.csproj",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\BioGC.csproj",
+              "RelativeToolTip": "BioGC\\BioGC.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-29T09:30:41.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\_ViewStart.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T09:25:55.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "IT_AI.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\IT_AI.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\IT_AI.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\IT_AI.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\IT_AI.cshtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAwwG8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:56:47.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "courses.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\courses.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\courses.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\courses.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\courses.cshtml",
+              "ViewState": "AgIAABMAAAAAAAAAAAAwwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:55:53.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "cosmeticsmanufacturing.cshtml",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\cosmeticsmanufacturing.cshtml",
+              "RelativeDocumentMoniker": "BioGC\\Views\\Home\\cosmeticsmanufacturing.cshtml",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Views\\Home\\cosmeticsmanufacturing.cshtml",
+              "RelativeToolTip": "BioGC\\Views\\Home\\cosmeticsmanufacturing.cshtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAwwG8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T06:55:21.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "BioGC\\Models\\ErrorViewModel.cs",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "BioGC\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:16:32.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "main.css",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\main.css",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\css\\main.css",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\main.css",
+              "RelativeToolTip": "BioGC\\wwwroot\\css\\main.css",
+              "ViewState": "AgIAALQGAAAAAAAAAAAswNAGAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-29T07:20:40.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "bootstrap.min.css",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\bootstrap.min.css",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\css\\bootstrap.min.css",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\bootstrap.min.css",
+              "RelativeToolTip": "BioGC\\wwwroot\\css\\bootstrap.min.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-29T09:05:47.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "all.min.css",
+              "DocumentMoniker": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\all.min.css",
+              "RelativeDocumentMoniker": "BioGC\\wwwroot\\css\\all.min.css",
+              "ToolTip": "J:\\Developer\\Github\\BioGC\\BioGC\\BioGC\\wwwroot\\css\\all.min.css",
+              "RelativeToolTip": "BioGC\\wwwroot\\css\\all.min.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-29T09:05:45.7Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

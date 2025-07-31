@@ -1,0 +1,44 @@
+﻿@model BioGC.Models.Review
+@{
+    ViewData["Title"] = "Delete Review";
+}
+
+<h1 data-ar="حذف التقييم" data-en="Delete Review">Delete Review</h1>
+<hr />
+
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        <span data-ar="تأكيد الحذف" data-en="Confirm Deletion">Confirm Deletion</span>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title" data-ar="هل أنت متأكد أنك تريد حذف هذا التقييم؟" data-en="Are you sure you want to delete this review?">Are you sure you want to delete this review?</h5>
+
+        <div class="mt-4 p-3 bg-light rounded border">
+            <dl class="row mb-0">
+                <dt class="col-sm-3" data-ar="المنتج" data-en="Product">Product</dt>
+                <dd class="col-sm-9">@Model.Product.NameEn</dd>
+
+                <dt class="col-sm-3" data-ar="المستخدم" data-en="User">User</dt>
+                <dd class="col-sm-9">@Model.ApplicationUser.FullName</dd>
+
+                <dt class="col-sm-3" data-ar="التقييم" data-en="Rating">Rating</dt>
+                <dd class="col-sm-9">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <i class="fas fa-star @(i <= Model.Rating ? "text-warning" : "text-muted")"></i>
+                    }
+                </dd>
+
+                <dt class="col-sm-3" data-ar="التعليق" data-en="Comment">Comment</dt>
+                <dd class="col-sm-9">@Model.Comment</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i> <span data-ar="حذف" data-en="Delete">Delete</span></button>
+            <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times me-2"></i> <span data-ar="إلغاء" data-en="Cancel">Cancel</span></a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@model IEnumerable<BioGC.Models.Product>
+
+@{
+    ViewData["Title"] = "Stock Management";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0" data-ar="إدارة المخزون" data-en="Stock Management">Stock Management</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="mb-4">
+            @Html.AntiForgeryToken() <!-- Important for AJAX security -->
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" name="searchTerm" class="form-control" value="@ViewData["CurrentSearch"]" data-ar-placeholder="ابحث باسم المنتج..." data-en-placeholder="Search by product name..." />
+                </div>
+                <div class="col-md-4">
+                    <select name="stockStatus" class="form-select" onchange="this.form.submit()">
+                        <option value="" data-ar="كل الحالات" data-en="All Statuses">All Statuses</option>
+                        <option value="in_stock" selected="@(ViewData["CurrentStatus"] as string == "in_stock")" data-ar="متوفر" data-en="In Stock">In Stock</option>
+                        <option value="low_stock" selected="@(ViewData["CurrentStatus"] as string == "low_stock")" data-ar="مخزون منخفض" data-en="Low Stock">Low Stock</option>
+                        <option value="out_of_stock" selected="@(ViewData["CurrentStatus"] as string == "out_of_stock")" data-ar="نفذ المخزون" data-en="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100" data-ar="بحث" data-en="Search">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th data-ar="اسم المنتج" data-en="Product Name">Product Name</th>
+                        <th class="text-center" data-ar="الكمية في المخزن" data-en="Quantity in Stock">Quantity in Stock</th>
+                        <th class="text-end" data-ar="الإجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-product-id="@item.Id">
+                            <td>@(lang == "ar" ? item.NameAr : item.NameEn)</td>
+                            <td class="text-center">
+                                <input type="number" class="form-control form-control-sm stock-quantity-input mx-auto" value="@item.Stock.Quantity" min="0" style="width: 100px;">
+                            </td>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-sm btn-success btn-save-stock">
+                                    <i class="fas fa-save me-1"></i> <span data-ar="حفظ" data-en="Save">Save</span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function getAntiForgeryToken() {
+                const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
+                return tokenInput ? tokenInput.value : '';
+            }
+
+            document.querySelectorAll('.btn-save-stock').forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const productId = row.dataset.productId;
+                    const quantityInput = row.querySelector('.stock-quantity-input');
+                    const newQuantity = quantityInput.value;
+                    const originalButtonHtml = this.innerHTML;
+
+                    this.disabled = true;
+                    this.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+
+                    fetch('/Admin/Stocks/UpdateStock', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'RequestVerificationToken': getAntiForgeryToken()
+                        },
+                        body: `productId=${encodeURIComponent(productId)}&quantity=${encodeURIComponent(newQuantity)}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            this.innerHTML = `<i class="fas fa-check"></i>`;
+                            this.classList.replace('btn-success', 'btn-outline-success');
+                        } else {
+                            this.innerHTML = originalButtonHtml;
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        this.innerHTML = originalButtonHtml;
+                        alert('An unexpected error occurred.');
+                    })
+                    .finally(() => {
+                        setTimeout(() => {
+                            this.disabled = false;
+                            this.innerHTML = originalButtonHtml;
+                            this.classList.replace('btn-outline-success', 'btn-success');
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+}

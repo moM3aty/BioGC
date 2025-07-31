@@ -1,0 +1,71 @@
+﻿@model BioGC.Areas.Admin.ViewModels.ShippingZoneIndexViewModel
+@{
+    ViewData["Title"] = "Shipping Zones";
+}
+
+<h1 data-ar="مناطق الشحن" data-en="Shipping Zones">Shipping Zones</h1>
+<p data-ar="إدارة أسماء وتكاليف مناطق الشحن المختلفة." data-en="Manage the names and costs of different shipping zones.">Manage the names and costs of different shipping zones.</p>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-filter me-1"></i>
+        <span data-ar="فلترة" data-en="Filters">Filters</span>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3 align-items-center">
+            <div class="col-md-10">
+                <label for="searchTerm" class="visually-hidden">Search</label>
+                <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Search by zone name..." value="@Model.SearchTerm" data-en-placeholder="Search by zone name..." data-ar-placeholder="ابحث باسم المنطقة...">
+            </div>
+            <div class="col-md-2">
+                <div class="d-grid d-md-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                    <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i><span data-ar="إضافة منطقة جديدة" data-en="Add New Zone">Add New Zone</span>
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-shipping-fast me-1"></i>
+        <span data-ar="قائمة مناطق الشحن" data-en="Shipping Zones List">Shipping Zones List</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th data-ar="اسم المنطقة (الإنجليزية)" data-en="Zone Name (English)">Zone Name (English)</th>
+                        <th data-ar="اسم المنطقة (العربية)" data-en="Zone Name (Arabic)">Zone Name (Arabic)</th>
+                        <th data-ar="تكلفة الشحن" data-en="Shipping Cost">Shipping Cost</th>
+                        <th class="text-end" data-ar="إجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ShippingZones)
+                    {
+                        <tr>
+                            <td>@item.ZoneNameEn</td>
+                            <td>@item.ZoneNameAr</td>
+                            <td>$@item.ShippingCost.ToString("F2")</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

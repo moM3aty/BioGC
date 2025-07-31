@@ -1,0 +1,82 @@
+﻿@model BioGC.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<section class="padding-section">
+    <div class="container">
+        <h2 class="text-center mt-5 mb-5" data-ar="الدفع" data-en="Checkout">Checkout</h2>
+        <div class="row g-5">
+            <!-- Shipping Details Column -->
+            <div class="col-md-7">
+                <h4 data-ar="بيانات الشحن" data-en="Shipping Details">Shipping Details</h4>
+                <hr />
+                <div id="checkout-form" data-publishable-key="@Model.StripePublishableKey">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FullName" class="form-label"></label>
+                            <input asp-for="FullName" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" disabled />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ShippingAddress" class="form-label"></label>
+                        <textarea asp-for="ShippingAddress" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ShippingZoneId" class="form-label"></label>
+                        <select asp-for="ShippingZoneId" class="form-select" asp-items="@Model.ShippingZones">
+                            <option value="" data-ar="اختر منطقة الشحن..." data-en="Select a shipping zone...">Select a shipping zone...</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="checkout-error" class="alert alert-danger mt-3" style="display: none;"></div>
+            </div>
+
+            <!-- Order Summary Column -->
+            <div class="col-md-5">
+                <div class="card shadow-sm sticky-top" style="top: 100px;">
+                    <div class="card-body">
+                        <h4 class="card-title" data-ar="ملخص الطلب" data-en="Order Summary">Order Summary</h4>
+                        <hr />
+                        <div id="order-summary-list"></div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span data-ar="الإجمالي الفرعي" data-en="Subtotal">Subtotal</span>
+                            <span id="summary-subtotal">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span data-ar="الشحن" data-en="Shipping">Shipping</span>
+                            <span id="summary-shipping">$0.00</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between fw-bold fs-5">
+                            <span data-ar="الإجمالي" data-en="Total">Total</span>
+                            <span id="summary-total">$0.00</span>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button id="place-order-btn" class="btn btn-primary btn-lg">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                <span data-ar="الانتقال للدفع" data-en="Proceed to Payment">Proceed to Payment</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/checkout.js" asp-append-version="true"></script>
+}

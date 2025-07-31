@@ -1,0 +1,95 @@
+﻿@model BioGC.ViewModels.ProductListViewModel
+@{
+    // Determine the title based on the current language and selected category
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var currentCategoryName = Model.CurrentCategory != null
+        ? (lang == "ar" ? Model.CurrentCategory.NameAr : Model.CurrentCategory.NameEn)
+        : (lang == "ar" ? "كل المنتجات" : "All Products");
+    ViewData["Title"] = currentCategoryName;
+}
+
+<section class="padding-section">
+    <div class="container">
+        <div class="product-list-container">
+            <!-- Sidebar for Categories -->
+            <aside class="product-list-sidebar">
+                <div class="card category-sidebar sticky-top" style="top: 100px;">
+                    <div class="card-header" data-ar="الفئات" data-en="Categories">Categories</div>
+                    <div class="list-group list-group-flush">
+                        <a asp-action="List" asp-route-sortBy="@Model.SortBy" asp-route-searchTerm="@Model.SearchTerm" class="list-group-item list-group-item-action @(Model.CurrentCategory == null ? "active" : "")" data-ar="كل المنتجات" data-en="All Products">All Products</a>
+                        @foreach (var category in Model.AllCategories)
+                        {
+                            <a asp-action="List" asp-route-categoryId="@category.Id" asp-route-sortBy="@Model.SortBy" asp-route-searchTerm="@Model.SearchTerm" class="list-group-item list-group-item-action @(Model.CurrentCategory?.Id == category.Id ? "active" : "")" data-en="@category.NameEn" data-ar="@category.NameAr">
+                                @(lang == "ar" ? category.NameAr : category.NameEn)
+                            </a>
+                        }
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content for Products -->
+            <main class="product-list-main">
+                <h2 class="mb-4" data-en="@(Model.CurrentCategory != null ? Model.CurrentCategory.NameEn : "All Products")" data-ar="@(Model.CurrentCategory != null ? Model.CurrentCategory.NameAr : "كل المنتجات")">
+                    @currentCategoryName
+                </h2>
+
+                <div class="filter-bar">
+                    <form asp-action="List" method="get" class="row g-2 w-100 align-items-center">
+                        <input type="hidden" name="categoryId" value="@Model.CurrentCategory?.Id" />
+                        <div class="col-lg">
+                            <div class="input-group">
+                                <input type="text" name="searchTerm" class="form-control" value="@Model.SearchTerm" data-en-placeholder="Search products..." data-ar-placeholder="ابحث عن منتجات...">
+                                <button class="btn btn-primary" type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-auto">
+                            <label for="product-list-filter-select" class="visually-hidden">Sort By</label>
+                            <select name="sortBy" class="form-select" id="product-list-filter-select" asp-for="SortBy">
+                                <option value="all" data-ar="فلترة حسب" data-en="Sort by">Sort by</option>
+                                <option value="best-seller" data-ar="الأكثر مبيعًا" data-en="Best Sellers">Best Sellers</option>
+                                <option value="highest-rated" data-ar="الأعلى تقييمًا" data-en="Highest Rated">Highest Rated</option>
+                                <option value="highest-price" data-ar="الأعلى سعرًا" data-en="Highest Price">Highest Price</option>
+                                <option value="lowest-price" data-ar="الأقل سعرًا" data-en="Lowest Price">Lowest Price</option>
+                                <option value="offers" data-ar="العروض" data-en="Offers">Offers</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <!-- Products Grid -->
+                <div class="row g-4">
+                    @if (Model.Products.Any())
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                @await Html.PartialAsync("_ProductCard", product)
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                                <p class="text-muted" data-ar="لم يتم العثور على منتجات تطابق بحثك." data-en="No products found matching your criteria.">No products found matching your criteria.</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterSelect = document.getElementById('product-list-filter-select');
+            if(filterSelect) {
+                filterSelect.addEventListener('change', function() {
+                    this.form.submit();
+                });
+            }
+        });
+    </script>
+}

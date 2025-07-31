@@ -1,0 +1,71 @@
+﻿@model BioGC.Models.Product
+
+@{
+    var approvedReviews = Model.Reviews.Where(r => r.Status == "Approved").ToList();
+    var averageRating = approvedReviews.Any() ? approvedReviews.Average(r => r.Rating) : 0;
+    var reviewCount = approvedReviews.Count();
+
+    // Check stock status
+    bool isOutOfStock = Model.Stock == null || Model.Stock.Quantity <= 0;
+}
+
+<div class="product-card h-100"
+     data-product-id="@Model.Id"
+     data-product-name-en="@Model.NameEn"
+     data-product-name-ar="@Model.NameAr"
+     data-price="@Model.PriceAfterDiscount"
+     data-image="/images/products/@Model.ImageUrl">
+
+    <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" class="text-decoration-none product-image-link">
+        <img src="/images/products/@Model.ImageUrl" class="product-image" alt="@Model.NameEn" onerror="this.onerror=null;this.src='https://placehold.co/400x300/E0E5EC/666?text=Image+Not+Found';">
+    </a>
+
+    @if (Model.PriceBeforeDiscount > Model.PriceAfterDiscount)
+    {
+        var discount = Math.Round((1 - (Model.PriceAfterDiscount / Model.PriceBeforeDiscount)) * 100);
+        <div class="discount-badge">@discount% <span data-en="OFF" data-ar="خصم">OFF</span></div>
+    }
+
+    <!-- STOCK STATUS BADGE -->
+    @if (isOutOfStock)
+    {
+        <div class="stock-badge out-of-stock" data-ar="نفد المخزون" data-en="Out of Stock">Out of Stock</div>
+    }
+
+    <div class="product-content">
+        <h5 class="product-title" data-ar="@Model.NameAr" data-en="@Model.NameEn">@Model.NameEn</h5>
+
+        <div class="rating">
+            @if (reviewCount > 0)
+            {
+                <div class="stars">
+                    @averageRating.ToString("0.0") <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text" data-ar="(@reviewCount مراجعات)" data-en="(@reviewCount reviews)">(@reviewCount reviews)</span>
+            }
+            else
+            {
+                <span class="rating-text text-muted" data-ar="لا توجد تقييمات" data-en="No reviews yet">No reviews yet</span>
+            }
+        </div>
+
+        <div class="price-section">
+            <div class="price-container">
+                <span class="current-price">$@Model.PriceAfterDiscount.ToString("F2")</span>
+                @if (Model.PriceBeforeDiscount > Model.PriceAfterDiscount)
+                {
+                    <span class="old-price">$@Model.PriceBeforeDiscount.ToString("F2")</span>
+                }
+            </div>
+        </div>
+
+        <div class="product-actions d-flex gap-2">
+            <button class="btn-action btn-cart" @(isOutOfStock ? "disabled" : "")>
+                <i class="fas fa-shopping-cart me-2"></i><span data-ar="إضافة للسلة" data-en="Add to Cart">Add to Cart</span>
+            </button>
+            <button class="btn-action btn-favorite">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@model BioGC.Areas.Admin.ViewModels.UserIndexViewModel
+@{
+    ViewData["Title"] = "Users";
+}
+<h1 data-ar="إدارة المستخدمين" data-en="Users Management">Users Management</h1>
+<p data-ar="عرض المستخدمين وتعيين الأدوار لهم." data-en="View users and assign them roles.">View users and assign them roles.</p>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-filter me-1"></i>
+        <span data-ar="فلترة" data-en="Filters">Filters</span>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-6">
+                    <label for="searchTerm" class="form-label" data-ar="بحث بالاسم/البريد" data-en="Search by Name/Email">Search by Name/Email</label>
+                    <input type="text" name="searchTerm" id="searchTerm" class="form-control" value="@Model.SearchTerm">
+                </div>
+                <div class="col-md-4">
+                    <label for="role" class="form-label" data-ar="الدور" data-en="Role">Role</label>
+                    <select name="role" id="role" class="form-select" asp-items="@Model.Roles">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-grid d-md-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                        <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i>
+        <span data-ar="قائمة المستخدمين" data-en="Users List">Users List</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th data-ar="الاسم الكامل" data-en="Full Name">Full Name</th>
+                        <th data-ar="اسم المستخدم" data-en="Username">Username</th>
+                        <th data-ar="البريد الإلكتروني" data-en="Email">Email</th>
+                        <th data-ar="الأدوار" data-en="Roles">Roles</th>
+                        <th class="text-end"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.FullName</td>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                @foreach (var role in user.Roles)
+                                {
+                                    <span class="badge bg-info text-dark me-1">@role</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="ManageRoles" asp-route-userId="@user.Id" class="btn btn-outline-primary btn-sm"><i class="fas fa-user-tag me-1"></i> <span data-ar="إدارة الأدوار" data-en="Manage Roles">Manage Roles</span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

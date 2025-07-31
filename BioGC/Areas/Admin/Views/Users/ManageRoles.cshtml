@@ -1,0 +1,41 @@
+﻿@model BioGC.Areas.Admin.ViewModels.ManageUserRolesViewModel
+@{
+    ViewData["Title"] = "Manage Roles";
+}
+
+<h1 data-ar="إدارة الأدوار للمستخدم: @Model.UserName" data-en="Manage Roles for @Model.UserName">Manage Roles for @Model.UserName</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-user-tag me-1"></i>
+                <span data-ar="تعيين الأدوار" data-en="Assign Roles">Assign Roles</span>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="UserName" />
+
+                    @for (int i = 0; i < Model.Roles.Count; i++)
+                    {
+                        <div class="form-check m-1">
+                            <input type="hidden" asp-for="Roles[i].RoleId" />
+                            <input type="hidden" asp-for="Roles[i].RoleName" />
+                            <input asp-for="Roles[i].IsSelected" class="form-check-input" />
+                            <label class="form-check-label" for="Roles_@(i)__IsSelected">
+                                @Model.Roles[i].RoleName
+                            </label>
+                        </div>
+                    }
+                    <div asp-validation-summary="All" class="text-danger mt-3"></div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i> <span data-ar="تحديث" data-en="Update">Update</span></button>
+                        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times me-2"></i> <span data-ar="إلغاء" data-en="Cancel">Cancel</span></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

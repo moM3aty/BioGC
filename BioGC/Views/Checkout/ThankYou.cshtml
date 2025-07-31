@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Thank You";
+}
+
+<section class="padding-section text-center">
+    <div class="container">
+        <div class="py-5">
+            <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+            <h1 class="display-4" data-ar="شكراً لك!" data-en="Thank You!">Thank You!</h1>
+            <p class="lead" data-ar="تم استلام طلبك بنجاح." data-en="Your order has been placed successfully.">Your order has been placed successfully.</p>
+            
+            @if (ViewBag.OrderId != null)
+            {
+                <p data-ar="رقم طلبك هو:" data-en="Your order number is:">Your order number is: <strong>#@ViewBag.OrderId</strong></p>
+            }
+            else
+            {
+                 <p data-ar="تمت عملية الشراء بنجاح." data-en="Your purchase was successful.">Your purchase was successful.</p>
+            }
+
+            <hr>
+            <p data-ar="سنتواصل معك قريباً لتأكيد تفاصيل الشحن." data-en="We will contact you shortly to confirm shipping details.">We will contact you shortly to confirm shipping details.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3" data-ar="العودة للرئيسية" data-en="Back to Home">Back to Home</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            localStorage.removeItem('cart');
+            
+            const cartCount = document.getElementById('cart-count');
+            if(cartCount) {
+                cartCount.textContent = '0';
+                cartCount.style.display = 'none';
+            }
+        });
+    </script>
+}

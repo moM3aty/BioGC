@@ -1,0 +1,113 @@
+﻿@model BioGC.ViewModels.RegisterViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioCG - Register</title>
+    <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <style>
+        .tabs .tab-link {
+        flex: 1;
+        padding: 12px 50px;
+        border: none;
+        background: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: 0.3s;
+        color: #25ccff;
+        text-decoration: none;
+        display: inline-block;
+
+        }
+        .tabs .tab-link:hover {
+         color: #13515b;
+         background: #d1d9e6;
+         box-shadow: inset 2px 2px 5px #bec4cb, inset -2px -2px 5px #f0f5fa;
+
+        }
+
+    </style>
+</head>
+<body>
+    <section class="auth py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <a data-ar="العوده الي الرئيسية" data-en="Back To Home" class="btn btn-back-to-home" asp-controller="Home" asp-action="Index">Back To Home</a>
+                </div>
+                <button class="btn btn-outline-light translate-btn btn-sm me-2" id="langToggle">العربية</button>
+            </div>
+            <div class="row g-4 justify-content-center align-items-center">
+                <div class="col-lg-6">
+                    <div class="login-card shadow shadow-sm">
+                        <div class="tabs d-flex flex-wrap gap-4 justify-content-center mb-5">
+                            <div><a asp-action="Login" class="tab-link" data-ar="تسجيل الدخول" data-en="Login">Login</a></div>
+                            <div><button class="active" data-ar="انشاء حساب" data-en="Create Account">Create Account</button></div>
+                        </div>
+
+                        <form asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                            <div asp-validation-summary="All" class="text-danger mb-3" role="alert"></div>
+                            <div class="heading text-center mb-4">
+                                <h2 data-ar="صفحة إنشاء حساب" data-en="Create Account Page">Create Account Page</h2>
+                                <p class="description" data-ar="الرجاء إدخال تفاصيل التسجيل الخاصة بك لإنشاء حسابك" data-en="Please enter your register details to create your account">Please enter your register details to create your account.</p>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <label asp-for="FullName" data-ar="الاسم الكامل" data-en="Full Name"></label>
+                                    <input asp-for="FullName" class="w-100" placeholder="Enter your full name" data-en-placeholder="Enter your full name" data-ar-placeholder="ادخل اسمك الكامل">
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="UserName" data-ar="اسم المستخدم" data-en="Username"></label>
+                                    <input asp-for="UserName" class="w-100" placeholder="Enter your username" data-en-placeholder="Enter your username" data-ar-placeholder="ادخل اسم المستخدم">
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="Email" data-ar="البريد الالكتروني" data-en="E-mail"></label>
+                                    <input asp-for="Email" class="w-100" placeholder="Enter your email" data-en-placeholder="Enter your email" data-ar-placeholder="ادخل البريد الالكتروني">
+                                </div>
+                                <div class="col-12">
+                                    <div class="password-field position-relative">
+                                        <label asp-for="Password" data-ar="الرقم السري" data-en="Password"></label>
+                                        <input asp-for="Password" class="w-100" id="registerPassword" placeholder="Enter your Password" data-en-placeholder="Enter your Password" data-ar-placeholder="ادخل الرقم السري">
+                                        <i class="fas fa-eye toggle-password" data-input="registerPassword"></i>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="password-field position-relative">
+                                        <label asp-for="ConfirmPassword" data-ar="تأكيد الرقم السري" data-en="Confirm your Password"></label>
+                                        <input asp-for="ConfirmPassword" class="w-100" id="confirmPassword" placeholder="Confirm your Password" data-en-placeholder="Confirm your Password" data-ar-placeholder="تأكيد الرقم السري">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="PhoneNumber" data-ar="رقم التليفون" data-en="Your phone"></label>
+                                    <input asp-for="PhoneNumber" class="w-100 phone" placeholder="Enter your phone" data-en-placeholder="Enter your phone" data-ar-placeholder="ادخل رقم التليفون">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-login w-100 mt-3" data-ar="انشئ حسابك" data-en="Create Account">Create Account</button>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <a class="create-account" asp-action="Login" data-ar="لديك حساب بالفعل؟ تسجيل الدخول" data-en="Already have an account? Sign In">Already have an account? Sign In</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    <script src="~/js/account.js" asp-append-version="true"></script>
+</body>
+</html>
