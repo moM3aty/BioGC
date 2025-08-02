@@ -41,10 +41,10 @@ namespace BioGC.Areas.Admin.Controllers
 
             var categoryListItems = new List<SelectListItem>();
             var parentCategories = await _context.Categories
-                .Where(c => c.ParentCategoryId == null)
-                .Include(c => c.SubCategories)
-                .OrderBy(c => c.NameEn)
-                .ToListAsync();
+                         .Where(c => c.ParentCategoryId == null && c.NameEn != "Digital Services")
+                         .Include(c => c.SubCategories)
+                         .OrderBy(c => c.NameEn)
+                         .ToListAsync();
 
             foreach (var parent in parentCategories)
             {

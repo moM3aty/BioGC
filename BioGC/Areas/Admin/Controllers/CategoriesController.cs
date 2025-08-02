@@ -24,7 +24,7 @@ namespace BioGC.Areas.Admin.Controllers
         public async Task<IActionResult> Index(string searchTerm)
         {
             var parentCategoriesQuery = _context.Categories
-                .Where(c => c.ParentCategoryId == null)
+                .Where(c => c.ParentCategoryId == null && c.NameEn != "Digital Services")
                 .Include(c => c.SubCategories)
                 .OrderBy(c => c.NameEn)
                 .AsQueryable();
@@ -278,21 +278,14 @@ namespace BioGC.Areas.Admin.Controllers
 
         private async Task<IEnumerable<SelectListItem>> GetParentCategorySelectList(int? currentCategoryId = null)
         {
-            var query = _context.Categories.Where(c => c.ParentCategoryId == null);
+            var query = _context.Categories.Where(c => c.ParentCategoryId == null && c.NameEn != "Digital Services");
             if (currentCategoryId.HasValue)
             {
                 query = query.Where(c => c.Id != currentCategoryId.Value);
             }
+            var lang = Request.Cookies["language"] ?? "en";
 
-            var lang = CultureInfo.CurrentUICulture.Name.StartsWith("ar") ? "ar" : "en";
-
-            return await query
-                .OrderBy(c => c.NameEn)
-                .Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = lang == "ar" ? c.NameAr : c.NameEn
-                }).ToListAsync();
+            return await query.OrderBy(c => c.NameEn).Select(c => new SelectListItem { Value = c.Id.ToString(), Text = lang == "ar" ? c.NameAr : c.NameEn }).ToListAsync();
         }
         #endregion
     }

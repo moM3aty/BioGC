@@ -4,9 +4,9 @@ using BioGC.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace BioGC.Controllers
 {
@@ -21,28 +21,30 @@ namespace BioGC.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> List(int? categoryId, string searchTerm, string sortBy = "all")
+        public async Task<IActionResult> List(int? parentCategoryId, int? subCategoryId, string searchTerm, string sortBy = "all")
         {
-            // Start with a query for all products, including their reviews for rating calculation
-            var productsQuery = _context.Products.Where(p => p.IsListed)
-                                        .Include(p => p.Reviews.Where(r => r.Status == "Approved"))
-                                        .Include(p => p.OrderItems) 
-                                        .Include(p => p.Stock)
-                                        .AsQueryable();
+            var productsQuery = _context.Products
+                .Where(p => p.IsListed)
+                .Include(p => p.Reviews.Where(r => r.Status == "Approved"))
+                .Include(p => p.OrderItems)
+                .Include(p => p.Stock)
+                .Include(p => p.Category) 
+                .AsQueryable();
 
-            // Filter by category if one is selected
-            if (categoryId.HasValue && categoryId > 0)
+            if (subCategoryId.HasValue && subCategoryId > 0)
             {
-                productsQuery = productsQuery.Where(p => p.CategoryId == categoryId.Value);
+                productsQuery = productsQuery.Where(p => p.CategoryId == subCategoryId.Value);
+            }
+            else if (parentCategoryId.HasValue && parentCategoryId > 0)
+            {
+                productsQuery = productsQuery.Where(p => p.Category.ParentCategoryId == parentCategoryId.Value);
             }
 
-            // Filter by search term
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 productsQuery = productsQuery.Where(p => p.NameEn.Contains(searchTerm) || p.NameAr.Contains(searchTerm) || p.DescriptionEn.Contains(searchTerm) || p.DescriptionAr.Contains(searchTerm));
             }
 
-            // Apply sorting based on the sortBy parameter
             switch (sortBy)
             {
                 case "best-seller":
@@ -65,11 +67,41 @@ namespace BioGC.Controllers
                     break;
             }
 
+            // --- Data for UI (Sidebar and Tabs) ---
+            var parentCategories = await _context.Categories
+                      .Where(c => c.ParentCategoryId == null && c.NameEn != "Digital Services")
+                      .OrderBy(c => c.NameEn)
+                      .ToListAsync();
+
+            var subCategoryTabs = new List<Category>();
+            int? currentParentId = parentCategoryId;
+
+            // If a sub-category is selected, we must find its parent to correctly highlight the sidebar and show the tabs.
+            if (subCategoryId.HasValue && subCategoryId > 0 && !parentCategoryId.HasValue)
+            {
+                var selectedSubCategory = await _context.Categories.FindAsync(subCategoryId.Value);
+                if (selectedSubCategory?.ParentCategoryId != null)
+                {
+                    currentParentId = selectedSubCategory.ParentCategoryId;
+                }
+            }
+
+            // If a parent category is active (either directly or inferred), fetch its children for the tabs.
+            if (currentParentId.HasValue)
+            {
+                subCategoryTabs = await _context.Categories
+                    .Where(c => c.ParentCategoryId == currentParentId.Value)
+                    .OrderBy(c => c.NameEn)
+                    .ToListAsync();
+            }
+
             var viewModel = new ProductListViewModel
             {
                 Products = await productsQuery.ToListAsync(),
-                AllCategories = await _context.Categories.Where(c => c.ParentCategoryId != null).OrderBy(c => c.NameEn).ToListAsync(),
-                CurrentCategory = categoryId.HasValue ? await _context.Categories.FindAsync(categoryId.Value) : null,
+                ParentCategories = parentCategories,
+                SubCategoryTabs = subCategoryTabs,
+                SelectedParentCategoryId = currentParentId,
+                SelectedSubCategoryId = subCategoryId,
                 SearchTerm = searchTerm,
                 SortBy = sortBy
             };
@@ -79,37 +111,16 @@ namespace BioGC.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Reviews.Where(r => r.Status == "Approved"))
-                .ThenInclude(r => r.ApplicationUser)
-                .Include(p => p.Stock)
-                .FirstOrDefaultAsync(p => p.Id == id);
-
+            var product = await _context.Products.Include(p => p.Category).Include(p => p.Reviews.Where(r => r.Status == "Approved")).ThenInclude(r => r.ApplicationUser).Include(p => p.Stock).FirstOrDefaultAsync(p => p.Id == id);
             if (product == null) return NotFound();
-
-            var relatedProducts = await _context.Products
-                .Where(p => p.IsListed)
-                .Where(p => p.CategoryId == product.CategoryId && p.Id != id)
-                .Include(p => p.Reviews.Where(r => r.Status == "Approved"))
-                .Include(p => p.Stock)
-                .Take(4)
-                .ToListAsync();
-
-            var viewModel = new ProductDetailViewModel
-            {
-                Product = product,
-                RelatedProducts = relatedProducts,
-                CanUserReview = false
-            };
-
+            var relatedProducts = await _context.Products.Where(p => p.IsListed).Where(p => p.CategoryId == product.CategoryId && p.Id != id).Include(p => p.Reviews.Where(r => r.Status == "Approved")).Include(p => p.Stock).Take(4).ToListAsync();
+            var viewModel = new ProductDetailViewModel { Product = product, RelatedProducts = relatedProducts, CanUserReview = false };
             if (User.Identity.IsAuthenticated)
             {
                 var userId = _userManager.GetUserId(User);
                 var hasReviewed = await _context.Reviews.AnyAsync(r => r.ProductId == id && r.ApplicationUserId == userId);
                 viewModel.CanUserReview = !hasReviewed;
             }
-
             return View(viewModel);
         }
     }
