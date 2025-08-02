@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BioGC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d79fc625b0a3d12af094e8663a8953dfce58181e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4713487aa7c1104e8060b8e6a10cfd81eb2ff297")]
 [assembly: System.Reflection.AssemblyProductAttribute("BioGC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BioGC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

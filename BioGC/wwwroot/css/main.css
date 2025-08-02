@@ -88,7 +88,28 @@ body {
     padding: 2rem;
     position: relative;
 }
+.second-btn {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: white;
+    border-radius: 10px 10px 0px 0px;
+    padding: 15px 25px;
+    font-weight: 600;
+    transition: all .5s ease-in-out;
+}
 
+    .second-btn:hover {
+        background-color: #366f28;
+        border: 1px solid #366f28;
+    }
+
+.quote-btn:hover {
+    transform: translateX(10px);
+}
+
+html[dir="rtl"] .quote-btn:hover {
+    transform: translateX(-10px);
+}
 .logo-container {
     margin-bottom: 2rem;
     border-radius: 20px;
