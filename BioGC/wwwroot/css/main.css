@@ -622,6 +622,11 @@ section {
 
 .about-content {
     max-width: 500px;
+    text-align: left;
+}
+
+html[dir="rtl"] .about-content {
+    text-align: right;
 }
 
 .quote-btn {
