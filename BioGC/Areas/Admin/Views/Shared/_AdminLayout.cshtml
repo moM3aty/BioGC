@@ -1,0 +1,342 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BioGC.Data
+@using BioGC.Models
+@using Microsoft.EntityFrameworkCore
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext DbContext
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var notifications = new List<Notification>();
+    if (user != null)
+    {
+        notifications = await DbContext.Notifications
+            .Where(n => n.UserId == user.Id && !n.IsRead)
+            .OrderByDescending(n => n.Timestamp)
+            .ToListAsync();
+    }
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var dir = lang == "ar" ? "rtl" : "ltr";
+    var notificationDropdownStyle = "";
+    if (lang == "ar")
+    {
+        notificationDropdownStyle = "width: 500px; margin: 0 -23rem 0 20rem;";
+    }
+    var transformStyle = lang == "ar" ? "translateX(65%)" : "translateX(-67%)";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Dashboard</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="icon" href="~/images/logo.png" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/admin-style.css" asp-append-version="true" />
+</head>
+<body>
+    @Html.AntiForgeryToken()
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <i class="fas fa-shield-alt me-2"></i>
+                <span data-ar="لوحة تحكم BioGC" data-en="BioGC Admin">BioGC Admin</span>
+            </div>
+            <nav class="sidebar-nav list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-tachometer-alt fa-fw"></i> <span data-ar="لوحة المعلومات" data-en="Dashboard">Dashboard</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Products" asp-action="Index"><i class="fas fa-boxes fa-fw"></i> <span data-ar="المنتجات" data-en="Products">Products</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Categories" asp-action="Index"><i class="fas fa-tags fa-fw"></i> <span data-ar="الفئات" data-en="Categories">Categories</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Orders" asp-action="Index"><i class="fas fa-receipt fa-fw"></i> <span data-ar="الطلبات" data-en="Orders">Orders</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Stocks" asp-action="Index"><i class="fas fa-warehouse fa-fw me-2"></i> <span data-ar="إدارة المخزون" data-en="Stock Management">Stock Management</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Users" asp-action="Index"><i class="fas fa-users-cog fa-fw"></i> <span data-ar="المستخدمون" data-en="Users">Users</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="ShippingZones" asp-action="Index"><i class="fas fa-shipping-fast fa-fw"></i> <span data-ar="مناطق الشحن" data-en="Shipping Zones">Shipping Zones</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Messages" asp-action="Index"><i class="fas fa-envelope-open-text fa-fw"></i> <span data-ar="الرسائل" data-en="Messages">Messages</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Reviews" asp-action="Index"><i class="fas fa-star-half-alt fa-fw"></i> <span data-ar="التقييمات" data-en="Reviews">Reviews</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Relaxation" asp-action="Index"><i class="fas fa-spa fa-fw"></i> <span data-ar="طيف الحياة" data-en="Life Resonance">Life Resonance</span></a>
+                <a class="list-group-item list-group-item-action" asp-area="Admin" asp-controller="Subscriptions" asp-action="Index"><i class="fas fa-user-check fa-fw"></i> <span data-ar="الاشتراكات" data-en="Subscriptions">Subscriptions</span></a>
+
+            </nav>
+            <div class="sidebar-footer mt-auto">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-user-circle fa-2x me-2"></i>
+                    <div>
+                        <strong>@User.Identity.Name</strong>
+                        <small class="d-block text-white" data-ar="مدير النظام" data-en="Administrator">Administrator</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav id="top-navbar" class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <button class="btn btn-sm btn-outline-secondary me-2" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
+                            <li class="nav-item me-3">
+                                <div class="lang-switch">
+                                    <input type="checkbox" id="adminLangToggleSwitch">
+                                    <label for="adminLangToggleSwitch">
+                                        <span class="lang-text">EN</span>
+                                        <span class="lang-text">AR</span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge rounded-pill bg-danger" id="notification-badge" style="@(notifications.Any() ? "" : "display: none;") position: absolute; top: 10px; transform: @transformStyle;">
+                                        @notifications.Count
+                                    </span>
+                                </a>
+                                <ul style="@notificationDropdownStyle" class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="navbarDropdown" id="notification-list-container">
+                                    <li class="dropdown-header">
+                                        <span data-ar="الإشعارات" data-en="Notifications">Notifications</span>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    @if (notifications.Any())
+                                    {
+                                        foreach (var notification in notifications)
+                                        {
+                                            <li data-notification-id="@notification.Id">
+                                                <a class="dropdown-item notification-item" href="@notification.Url">
+                                                    <div class="fw-bold">@(lang == "ar" ? notification.MessageAr : notification.MessageEn)</div>
+                                                    <div class="small text-muted">@notification.Timestamp.ToLocalTime().ToString("g")</div>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li id="no-notifications-message"><span class="dropdown-item text-muted" data-ar="لا توجد إشعارات جديدة" data-en="No new notifications">No new notifications</span></li>
+                                    }
+
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-center small" href="#" id="mark-all-as-read" data-ar="تحديد الكل كمقروء" data-en="Mark all as read">Mark all as read</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item mx-2"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-globe me-1"></i> <span data-ar="الذهاب للموقع" data-en="Go to Site">Go to Site</span></a></li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" asp-area="" method="post" id="logoutFormAdmin">
+                                    <button type="submit" class="nav-link btn btn-link"><i class="fas fa-sign-out-alt me-1"></i> <span data-ar="تسجيل الخروج" data-en="Logout">Logout</span></button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page content-->
+            <main class="container-fluid">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- Parent Category Management Modal -->
+    <div class="modal fade" id="parentCategoryManagementModal" tabindex="-1" aria-labelledby="parentCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="parentCategoryModalLabel"><i class="fas fa-tags me-2"></i><span data-ar="إدارة الفئات الرئيسية" data-en="Manage Parent Categories">Manage Parent Categories</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-7 border-end">
+                            <h6 class="mb-3"><span data-ar="الفئات الرئيسية الحالية" data-en="Current Parent Categories">Current Parent Categories</span></h6>
+                            <div class="category-list-container" style="max-height: 300px; overflow-y: auto;">
+                                <ul class="list-group list-group-flush" id="parent-category-list-modal"></ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <h6 id="parent-category-form-title"><span data-ar="إضافة فئة رئيسية جديدة" data-en="Add New Parent Category">Add New Parent Category</span></h6>
+                            <form id="parent-category-modal-form" novalidate class="mt-3">
+                                <input type="hidden" id="parentCategoryId" />
+                                <div class="mb-3">
+                                    <label for="parentCategoryNameEn" class="form-label" data-ar="الاسم (الإنجليزية)" data-en="Name (English)">Name (English)</label>
+                                    <input type="text" class="form-control" id="parentCategoryNameEn" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="parentCategoryNameAr" class="form-label" data-ar="الاسم (العربية)" data-en="Name (Arabic)">Name (Arabic)</label>
+                                    <input type="text" class="form-control" id="parentCategoryNameAr" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i><span data-ar="حفظ" data-en="Save">Save</span></button>
+                                    <button type="button" class="btn btn-secondary" id="cancel-parent-edit-btn" style="display:none;"><i class="fas fa-times me-2"></i><span data-ar="إلغاء التعديل" data-en="Cancel Edit">Cancel Edit</span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Category Management Modal -->
+    <div class="modal fade" id="subCategoryManagementModal" tabindex="-1" aria-labelledby="subCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="subCategoryModalLabel"><i class="fas fa-sitemap me-2"></i><span data-ar="إدارة الفئات الفرعية" data-en="Manage Sub-Categories">Manage Sub-Categories</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-7 border-end">
+                            <div class="mb-3">
+                                <label for="modalParentCategorySelect" class="form-label fw-bold" data-ar="اختر الفئة الرئيسية" data-en="Select Parent Category">Select Parent Category</label>
+                                <select id="modalParentCategorySelect" class="form-select"></select>
+                            </div>
+                            <hr />
+                            <h6 class="mb-3"><span data-ar="الفئات الفرعية الحالية" data-en="Current Sub-Categories">Current Sub-Categories</span></h6>
+                            <div class="category-list-container" style="max-height: 250px; overflow-y: auto;">
+                                <ul class="list-group list-group-flush" id="sub-category-list-modal">
+                                    <li class="list-group-item text-muted" data-ar="الرجاء اختيار فئة رئيسية أولاً." data-en="Please select a parent category first.">Please select a parent category first.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <h6 id="sub-category-form-title"><span data-ar="إضافة فئة فرعية جديدة" data-en="Add New Sub-Category">Add New Sub-Category</span></h6>
+                            <form id="sub-category-modal-form" novalidate class="mt-3">
+                                <input type="hidden" id="subCategoryId" />
+                                <input type="hidden" id="subCategoryParentId" />
+                                <div class="mb-3">
+                                    <label for="subCategoryNameEn" class="form-label" data-ar="الاسم (الإنجليزية)" data-en="Name (English)">Name (English)</label>
+                                    <input type="text" class="form-control" id="subCategoryNameEn" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subCategoryNameAr" class="form-label" data-ar="الاسم (العربية)" data-en="Name (Arabic)">Name (Arabic)</label>
+                                    <input type="text" class="form-control" id="subCategoryNameAr" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i><span data-ar="حفظ" data-en="Save">Save</span></button>
+                                    <button type="button" class="btn btn-secondary" id="cancel-sub-edit-btn" style="display:none;"><i class="fas fa-times me-2"></i><span data-ar="إلغاء التعديل" data-en="Cancel Edit">Cancel Edit</span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+
+    <script>
+        (function() {
+            const sidebarToggled = localStorage.getItem('sb|sidebar-toggle') === 'true';
+            if (sidebarToggled && document.body) {
+                document.body.classList.add('sb-sidenav-toggled');
+            }
+        })();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationContainer = document.getElementById('notification-list-container');
+            const notificationBadge = document.getElementById('notification-badge');
+            const markAllAsReadBtn = document.getElementById('mark-all-as-read');
+
+            if (notificationContainer) {
+                // Logic for clicking a single notification
+                notificationContainer.addEventListener('click', function(e) {
+                    const notificationLink = e.target.closest('.notification-item');
+                    if (notificationLink) {
+                        e.preventDefault();
+
+                        const listItem = notificationLink.closest('li');
+                        const notificationId = listItem.dataset.notificationId;
+                        const destinationUrl = notificationLink.href;
+                        const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
+
+                        fetch(`/api/Notifications/MarkAsRead/${notificationId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'RequestVerificationToken': token
+                            },
+                            credentials: 'same-origin'
+                        });
+
+                        listItem.style.transition = 'opacity 0.5s';
+                        listItem.style.opacity = '0';
+
+                        setTimeout(() => {
+                            listItem.remove();
+                            const currentCount = parseInt(notificationBadge.textContent, 10);
+                            const newCount = currentCount - 1;
+
+                            notificationBadge.textContent = newCount;
+                            if (newCount <= 0) {
+                                notificationBadge.style.display = 'none';
+                                if (!document.getElementById('no-notifications-message')) {
+                                    const noNotificationsLi = document.createElement('li');
+                                    noNotificationsLi.id = 'no-notifications-message';
+                                    noNotificationsLi.innerHTML = `<span class="dropdown-item text-muted" data-ar="لا توجد إشعارات جديدة" data-en="No new notifications">No new notifications</span>`;
+                                    const firstDivider = notificationContainer.querySelector('.dropdown-divider');
+                                    if(firstDivider) firstDivider.after(noNotificationsLi);
+                                }
+                            }
+                            window.location.href = destinationUrl;
+                        }, 500);
+                    }
+                });
+
+                // Logic for clicking "Mark all as read"
+                if (markAllAsReadBtn) {
+                    markAllAsReadBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
+
+                        fetch('/api/Notifications/MarkAllAsRead', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'RequestVerificationToken': token
+                            },
+                            credentials: 'same-origin'
+                        }).then(response => {
+                            if (response.ok) {
+                                // Visually clear all notifications
+                                const notificationItems = notificationContainer.querySelectorAll('li[data-notification-id]');
+                                notificationItems.forEach(item => item.remove());
+
+                                // Update badge
+                                notificationBadge.textContent = '0';
+                                notificationBadge.style.display = 'none';
+
+                                // Show the "no new notifications" message
+                                if (!document.getElementById('no-notifications-message')) {
+                                    const noNotificationsLi = document.createElement('li');
+                                    noNotificationsLi.id = 'no-notifications-message';
+                                    noNotificationsLi.innerHTML = `<span class="dropdown-item text-muted" data-ar="لا توجد إشعارات جديدة" data-en="No new notifications">No new notifications</span>`;
+                                    const firstDivider = notificationContainer.querySelector('.dropdown-divider');
+                                    if(firstDivider) firstDivider.after(noNotificationsLi);
+                                }
+                            }
+                        }).catch(error => console.error('Error marking all as read:', error));
+                    });
+                }
+            }
+        });
+    </script>
+    <script src="~/js/admin-language.js" asp-append-version="true"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

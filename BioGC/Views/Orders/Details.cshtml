@@ -1,0 +1,115 @@
+﻿@model BioGC.Models.Order
+@{
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    ViewData["Title"] = lang == "ar" ? $"تفاصيل الطلب #{Model.Id}" : $"Order Details #{Model.Id}";
+    var subtotal = Model.OrderItems.Sum(i => i.Price * i.Quantity);
+    var statusClass = Model.OrderStatus switch
+    {
+        "Processing" => "bg-primary",
+        "Shipped" => "bg-info text-dark",
+        "Delivered" => "bg-success",
+        "Cancelled" => "bg-danger",
+        "Subscription" => "bg-info",
+        _ => "bg-secondary"
+    };
+}
+
+<style>
+    .status-badge {
+        font-size: 0.9rem;
+        padding: 0.5em 0.9em;
+    }
+
+    .order-summary-card {
+        background-color: #f8f9fa;
+        border-radius: var(--border-radius);
+        padding: 2rem;
+    }
+</style>
+
+<section class="padding-section">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 data-ar="تفاصيل الطلب" data-en="Order Details">Order Details</h2>
+                <p class="text-muted">#@Model.Id</p>
+            </div>
+            <div>
+                <a asp-controller="Account" asp-action="Profile" asp-fragment="orders-tab-pane" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i><span data-ar="العودة للطلبات" data-en="Back to Orders">Back to Orders</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Left Column: Items and Customer Info -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header"><h5 class="mb-0" data-ar="المنتجات المطلوبة" data-en="Ordered Items">Ordered Items</h5></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th data-ar="المنتج" data-en="Product">Product</th>
+                                        <th class="text-center" data-ar="الكمية" data-en="Quantity">Quantity</th>
+                                        <th class="text-end" data-ar="السعر" data-en="Price">Price</th>
+                                        <th class="text-end" data-ar="الإجمالي" data-en="Total">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.OrderItems)
+                                    {
+                                        <tr>
+                                            <td>@(lang == "ar" ? item.Product.NameAr : item.Product.NameEn)</td>
+                                            <td class="text-center">@item.Quantity</td>
+                                            <td class="text-end">$@item.Price.ToString("F2")</td>
+                                            <td class="text-end">$@((item.Price * item.Quantity).ToString("F2"))</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-header"><h5 class="mb-0" data-ar="معلومات الشحن" data-en="Shipping Information">Shipping Information</h5></div>
+                    <div class="card-body">
+                        <p><strong><span data-ar="الاسم:" data-en="Name:">Name:</span></strong> @Model.ApplicationUser.FullName</p>
+                        <p><strong><span data-ar="عنوان الشحن:" data-en="Shipping Address:">Shipping Address:</span></strong><br />@Model.ShippingAddress</p>
+                        @if (Model.ShippingZone != null)
+                        {
+                            <p><strong><span data-ar="منطقة الشحن:" data-en="Shipping Zone:">Shipping Zone:</span></strong> @(lang == "ar" ? Model.ShippingZone.ZoneNameAr : Model.ShippingZone.ZoneNameEn)</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="col-lg-4">
+                <div class="order-summary-card sticky-top" style="top: 120px;">
+                    <h4 class="mb-4" data-ar="ملخص الطلب" data-en="Order Summary">Order Summary</h4>
+                    <div class="d-flex justify-content-between">
+                        <span data-ar="الإجمالي الفرعي" data-en="Subtotal">Subtotal</span>
+                        <span>$@subtotal.ToString("F2")</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span data-ar="الشحن" data-en="Shipping">Shipping</span>
+                        <span>$@Model.ShippingCost.ToString("F2")</span>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span data-ar="الإجمالي الكلي" data-en="Grand Total">Grand Total</span>
+                        <span>$@Model.TotalAmount.ToString("F2")</span>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong data-ar="حالة الطلب:" data-en="Order Status:">Order Status:</strong>
+                        <span class="badge @statusClass status-badge">@Model.OrderStatus</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,275 @@
+﻿
+@model BioGC.Models.RelaxationContent
+@{
+    ViewData["Title"] = "Relaxation Space";
+}
+
+                                            <!-- Bunny.net Player Script -->
+                                            <script src="https://iframe.bunny.net/stream/player.js"></script>
+
+                                            <style>
+                                                :root {
+                                                    --primary-color: #2b3f73;
+                                                    --secondary-color: #1c77a9;
+                                                    --accent-color: #eaeff5;
+                                                    --highlight-color: #78c3e1;
+                                                    --text-dark: #1e2b45;
+                                                    --text-light: #6f8ba4;
+                                                    --gradient-overlay: linear-gradient(135deg, #2b3f73, #1c77a9);
+                                                    --border-radius: 12px;
+                                                    --transition: all 0.3s ease;
+                                                    --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+                                                }
+
+                                                .rest-area-section {
+                                                    background: var(--gradient-overlay);
+                                                    padding: 8rem 0rem;
+                                                    color: var(--accent-color);
+                                                    font-family: 'Cairo', sans-serif;
+                                                }
+
+                                                .rest-area-title {
+                                                    font-size: 2.75rem;
+                                                    font-weight: bold;
+                                                    text-align: center;
+                                                    color: var(--accent-color);
+                                                    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+                                                }
+
+                                                .rest-area-subtitle {
+                                                    text-align: center;
+                                                    font-size: 1.2rem;
+                                                    color: #c0d1e1; /* Lighter color for better contrast */
+                                                    margin-bottom: 3rem;
+                                                }
+
+                                                .nav-tabs {
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    gap: 1rem;
+                                                    border-bottom: none;
+                                                    margin-bottom: 2rem;
+                                                }
+
+                                                .rest-tab {
+                                                    background: var(--primary-color);
+                                                    color: #fff;
+                                                    padding: 0.75rem 1.75rem;
+                                                    font-size: 1rem;
+                                                    font-weight: 600;
+                                                    border: none;
+                                                    border-radius: var(--border-radius);
+                                                    cursor: pointer;
+                                                    transition: var(--transition);
+                                                    box-shadow: var(--box-shadow);
+                                                }
+
+                                                    .rest-tab.active, .rest-tab:hover {
+                                                        background: var(--secondary-color);
+                                                        transform: translateY(-2px);
+                                                    }
+
+                                                .tab-content {
+                                                    background: rgba(255,255,255,0.05);
+                                                    backdrop-filter: blur(10px);
+                                                    border-radius: var(--border-radius);
+                                                    padding: 2rem;
+                                                    box-shadow: var(--box-shadow);
+                                                }
+
+                                                .now-playing-title {
+                                                    font-size: 1.5rem;
+                                                    margin-bottom: 1rem;
+                                                    color: var(--accent-color);
+                                                }
+
+                                                .player-container iframe {
+                                                    width: 100%;
+                                                    height: 400px;
+                                                    border: none;
+                                                    border-radius: var(--border-radius);
+                                                    box-shadow: var(--box-shadow);
+                                                }
+
+                                                .playlist {
+                                                    list-style: none;
+                                                    padding: 0;
+                                                    background: rgba(255, 255, 255, 0.05);
+                                                    border-radius: var(--border-radius);
+                                                    backdrop-filter: blur(10px);
+                                                    box-shadow: var(--box-shadow);
+                                                    max-height: 400px;
+                                                    overflow-y: auto;
+                                                }
+
+                                                .playlist-item {
+                                                    padding: 0.75rem 1rem;
+                                                    cursor: pointer;
+                                                    transition: var(--transition);
+                                                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                                                    color: var(--accent-color);
+                                                    display: flex;
+                                                    align-items: center;
+                                                    gap: 0.75rem;
+                                                }
+
+                                                    .playlist-item:hover,
+                                                    .playlist-item.active {
+                                                        background-color: rgba(255, 255, 255, 0.1);
+                                                    }
+
+                                                .item-icon {
+                                                    color: var(--highlight-color);
+                                                }
+
+                                                @@media (max-width: 768px) {
+                                                    .player-container iframe {
+                                                        height: 250px;
+                                                    }
+
+                                                    .playlist {
+                                                        max-height: 250px;
+                                                    }
+                                                }
+                                            </style>
+
+                                            <section class="rest-area-section">
+                                                <div class="container">
+                                                    <h2 class="rest-area-title" data-ar="مساحة الاسترخاء" data-en="Relaxation Space">Relaxation Space</h2>
+                                                    <p class="rest-area-subtitle" data-ar="اختر من القوائم أدناه وابدأ رحلتك نحو الهدوء والسلام الداخلي" data-en="Choose from the lists below and start your journey to calm and inner peace">Choose from the lists below and start your journey to calm and inner peace</p>
+
+                                                    <!-- Nav tabs -->
+                                                    <ul class="nav nav-tabs" id="relaxationTab" role="tablist">
+                                                        @if (Model.Videos.Any())
+                                                        {
+                                                            <li class="nav-item" role="presentation">
+                                                                <button class="rest-tab active" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos-pane" type="button" role="tab"><i class="fas fa-video me-2"></i><span data-ar="الفيديوهات" data-en="Videos">Videos</span></button>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Audios.Any())
+                                                        {
+                                                            <li class="nav-item" role="presentation">
+                                                                <button class="rest-tab @(!Model.Videos.Any() ? "active" : "")" id="audios-tab" data-bs-toggle="tab" data-bs-target="#audios-pane" type="button" role="tab"><i class="fas fa-music me-2"></i><span data-ar="الصوتيات" data-en="Audios">Audios</span></button>
+                                                            </li>
+                                                        }
+                                                    </ul>
+
+                                                    <!-- Tab content -->
+                                                    <div class="tab-content" id="relaxationTabContent">
+                                                        @if (Model.Videos.Any())
+                                                        {
+                                                            <div class="tab-pane fade show active" id="videos-pane" role="tabpanel">
+                                                                <div class="row g-5">
+                                                                    <div class="col-lg-8">
+                                                                        <h2 id="now-playing-video-title" class="now-playing-title">
+                                                                            <span data-ar="يعمل الآن:" data-en="Now Playing:">Now Playing:</span> <strong>@Model.Videos.First().Title</strong>
+                                                                        </h2>
+                                                                        <div id="video-player-container" class="player-container mb-4">
+                                                                            <iframe src="https://video.bunnycdn.com/embed/@Model.Videos.First().LibraryId/@Model.Videos.First().VideoGuid?autoplay=false" allowfullscreen></iframe>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <h4 class="mb-3" data-ar="قائمة التشغيل" data-en="Playlist">Playlist</h4>
+                                                                        <ul class="playlist">
+                                                                            @foreach (var video in Model.Videos)
+                                                                            {
+                                                                                <li class="playlist-item video-item" data-library-id="@video.LibraryId" data-video-id="@video.VideoGuid" data-title-en="@video.Title" data-title-ar="@video.Title">
+                                                                                    <i class="fas fa-play-circle item-icon"></i>
+                                                                                    <span>@video.Title</span>
+                                                                                </li>
+                                                                            }
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        @if (Model.Audios.Any())
+                                                        {
+                                                            <div class="tab-pane fade @(!Model.Videos.Any() ? "show active" : "")" id="audios-pane" role="tabpanel">
+                                                                <div class="row g-5">
+                                                                    <div class="col-lg-8">
+                                                                        <h2 id="now-playing-audio-title" class="now-playing-title">
+                                                                            <span data-ar="يعمل الآن:" data-en="Now Playing:">Now Playing:</span> <strong>@Model.Audios.First().Title</strong>
+                                                                        </h2>
+                                                                        <div id="audio-player-container" class="player-container audio mb-4">
+                                                                            <iframe src="https://video.bunnycdn.com/embed/@Model.Audios.First().LibraryId/@Model.Audios.First().AudioGuid?autoplay=false&preload=true" allow="autoplay; encrypted-media;"></iframe>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <h4 class="mb-3" data-ar="قائمة التشغيل" data-en="Playlist">Playlist</h4>
+                                                                        <ul class="playlist">
+                                                                            @foreach (var audio in Model.Audios)
+                                                                            {
+                                                                                <li class="playlist-item audio-item" data-library-id="@audio.LibraryId" data-audio-id="@audio.AudioGuid" data-title-en="@audio.Title" data-title-ar="@audio.Title">
+                                                                                    <i class="fas fa-headphones-alt item-icon"></i>
+                                                                                    <span>@audio.Title</span>
+                                                                                </li>
+                                                                            }
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </section>
+
+@section Scripts {
+                                                <!-- FIX: Corrected the placement of the SignalR script tag -->
+                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+                                                <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        // --- Player logic (unchanged) ---
+                                                        const videoItems = document.querySelectorAll('.video-item');
+                                                        const audioItems = document.querySelectorAll('.audio-item');
+                                                        const videoContainer = document.getElementById('video-player-container');
+                                                        const audioContainer = document.getElementById('audio-player-container');
+                                                        const videoTitleElement = document.querySelector('#now-playing-video-title strong');
+                                                        const audioTitleElement = document.querySelector('#now-playing-audio-title strong');
+
+                                                        function updatePlaylist(items, container, titleElement, type) {
+                                                            items.forEach((item, index) => {
+                                                                if (index === 0) {
+                                                                    item.classList.add('active');
+                                                                }
+                                                                item.addEventListener('click', () => {
+                                                                    items.forEach(i => i.classList.remove('active'));
+                                                                    item.classList.add('active');
+                                                                    const lib = item.dataset.libraryId;
+                                                                    const id = type === 'video' ? item.dataset.videoId : item.dataset.audioId;
+                                                                    const lang = document.documentElement.lang || 'en';
+                                                                    const title = item.dataset[`title-${lang}`] || item.querySelector('span').textContent;
+                                                                    let src = `https://video.bunnycdn.com/embed/${lib}/${id}?autoplay=true`;
+                                                                    if (type === 'audio') {
+                                                                        src += '&preload=true';
+                                                                    }
+                                                                    container.innerHTML = `<iframe src="${src}" allowfullscreen allow="autoplay; encrypted-media;"></iframe>`;
+                                                                    titleElement.textContent = title;
+                                                                });
+                                                            });
+                                                        }
+
+                                                        if (videoItems.length > 0) {
+                                                            updatePlaylist(videoItems, videoContainer, videoTitleElement, 'video');
+                                                        }
+                                                        if (audioItems.length > 0) {
+                                                            updatePlaylist(audioItems, audioContainer, audioTitleElement, 'audio');
+                                                        }
+
+                                                        // --- START OF REAL-TIME ACCESS CHECK ---
+                                                        const connection = new signalR.HubConnectionBuilder()
+                                                            .withUrl("/notificationHub")
+                                                            .build();
+
+                                                        // Listen for the message from the server that the subscription status has changed
+                                                        connection.on("SubscriptionStatusChanged", () => {
+                                                            // When the message is received, immediately redirect the user
+                                                            window.location.href = '/Relaxation/Offer';
+                                                        });
+
+                                                        // Start the connection
+                                                        connection.start().catch(err => console.error("SignalR Connection Error: ", err.toString()));
+                                                        // --- END OF REAL-TIME ACCESS CHECK ---
+                                                    });
+                                                </script>
+}

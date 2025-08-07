@@ -1,0 +1,132 @@
+﻿@model BioGC.Areas.Admin.ViewModels.ReviewIndexViewModel
+@{
+    ViewData["Title"] = "Manage Reviews";
+}
+
+<h1 data-ar="إدارة التقييمات" data-en="Reviews Management">Reviews Management</h1>
+<p data-ar="الموافقة على تقييمات المنتجات أو رفضها أو حذفها." data-en="Approve, reject, or delete product reviews.">Approve, reject, or delete product reviews.</p>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-filter me-1"></i>
+        <span data-ar="فلترة" data-en="Filters">Filters</span>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-6">
+                    <label for="searchTerm" class="form-label" data-ar="بحث بالمنتج/المستخدم" data-en="Search by Product/User">Search by Product/User</label>
+                    <input type="text" name="searchTerm" id="searchTerm" class="form-control" value="@Model.SearchTerm">
+                </div>
+                <div class="col-md-4">
+                    <label for="status" class="form-label" data-ar="الحالة" data-en="Status">Status</label>
+                    <select name="status" id="status" class="form-select" asp-items="@Model.Statuses">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-grid d-md-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                        <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-star-half-alt me-1"></i>
+        <span data-ar="قائمة التقييمات" data-en="Reviews List">Reviews List</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th data-ar="المنتج" data-en="Product">Product</th>
+                        <th data-ar="المستخدم" data-en="User">User</th>
+                        <th class="text-center" data-ar="التقييم" data-en="Rating">Rating</th>
+                        <th data-ar="الحالة" data-en="Status">Status</th>
+                        <th class="text-end" data-ar="إجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <tr id="review-row-@review.Id">
+                            <td>@review.Product.NameEn</td>
+                            <td>@review.ApplicationUser.FullName</td>
+                            <td class="text-center">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="fas fa-star @(i <= review.Rating ? "text-warning" : "text-muted")"></i>
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    var statusClass = review.Status == "Approved" ? "bg-success" : (review.Status == "Rejected" ? "bg-danger" : "bg-warning text-dark");
+                                }
+                                <span class="badge @statusClass" id="status-badge-@review.Id">@review.Status</span>
+                            </td>
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm gap-1">
+                                    @if (review.Status != "Approved")
+                                    {
+                                        <button style="border-radius:15px;" class="btn btn-outline-success" onclick="updateStatus(@review.Id, 'Approved')" title="Approve"><i class="fas fa-check"></i></button>
+                                    }
+                                    @if (review.Status != "Rejected")
+                                    {
+                                        <button style="border-radius:15px;" class="btn btn-outline-warning" onclick="updateStatus(@review.Id, 'Rejected')" title="Reject"><i class="fas fa-times"></i></button>
+                                    }
+                                    <a style="border-radius:15px;" asp-action="Delete" asp-route-id="@review.Id" class="btn btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateStatus(id, status) {
+            fetch(`/Admin/Reviews/UpdateStatus/${id}?status=${status}`, {
+                method: 'POST',
+                headers: {
+                    'RequestVerificationToken': getAntiForgeryToken()
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // This is a simple way to refresh the page to show changes
+                    // A more advanced solution would be to update the DOM directly
+                    location.reload();
+                } else {
+                    Swal.fire('Error!', data.message || 'An error occurred.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Error!', 'An unexpected error occurred.', 'error');
+            });
+        }
+
+        // This function should already be in your admin.js, but ensure it's accessible
+        function getAntiForgeryToken() {
+            const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
+            return tokenInput ? tokenInput.value : '';
+        }
+    </script>
+}
+

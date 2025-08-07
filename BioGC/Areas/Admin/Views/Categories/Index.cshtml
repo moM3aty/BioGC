@@ -1,0 +1,87 @@
+﻿@model BioGC.Areas.Admin.ViewModels.CategoryIndexViewModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1 data-ar="إدارة الفئات" data-en="Categories Management">Categories Management</h1>
+<p data-ar="إدارة جميع فئات المنتجات من هنا." data-en="Manage all product categories from here.">Manage all product categories from here.</p>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-filter me-1"></i>
+        <span data-ar="فلترة" data-en="Filters">Filters</span>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3 align-items-center">
+            <div class="col-md-10">
+                <label for="searchTerm" class="visually-hidden">Search</label>
+                <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Search by parent or sub-category name..." value="@Model.SearchTerm" data-en-placeholder="Search by parent or sub-category name..." data-ar-placeholder="ابحث باسم الفئة الرئيسية أو الفرعية...">
+            </div>
+            <div class="col-md-2">
+                <div class="d-grid d-md-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                    <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i><span data-ar="إنشاء فئة جديدة" data-en="Create New Category">Create New Category</span>
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-tags me-1"></i>
+        <span data-ar="قائمة الفئات" data-en="Categories List">Categories List</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th data-ar="الاسم" data-en="Name">Name</th>
+                        <th data-ar="النوع" data-en="Type">Type</th>
+                        <th class="text-end" data-ar="إجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var parent in Model.ParentCategories)
+                    {
+                        <tr class="table-light">
+                            <td>
+                                <strong>@parent.NameEn</strong>
+                                <br />
+                                <small class="text-muted">@parent.NameAr</small>
+                            </td>
+                            <td><span class="badge bg-primary"><span data-ar="فئة رئيسية" data-en="Parent">Parent</span></span></td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@parent.Id" class="btn btn-outline-primary btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a asp-action="Delete" asp-route-id="@parent.Id" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        @foreach (var sub in parent.SubCategories.OrderBy(s => s.NameEn))
+                        {
+                            <tr>
+                                <td class="ps-4">
+                                    <i class="fas fa-level-up-alt fa-rotate-90 me-2 text-muted"></i>
+                                    @sub.NameEn
+                                    <br />
+                                    <small class="text-muted ps-4">@sub.NameAr</small>
+                                </td>
+                                <td><span class="badge bg-secondary"><span data-ar="فئة فرعية" data-en="Sub-category">Sub-category</span></span></td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@sub.Id" class="btn btn-outline-primary btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@sub.Id" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

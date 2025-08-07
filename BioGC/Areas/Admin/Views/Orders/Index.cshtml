@@ -1,0 +1,105 @@
+﻿@model BioGC.Areas.Admin.ViewModels.OrderIndexViewModel
+@{
+    ViewData["Title"] = "Orders";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+}
+
+<h1 data-ar="إدارة الطلبات" data-en="Orders Management">Orders Management</h1>
+
+<!-- Filter Section -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-filter me-2"></i><span data-ar="فلترة الطلبات" data-en="Filter Orders">Filter Orders</span></h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3">
+            <div class="col-md-4">
+                <label for="searchTerm" class="form-label" data-ar="بحث" data-en="Search">Search</label>
+                <input type="text" name="SearchTerm" class="form-control" value="@Model.SearchTerm" data-ar-placeholder="ابحث بالاسم أو الإيميل..." data-en-placeholder="Search by name or email..." />
+            </div>
+            <div class="col-md-2">
+                <label for="status" class="form-label" data-ar="الحالة" data-en="Status">Status</label>
+                <select name="Status" class="form-select" asp-items="@Model.Statuses">
+                    <option value="" data-ar="الكل" data-en="All">All</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="startDate" class="form-label" data-ar="من تاريخ" data-en="Start Date">Start Date</label>
+                <input type="date" name="StartDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+            </div>
+            <div class="col-md-2">
+                <label for="endDate" class="form-label" data-ar="إلى تاريخ" data-en="End Date">End Date</label>
+                <input type="date" name="EndDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <div class="d-grid d-md-flex gap-2 w-100">
+                    <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                    <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-receipt me-2"></i><span data-ar="قائمة الطلبات" data-en="Orders List">Orders List</span></h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th data-ar="رقم الطلب" data-en="Order ID">Order ID</th>
+                        <th data-ar="العميل" data-en="Customer">Customer</th>
+                        <th data-ar="التاريخ" data-en="Date">Date</th>
+                        <th data-ar="الإجمالي" data-en="Total">Total</th>
+                        <th data-ar="الحالة" data-en="Status">Status</th>
+                        <th class="text-end" data-ar="الإجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Orders.Any())
+                    {
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td>#@order.Id</td>
+                                <td>@order.ApplicationUser.FullName</td>
+                                <td>@order.OrderDate.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                                <td>$@order.TotalAmount.ToString("F2")</td>
+                                <td>
+                                    @{
+                                        var statusClass = order.OrderStatus switch
+                                        {
+                                            "Processing" => "bg-primary",
+                                            "Shipped" => "bg-info text-dark",
+                                            "Delivered" => "bg-success",
+                                            "Cancelled" => "bg-danger",
+                                            _ => "bg-secondary"
+                                        };
+                                    }
+                                    <span class="badge @statusClass">@order.OrderStatus</span>
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye me-1"></i> <span data-ar="عرض" data-en="View">View</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                <span data-ar="لم يتم العثور على طلبات تطابق معايير البحث." data-en="No orders found matching the criteria.">No orders found matching the criteria.</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@model BioGC.Areas.Admin.ViewModels.MessageIndexViewModel
+@{
+    ViewData["Title"] = "Contact Messages";
+}
+<h1 data-ar="رسائل التواصل" data-en="Contact Messages">Contact Messages</h1>
+<p data-ar="عرض جميع الرسائل المرسلة من نماذج التواصل في الموقع." data-en="View all messages submitted from the website's contact forms.">View all messages submitted from the website's contact forms.</p>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-filter me-1"></i>
+        <span data-ar="فلترة" data-en="Filters">Filters</span>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label for="searchTerm" class="form-label" data-ar="بحث بالاسم/البريد" data-en="Search by Name/Email">Search by Name/Email</label>
+                    <input type="text" name="searchTerm" id="searchTerm" class="form-control" value="@Model.SearchTerm">
+                </div>
+                <div class="col-md-2">
+                    <label for="sourcePage" class="form-label" data-ar="المصدر" data-en="Source">Source</label>
+                    <select name="sourcePage" id="sourcePage" class="form-select" asp-items="@Model.SourcePages">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="startDate" class="form-label" data-ar="من تاريخ" data-en="Start Date">Start Date</label>
+                    <input type="date" name="startDate" id="startDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-2">
+                    <label for="endDate" class="form-label" data-ar="إلى تاريخ" data-en="End Date">End Date</label>
+                    <input type="date" name="endDate" id="endDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-2">
+                    <div class="d-grid d-md-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                        <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-envelope-open-text me-1"></i>
+        <span data-ar="صندوق الوارد" data-en="Inbox">Inbox</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th data-ar="المرسل" data-en="From">From</th>
+                        <th data-ar="البريد الإلكتروني" data-en="Email">Email</th>
+                        <th data-ar="المصدر" data-en="Source">Source</th>
+                        <th data-ar="التاريخ" data-en="Date">Date</th>
+                        <th class="text-end"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Messages)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td><span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.SourcePage)</span></td>
+                            <td>@item.SubmittedAt.ToLocalTime().ToString("yyyy-MM-dd hh:mm tt")</td>
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" title="View Details"><i class="fas fa-eye"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

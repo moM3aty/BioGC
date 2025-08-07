@@ -1,0 +1,332 @@
+﻿@model BioGC.ViewModels.ProductDetailViewModel
+@{
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var productName = lang == "ar" ? Model.Product.NameAr : Model.Product.NameEn;
+    var productDescription = lang == "ar" ? Model.Product.DescriptionAr : Model.Product.DescriptionEn;
+    var categoryName = lang == "ar" ? Model.Product.Category.NameAr : Model.Product.Category.NameEn;
+    ViewData["Title"] = productName;
+}
+
+@* --- Custom Styles for this page --- *@
+<style>
+    .product-detail-page {
+        background-color: #f8f9fa; /* Light grey background for the whole page */
+    }
+
+    .product-main-card {
+        background-color: #ffffff;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+
+    .product-detail-page .main-product-image {
+        width: 100%;
+        height: 500px; /* Taller image */
+        object-fit: cover; /* Use cover to fill the space */
+    }
+
+    [dir="ltr"] .main-product-image {
+        border-right: 1px solid #dee2e6;
+    }
+
+    [dir="rtl"] .main-product-image {
+        border-left: 1px solid #dee2e6;
+    }
+
+    .product-info-panel {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .product-breadcrumb .breadcrumb {
+        background-color: #e9ecef;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-breadcrumb .breadcrumb-item a {
+        text-decoration: none;
+        color: var(--primary-color);
+    }
+
+    .product-breadcrumb .breadcrumb-item.active {
+        color: var(--text-light);
+    }
+
+    .product-title-detail {
+        font-weight: 700;
+        font-size: 2.25rem;
+        color: var(--text-dark);
+    }
+
+    .product-rating-summary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .quantity-selector .input-group {
+        width: auto;
+        max-width: 150px;
+    }
+
+    .quantity-selector .btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 50% !important; /* Make buttons circular */
+    }
+
+    .quantity-selector .form-control {
+        text-align: center;
+        font-weight: bold;
+        border-left: 0;
+        border-right: 0;
+        box-shadow: none;
+        font-size: 1.2rem;
+    }
+
+    [dir="rtl"] .quantity-selector .form-control {
+        border-left: 1px solid #dee2e6;
+        border-right: 1px solid #dee2e6;
+    }
+
+
+    /* Hide number input arrows */
+    .quantity-selector input[type=number]::-webkit-inner-spin-button,
+    .quantity-selector input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .quantity-selector input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .product-details-tabs .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+        .product-details-tabs .nav-tabs .nav-link {
+            font-weight: 600;
+            color: var(--text-light);
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 1rem 1.5rem;
+        }
+
+            .product-details-tabs .nav-tabs .nav-link.active {
+                color: var(--primary-color);
+                border-bottom-color: var(--primary-color);
+                background-color: transparent;
+            }
+
+    .product-details-tabs .tab-content {
+        padding: 2rem 0;
+    }
+
+    .review-item {
+        border-bottom: 1px solid #f1f1f1;
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+        .review-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+    .review-author {
+        font-weight: 600;
+    }
+
+    .star-rating i {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #e0e0e0;
+    }
+
+    .related-products-section {
+        padding-top: 3rem;
+        border-top: 1px solid #dee2e6;
+    }
+</style>
+
+<section class="product-detail-page padding-section">
+    <div class="container">
+        <div class="card product-main-card shadow-sm border-0 mb-5">
+            <div class="row g-0">
+                <!-- Product Image Gallery -->
+                <div class="col-lg-6">
+                    <div class="product-gallery"
+                         data-product-id="@Model.Product.Id"
+                         data-product-name-en="@Model.Product.NameEn"
+                         data-product-name-ar="@Model.Product.NameAr"
+                         data-price="@Model.Product.PriceAfterDiscount"
+                         data-image="/images/products/@Model.Product.ImageUrl">
+                        <img src="/images/products/@Model.Product.ImageUrl" class="main-product-image" alt="@productName" onerror="this.onerror=null;this.src='https://placehold.co/600x500/E0E5EC/666?text=Image+Not+Found';">
+                    </div>
+                </div>
+
+                <!-- Product Information Panel -->
+                <div class="col-lg-6">
+                    <div class="product-info-panel">
+                        <div class="mb-4">
+             <a asp-action="List" asp-controller="Products" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i><span data-ar="العودة للمنتجات" data-en="Back to Products">Back to Products</span>
+            </a>
+        </div>
+
+                        <h1 class="product-title-detail" data-ar="@Model.Product.NameAr" data-en="@Model.Product.NameEn">@productName</h1>
+
+                        <div class="product-rating-summary">
+                            @{
+                                var approvedReviews = Model.Product.Reviews.Where(r => r.Status == "Approved").ToList();
+                                var averageRating = approvedReviews.Any() ? approvedReviews.Average(r => r.Rating) : 0;
+                            }
+                            <div class="stars text-warning">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="fas fa-star @(i <= averageRating ? "" : "far")"></i>
+                                }
+                            </div>
+                            <a href="#reviews-pane" class="rating-text text-decoration-none" data-bs-toggle="tab" data-bs-target="#reviews-pane">(@approvedReviews.Count <span data-ar="تقييمات" data-en="reviews">reviews</span>)</a>
+                        </div>
+
+                        <div class="price-section my-3">
+                            <span class="current-price fs-2 fw-bold text-success">$@Model.Product.PriceAfterDiscount.ToString("F2")</span>
+                            @if (Model.Product.PriceBeforeDiscount > Model.Product.PriceAfterDiscount)
+                            {
+                                <span class="old-price fs-4 ms-2 text-muted text-decoration-line-through">$@Model.Product.PriceBeforeDiscount.ToString("F2")</span>
+                            }
+                        </div>
+
+                        <p class="text-muted my-3" data-ar="@Model.Product.DescriptionAr.Substring(0, Math.Min(Model.Product.DescriptionAr.Length, 150))..." data-en="@Model.Product.DescriptionEn.Substring(0, Math.Min(Model.Product.DescriptionEn.Length, 150))...">
+                            @productDescription.Substring(0, Math.Min(productDescription.Length, 150))...
+                        </p>
+
+                        <div class="mt-auto">
+                            <div class="row align-items-center my-4">
+                                <div class="col-md-6">
+                                    <label for="quantity" class="form-label fw-bold" data-ar="الكمية" data-en="Quantity">Quantity</label>
+                                    <div class="quantity-selector">
+                                        <div class="input-group">
+                                            <button class="btn btn-outline-secondary" type="button" id="decrease-quantity"><i class="fas fa-minus"></i></button>
+                                            <input style="    border-radius: 25px;" type="number" class="form-control" id="quantity" value="1" min="1" readonly>
+                                            <button class="btn btn-outline-secondary" type="button" id="increase-quantity"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="product-actions-detail d-flex gap-2 mt-4">
+                                <button class="btn btn-primary btn-lg flex-grow-1 btn-cart">
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    <span data-ar="اضف الي السلة" data-en="Add to Cart">Add to Cart</span>
+                                </button>
+                                <button class="btn btn-outline-danger btn-lg btn-favorite" title="Add to Wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description & Reviews Tabs -->
+        <div class="product-details-tabs">
+            <ul class="nav nav-tabs" id="productTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-pane" type="button" role="tab" aria-controls="description-pane" aria-selected="true" data-ar="الوصف الكامل" data-en="Full Description">Full Description</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-pane" type="button" role="tab" aria-controls="reviews-pane" aria-selected="false" data-ar="التقييمات" data-en="Reviews">Reviews (@approvedReviews.Count)</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="productTabContent">
+                <div class="tab-pane fade show active" id="description-pane" role="tabpanel" aria-labelledby="description-tab" tabindex="0">
+                    <p data-en="@Model.Product.DescriptionEn" data-ar="@Model.Product.DescriptionAr">@productDescription</p>
+                </div>
+                <div class="tab-pane fade" id="reviews-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-lg-7 border-end-lg">
+                            <h4 class="mb-4" data-ar="تقييمات العملاء" data-en="Customer Reviews">Customer Reviews</h4>
+                            @if (approvedReviews.Any())
+                            {
+                                foreach (var review in approvedReviews)
+                                {
+                                    <div class="review-item">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <img src="@(review.ApplicationUser.ProfilePictureUrl ?? "/images/default-avatar.png")" class="rounded-circle me-2" width="40" height="40" alt="user" />
+                                            <div class="review-author">@review.ApplicationUser.FullName</div>
+                                        </div>
+                                        <div class="stars text-warning mb-2">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <i class="fas fa-star @(i <= review.Rating ? "" : "text-muted far")"></i>
+                                            }
+                                        </div>
+                                        <p class="review-comment">@review.Comment</p>
+                                        <small class="text-muted">@review.DatePosted.ToString("MMMM dd, yyyy")</small>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="text-muted" data-ar="لا توجد تقييمات لهذا المنتج بعد." data-en="No reviews for this product yet.">No reviews for this product yet.</p>
+                            }
+                        </div>
+                        @if (Model.CanUserReview)
+                        {
+                            <div class="col-lg-5 mt-4 mt-lg-0">
+                                <h4 class="mb-4" data-ar="أضف تقييمك" data-en="Add Your Review">Add Your Review</h4>
+                                <form id="review-form">
+                                    @Html.AntiForgeryToken()
+                                    <div id="review-status-message"></div>
+                                    <div class="mb-3">
+                                        <label class="form-label" data-ar="تقييمك" data-en="Your Rating">Your Rating</label>
+                                        <div class="star-rating">
+                                            <i class="fas fa-star" data-value="1"></i><i class="fas fa-star" data-value="2"></i><i class="fas fa-star" data-value="3"></i><i class="fas fa-star" data-value="4"></i><i class="fas fa-star" data-value="5"></i>
+                                        </div>
+                                        <input type="hidden" name="rating" id="rating-value" value="0" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="comment" class="form-label" data-ar="تعليقك" data-en="Your Comment">Your Comment</label>
+                                        <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+                                    </div>
+                                    <input type="hidden" name="productId" value="@Model.Product.Id" />
+                                    <button type="submit" class="btn btn-primary" data-ar="إرسال التقييم" data-en="Submit Review">Submit Review</button>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products Section -->
+        @if (Model.RelatedProducts.Any())
+        {
+            <div class="related-products-section">
+                <h2 class="text-center mb-5" data-ar="منتجات مشابهة قد تعجبك" data-en="You Might Also Like">You Might Also Like</h2>
+                <div class="row g-4">
+                    @foreach (var relatedProduct in Model.RelatedProducts)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            @await Html.PartialAsync("_ProductCard", relatedProduct)
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/product-details.js" asp-append-version="true"></script>
+}

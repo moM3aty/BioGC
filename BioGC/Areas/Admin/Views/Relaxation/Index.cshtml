@@ -1,0 +1,172 @@
+﻿@model BioGC.Areas.Admin.ViewModels.RelaxationAdminViewModel
+@{
+    ViewData["Title"] = "Manage Relaxation Content";
+}
+
+<h1 data-ar="إدارة محتوى الاسترخاء" data-en="Manage Relaxation Content">Manage Relaxation Content</h1>
+
+<!-- The old TempData display is removed from here -->
+
+<div class="row g-4">
+    <!-- Pricing Column -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header"><h5 class="mb-0"><i class="fas fa-dollar-sign me-2"></i><span data-ar="تسعير الخدمة" data-en="Service Pricing">Service Pricing</span></h5></div>
+            <div class="card-body">
+
+                <!-- This is the new container for toast messages -->
+                <div id="toast-container-local" class="mb-3"></div>
+
+                @if (Model.AssociatedProduct != null)
+                {
+                    <form asp-action="UpdatePrice" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="productId" value="@Model.AssociatedProduct.Id" />
+                        <div class="alert alert-info py-2">
+                            <small class="d-block" data-ar="المنتج المرتبط:" data-en="Linked Product:">Linked Product:</small>
+                            <strong>@Model.AssociatedProduct.NameEn (ID: @Model.AssociatedProduct.Id)</strong>
+                        </div>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-md-10">
+                                <label for="price" class="form-label" data-ar="سعر الخدمة ($)" data-en="Service Price ($)">Service Price ($)</label>
+                                <input name="price" id="price" type="number" step="0.01" class="form-control" value="@Model.AssociatedProduct.PriceAfterDiscount" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100" data-ar="تحديث السعر" data-en="Update Price">Update Price</button>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-danger mt-3">
+                        <strong data-ar="خطأ:" data-en="Error:">Error:</strong>
+                        <span data-ar="المنتج المخصص للخدمة (ID: 1) غير موجود في قاعدة البيانات. يرجى التأكد من وجوده." data-en="The fixed service product (ID: 1) was not found in the database. Please ensure it exists.">The fixed service product (ID: 1) was not found in the database. Please ensure it exists.</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Video Management Column -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5 class="mb-0"><i class="fas fa-video me-2"></i><span data-ar="قائمة تشغيل الفيديو" data-en="Video Playlist">Video Playlist</span></h5></div>
+            <div class="card-body">
+                <form asp-action="AddVideo" method="post" class="row g-3 mb-4">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="contentId" value="@Model.Content.Id" />
+                    <div class="col-md-4"><input type="text" name="title" class="form-control" placeholder="Video Title" data-ar-placeholder="عنوان الفيديو" data-en-placeholder="Video Title" required /></div>
+                    <div class="col-md-4"><input type="number" name="libraryId" class="form-control" placeholder="Library ID" data-ar-placeholder="معرف المكتبة" data-en-placeholder="Library ID" required /></div>
+                    <div class="col-md-4"><input type="text" name="videoGuid" class="form-control" placeholder="Video GUID" data-ar-placeholder="معرف الفيديو" data-en-placeholder="Video GUID" required /></div>
+                    <div class="col-12 d-grid"><button type="submit" class="btn btn-primary" data-ar="إضافة فيديو" data-en="Add Video">Add Video</button></div>
+                </form>
+                <ul class="list-group">
+                    @if (!Model.Content.Videos.Any())
+                    {
+                        <li class="list-group-item text-muted" data-ar="لم تتم إضافة أي فيديوهات بعد." data-en="No videos have been added yet.">No videos have been added yet.</li>
+                    }
+                    @foreach (var video in Model.Content.Videos)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @video.Title
+                            <form asp-action="DeleteVideo" asp-route-id="@video.Id" method="post" onsubmit="return confirm(document.documentElement.lang === 'ar' ? 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟' : 'Are you sure you want to delete this video?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger">&times;</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Management Column -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5 class="mb-0"><i class="fas fa-music me-2"></i><span data-ar="قائمة تشغيل الصوت" data-en="Audio Playlist">Audio Playlist</span></h5></div>
+            <div class="card-body">
+                <form asp-action="AddAudio" method="post" class="row g-3 mb-4">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="contentId" value="@Model.Content.Id" />
+                    <div class="col-md-4"><input type="text" name="title" class="form-control" placeholder="Audio Title" data-ar-placeholder="عنوان المقطع الصوتي" data-en-placeholder="Audio Title" required /></div>
+                    <div class="col-md-4"><input type="number" name="libraryId" class="form-control" placeholder="Library ID" data-ar-placeholder="معرف المكتبة" data-en-placeholder="Library ID" required /></div>
+                    <div class="col-md-4"><input type="text" name="audioGuid" class="form-control" placeholder="Audio GUID" data-ar-placeholder="معرف المقطع الصوتي" data-en-placeholder="Audio GUID" required /></div>
+                    <div class="col-12 d-grid"><button type="submit" class="btn btn-primary" data-ar="إضافة مقطع صوتي" data-en="Add Audio">Add Audio</button></div>
+                </form>
+                <ul class="list-group">
+                    @if (!Model.Content.Audios.Any())
+                    {
+                        <li class="list-group-item text-muted" data-ar="لم تتم إضافة أي مقاطع صوتية بعد." data-en="No audios have been added yet.">No audios have been added yet.</li>
+                    }
+                    @foreach (var audio in Model.Content.Audios)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @audio.Title
+                            <form asp-action="DeleteAudio" asp-route-id="@audio.Id" method="post" onsubmit="return confirm(document.documentElement.lang === 'ar' ? 'هل أنت متأكد أنك تريد حذف هذا المقطع الصوتي؟' : 'Are you sure you want to delete this audio?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger">&times;</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const toastMessage = @Html.Raw(TempData["ToastMessage"] != null ? $"'{TempData["ToastMessage"]}'" : "null");
+
+            const translations = {
+                "PriceUpdated": { en: "Price updated successfully!", ar: "تم تحديث السعر بنجاح!" },
+                "ProductNotFound": { en: "Product not found.", ar: "المنتج غير موجود." },
+                "VideoAdded": { en: "Video added successfully.", ar: "تم إضافة الفيديو بنجاح." },
+                "VideoDeleted": { en: "Video deleted successfully.", ar: "تم حذف الفيديو بنجاح." },
+                "VideoFieldsRequired": { en: "Title, Library ID, and Video GUID are required.", ar: "العنوان ومعرف المكتبة ومعرف الفيديو مطلوبون." },
+                "AudioAdded": { en: "Audio added successfully.", ar: "تم إضافة المقطع الصوتي بنجاح." },
+                "AudioDeleted": { en: "Audio deleted successfully.", ar: "تم حذف المقطع الصوتي بنجاح." },
+                "AudioFieldsRequired": { en: "Title, Library ID, and Audio GUID are required.", ar: "العنوان ومعرف المكتبة ومعرف الصوت مطلوبون." }
+            };
+
+            if (toastMessage) {
+                const [type, key] = toastMessage.split(':');
+                const messageData = translations[key];
+
+                if (messageData) {
+                    const lang = document.documentElement.lang || 'en';
+                    const message = messageData[lang];
+                    const isError = type.toLowerCase() === 'error';
+
+                    showToast(message, isError);
+                }
+            }
+
+            function showToast(message, isError) {
+                const container = document.getElementById('toast-container-local');
+                if (!container) return;
+
+                const alertType = isError ? 'alert-danger' : 'alert-success';
+                const toastElement = document.createElement('div');
+                toastElement.className = `alert ${alertType} alert-dismissible fade show`;
+                toastElement.setAttribute('role', 'alert');
+                toastElement.innerHTML = `
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+
+                container.innerHTML = '';
+                container.appendChild(toastElement);
+
+                setTimeout(() => {
+                    const bsAlert = bootstrap.Alert.getOrCreateInstance(toastElement);
+                    if (bsAlert) {
+                        bsAlert.close();
+                    }
+                }, 5000);
+            }
+        });
+    </script>
+}

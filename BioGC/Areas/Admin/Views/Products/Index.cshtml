@@ -1,0 +1,78 @@
+﻿@model BioGC.Areas.Admin.ViewModels.ProductIndexViewModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1 class="mb-4" data-ar="إدارة المنتجات" data-en="Products Management">Products Management</h1>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-filter me-1"></i>
+        <span data-ar="فلترة" data-en="Filters">Filters</span>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3 align-items-center">
+            <div class="col-md-6">
+                <label for="searchTerm" class="visually-hidden">Search</label>
+                <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Search by name..." value="@Model.SearchTerm" data-en-placeholder="Search by name..." data-ar-placeholder="ابحث بالاسم...">
+            </div>
+            <div class="col-md-4">
+                <label for="categoryId" class="visually-hidden">Category</label>
+                <select name="categoryId" id="categoryId" class="form-select" asp-items="@Model.Categories">
+                    <option value="" data-ar="كل الفئات" data-en="All Categories">All Categories</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <div class="d-grid d-md-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100" title="Search"><i class="fas fa-search"></i></button>
+                    <a asp-action="Index" class="btn btn-secondary w-100" title="Reset"><i class="fas fa-undo"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus me-2"></i><span data-ar="إضافة منتج جديد" data-en="Add New Product">Add New Product</span></a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-boxes me-1"></i>
+        <span data-ar="قائمة المنتجات" data-en="Products List">Products List</span>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;" data-ar="الصورة" data-en="Image">Image</th>
+                        <th data-ar="الاسم" data-en="Name">Name</th>
+                        <th data-ar="الفئة" data-en="Category">Category</th>
+                        <th data-ar="السعر" data-en="Price">Price</th>
+                        <th style="width: 15%;" class="text-end" data-ar="إجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td><img src="/images/products/@item.ImageUrl" class="img-thumbnail" alt="@item.NameEn" onerror="this.onerror=null;this.src='https://placehold.co/70x70/E0E5EC/666?text=No+Img';" /></td>
+                            <td>
+                                <div>@item.NameEn</div>
+                                <small class="text-muted">@item.NameAr</small>
+                            </td>
+                            <td>@(item.Category?.NameEn ?? "N/A")</td>
+                            <td>$@item.PriceAfterDiscount.ToString("F2")</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

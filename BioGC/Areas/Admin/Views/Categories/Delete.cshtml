@@ -1,0 +1,37 @@
+﻿@model BioGC.Models.Category
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<h1 data-ar="حذف الفئة" data-en="Delete Category">Delete Category</h1>
+<hr />
+
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        <span data-ar="تأكيد الحذف" data-en="Confirm Deletion">Confirm Deletion</span>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title" data-ar="هل أنت متأكد أنك تريد حذف هذه الفئة؟" data-en="Are you sure you want to delete this category?">Are you sure you want to delete this category?</h5>
+        <p class="text-danger" data-ar="لا يمكن التراجع عن هذا الإجراء." data-en="This action cannot be undone.">This action cannot be undone.</p>
+
+        <div class="mt-4">
+            <dl class="row">
+                <dt class="col-sm-3" data-ar="الاسم (الإنجليزية)" data-en="Name (English)">Name (English)</dt>
+                <dd class="col-sm-9">@Model.NameEn</dd>
+
+                <dt class="col-sm-3" data-ar="الاسم (العربية)" data-en="Name (Arabic)">Name (Arabic)</dt>
+                <dd class="col-sm-9">@Model.NameAr</dd>
+
+                <dt class="col-sm-3" data-ar="الفئة الرئيسية" data-en="Parent Category">Parent Category</dt>
+                <dd class="col-sm-9">@(Model.ParentCategory?.NameEn ?? "N/A")</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i> <span data-ar="حذف" data-en="Delete">Delete</span></button>
+            <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times me-2"></i> <span data-ar="إلغاء" data-en="Cancel">Cancel</span></a>
+        </form>
+    </div>
+</div>

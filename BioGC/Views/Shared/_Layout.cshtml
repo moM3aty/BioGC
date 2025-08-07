@@ -1,0 +1,242 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BioGC.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioCG - Bioconstruction Group LTD</title>
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/shop-style.css" asp-append-version="true" />
+    <link rel="icon" href="~/images/logo.png" asp-append-version="true" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <style>
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1060;
+        }
+
+        .toast {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            transform: translateY(20px);
+        }
+
+            .toast.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo.png" alt="BioCG" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto d-flex justify-content-center align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="home" data-en="Home" data-ar="الرئيسية">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="about" data-en="About Us" data-ar="من نحن">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="services" data-en="Services" data-ar="خدماتنا">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="projects" data-en="Projects" data-ar="مشاريعنا">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="shop" data-en="Products" data-ar="منتجاتنا">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Relaxation" asp-action="RedirectToContent" data-en="Life Resonance" data-ar="طيف الحياة">Life Resonance</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-en="Pages" data-ar="الصفحات">
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu text-center text-lg-start" aria-labelledby="pagesDropdown">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="engineeringConsulting" data-en="Engineering Consulting" data-ar="الاستشارات الهندسيه">
+                                    Engineering Consulting
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="courses" data-en="Training and courses" data-ar="التدريب والدورات">
+                                    Training and courses
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="IT_AI" data-en="IT, artificial intelligence, and information systems" data-ar="تكنولوجيا المعلومات والذكاء الاصطناعي ونظم المعلومات">
+                                    IT, artificial intelligence, and information systems
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item last-child" asp-controller="Home" asp-action="cosmeticsmanufacturing" data-en="Cosmetics manufacturing and sales" data-ar="تصنيع وبيع مستحضرات التجميل">
+                                    Cosmetics manufacturing and sales
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav mt-3 mt-lg-0 d-flex flex-row align-items-center">
+
+                    <button class="btn btn-outline-light translate-btn btn-sm me-3" id="langToggle">
+                        العربية
+                    </button>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a style="font-size:35px;" asp-controller="Account" asp-action="Profile" class="nav-link text-white" title="Profile"><i class="fas fa-user-circle fa-lg"></i></a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-sm btn-warning" title="Admin Dashboard">
+                                <i class="fas fa-user-shield"></i>
+                            </a>
+                        }
+
+                        <form asp-controller="Account" asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary" title="Logout">
+                                <i class="fas fa-sign-out-alt"></i> <span class="d-none d-lg-inline" data-ar="تسجيل الخروج" data-en="Logout">Logout</span>
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login" data-ar="تسجيل الدخول" data-en="Sign In" class="btn btn-sm btn-outline-primary">Sign In</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main id="mainContent">
+        @RenderBody()
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row g-4 justify-content-center align-items-center">
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                        <a class="logo d-flex justify-content-center justify-content-lg-start align-items-center" href="index.html" aria-label="BIOCG logo">
+                            <img src="~/images/logo.png" class="" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <ul class="list-unstyled d-flex flex-wrap justify-content-center align-items-center gap-5 mt-4">
+                        <li class="mb-3">
+                            <a asp-controller="Home" asp-action="Index" asp-fragment="home" class="text-decoration-none" data-en="Home" data-ar="الرئيسية">Home</a>
+                        </li>
+                        <li class="mb-3">
+                            <a asp-controller="Home" asp-action="Index" asp-fragment="about" class="text-decoration-none" data-en="About Us" data-ar="من نحن">About Us</a>
+                        </li>
+                        <li class="mb-3">
+                            <a asp-controller="Home" asp-action="Index" asp-fragment="services" class="text-decoration-none" data-en="Services" data-ar="خدماتنا">Services</a>
+                        </li>
+                        <li class="mb-3">
+                            <a asp-controller="Home" asp-action="Index" asp-fragment="projects" class="text-decoration-none" data-en="Projects" data-ar="مشروعاتنا">Projects</a>
+                        </li>
+
+                        <li class="dropdown mb-3">
+                            <a class="dropdown-toggle text-decoration-none" href="#" id="pagesDropdownFooter" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-en="Pages" data-ar="الصفحات">
+                                Pages
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesDropdownFooter">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="engineeringConsulting" data-en="Engineering Consulting" data-ar="الاستشارات الهندسية">
+                                        Engineering Consulting
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="courses" data-en="Training and courses" data-ar="التدريب والدورات">
+                                        Training and courses
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="IT_AI" data-en="IT, artificial intelligence, and information systems" data-ar="تكنولوجيا المعلومات والذكاء الاصطناعي ونظم المعلومات">
+                                        IT, artificial intelligence, and information systems
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="cosmeticsmanufacturing" data-en="Cosmetics manufacturing and sales" data-ar="تصنيع وبيع مستحضرات التجميل">
+                                        Cosmetics manufacturing and sales
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="mb-3">
+                            <a asp-controller="Home" asp-action="Index" asp-fragment="contact" class="text-decoration-none" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <hr class="my-4 border-light">
+            <div class="text-center small text-white" data-ar="  جميع الحقوق محفوظة © 2025 Bio constructions group ltd." data-en="All rights reserved © 2025 Bio constructions group ltd.">
+                All rights reserved © 2025 Bio constructions group ltd.
+            </div>
+            <div class="text-center small text-white mt-4">
+                <span data-ar="تم التصميم بواسطة" data-en="Designed by:">Designed by: </span> <a aria-label="gmt facebook" href="https://www.facebook.com/profile.php?id=100090592885243&mibextid=ZbWKwL" class="gwt">GMT</a>
+            </div>
+        </div>
+    </footer>
+
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-controller="Account" asp-action="Profile" asp-fragment="wishlist-tab-pane" class="fixed-fav-btn btn btn-danger rounded-circle text-decoration-none">
+            <i class="fas fa-heart"></i>
+        </a>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login" class="fixed-fav-btn btn btn-danger rounded-circle text-decoration-none">
+            <i class="fas fa-heart"></i>
+        </a>
+    }
+
+    <a asp-controller="Home" asp-action="cart" class="fixed-cart-btn btn btn-success rounded-circle text-decoration-none">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count" class="cart-count">0</span>
+    </a>
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/shop.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

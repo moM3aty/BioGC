@@ -1,0 +1,125 @@
+﻿@model BioGC.ViewModels.ProductListViewModel
+@{
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var currentParentCategory = Model.ParentCategories.FirstOrDefault(p => p.Id == Model.SelectedParentCategoryId);
+    var pageTitle = currentParentCategory != null ? (lang == "ar" ? currentParentCategory.NameAr : currentParentCategory.NameEn) : (lang == "ar" ? "كل المنتجات" : "All Products");
+    ViewData["Title"] = pageTitle;
+}
+
+<style>
+    .sub-category-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .sub-category-tab {
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 500;
+        background-color: #f1f3f5;
+        color: var(--text-dark);
+        transition: all 0.2s ease-in-out;
+    }
+    .sub-category-tab:hover {
+        background-color: #e9ecef;
+    }
+    .sub-category-tab.active {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(44, 90, 160, 0.3);
+    }
+</style>
+
+<section class="padding-section">
+    <div class="container">
+        <div class="product-list-container">
+            <aside class="product-list-sidebar">
+                <div class="card category-sidebar sticky-top" style="top: 100px;">
+                    <div class="card-header" data-ar="الفئات الرئيسية" data-en="Main Categories">Main Categories</div>
+                    <div class="list-group list-group-flush">
+                        <a asp-action="List" asp-route-sortBy="@Model.SortBy" asp-route-searchTerm="@Model.SearchTerm"
+                           class="list-group-item list-group-item-action @(Model.SelectedParentCategoryId == null ? "active" : "")"
+                           data-ar="كل المنتجات" data-en="All Products">All Products</a>
+                        @foreach (var parent in Model.ParentCategories)
+                        {
+                            <a asp-action="List" asp-route-parentCategoryId="@parent.Id" asp-route-sortBy="@Model.SortBy" asp-route-searchTerm="@Model.SearchTerm"
+                               class="list-group-item list-group-item-action @(Model.SelectedParentCategoryId == parent.Id ? "active" : "")"
+                               data-en="@parent.NameEn" data-ar="@parent.NameAr">
+                                @(lang == "ar" ? parent.NameAr : parent.NameEn)
+                            </a>
+                        }
+                    </div>
+                </div>
+            </aside>
+
+            <main class="product-list-main">
+                <h2 class="mb-4">@pageTitle</h2>
+
+                @if (Model.SubCategoryTabs.Any())
+                {
+                    <div class="sub-category-tabs">
+                        <a asp-action="List" asp-route-parentCategoryId="@Model.SelectedParentCategoryId" asp-route-sortBy="@Model.SortBy" asp-route-searchTerm="@Model.SearchTerm"
+                           class="sub-category-tab @(Model.SelectedSubCategoryId == null ? "active" : "")" data-ar="الكل" data-en="All">All</a>
+                        @foreach (var tab in Model.SubCategoryTabs)
+                        {
+                            <a asp-action="List" asp-route-parentCategoryId="@Model.SelectedParentCategoryId" asp-route-subCategoryId="@tab.Id" asp-route-sortBy="@Model.SortBy" asp-route-searchTerm="@Model.SearchTerm"
+                               class="sub-category-tab @(Model.SelectedSubCategoryId == tab.Id ? "active" : "")" data-en="@tab.NameEn" data-ar="@tab.NameAr">
+                                @(lang == "ar" ? tab.NameAr : tab.NameEn)
+                            </a>
+                        }
+                    </div>
+                }
+
+                <div class="filter-bar">
+                    <form asp-action="List" method="get" class="row g-2 w-100 align-items-center">
+                        <input type="hidden" name="parentCategoryId" value="@Model.SelectedParentCategoryId" />
+                        <input type="hidden" name="subCategoryId" value="@Model.SelectedSubCategoryId" />
+                        <div class="col-lg">
+                            <div class="input-group">
+                                <input type="text" name="searchTerm" class="form-control" value="@Model.SearchTerm" data-en-placeholder="Search products..." data-ar-placeholder="ابحث عن منتجات...">
+                                <button class="btn btn-primary" type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-auto">
+                            <label for="product-list-filter-select" class="visually-hidden">Sort By</label>
+                            <select name="sortBy" class="form-select" id="product-list-filter-select" asp-for="SortBy" onchange="this.form.submit()">
+                                <option value="all" data-ar="فلترة حسب" data-en="Sort by">Sort by</option>
+                                <option value="best-seller" data-ar="الأكثر مبيعًا" data-en="Best Sellers">Best Sellers</option>
+                                <option value="highest-rated" data-ar="الأعلى تقييمًا" data-en="Highest Rated">Highest Rated</option>
+                                <option value="highest-price" data-ar="الأعلى سعرًا" data-en="Highest Price">Highest Price</option>
+                                <option value="lowest-price" data-ar="الأقل سعرًا" data-en="Lowest Price">Lowest Price</option>
+                                <option value="offers" data-ar="العروض" data-en="Offers">Offers</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row g-4 mt-1">
+                    @if (Model.Products.Any())
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                @await Html.PartialAsync("_ProductCard", product)
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                                <p class="text-muted" data-ar="لم يتم العثور على منتجات تطابق بحثك." data-en="No products found matching your criteria.">No products found matching your criteria.</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </main>
+        </div>
+    </div>
+</section>

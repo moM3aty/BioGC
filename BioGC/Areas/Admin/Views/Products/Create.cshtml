@@ -1,0 +1,106 @@
+﻿@model BioGC.Areas.Admin.ViewModels.ProductViewModel
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h1 data-ar="إضافة منتج جديد" data-en="Add New Product">Add New Product</h1>
+<hr />
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="row g-4">
+        <!-- Left Column: Product Details -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle me-1"></i>
+                    <span data-ar="تفاصيل المنتج" data-en="Product Details">Product Details</span>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label for="NameEn" class="form-label" data-en="Name (English)" data-ar="الاسم (الإنجليزية)"></label>
+                        <input asp-for="NameEn" class="form-control" />
+                        <span asp-validation-for="NameEn" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="NameAr" class="form-label" data-en="Name (Arabic)" data-ar="الاسم (العربية)"></label>
+                        <input asp-for="NameAr" class="form-control" />
+                        <span asp-validation-for="NameAr" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="DescriptionEn" class="form-label" data-en="Description (English)" data-ar="الوصف (الإنجليزية)"></label>
+                        <textarea asp-for="DescriptionEn" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="DescriptionEn" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="DescriptionAr" class="form-label" data-en="Description (Arabic)" data-ar="الوصف (العربية)"></label>
+                        <textarea asp-for="DescriptionAr" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="DescriptionAr" class="text-danger"></span>
+                    </div>
+                   
+                    <div class="mb-3">
+                        <label asp-for="Quantity" class="form-label"></label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        <!-- Right Column: Pricing, Category, Image -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-dollar-sign me-1"></i>
+                    <span data-ar="التسعير والفئة" data-en="Pricing & Category">Pricing & Category</span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="PriceBeforeDiscount" class="form-label" data-en="Price Before Discount" data-ar="السعر قبل الخصم"></label>
+                        <input asp-for="PriceBeforeDiscount" class="form-control" />
+                        <span asp-validation-for="PriceBeforeDiscount" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="PriceAfterDiscount" class="form-label" data-en="Price After Discount" data-ar="السعر بعد الخصم"></label>
+                        <input asp-for="PriceAfterDiscount" class="form-control" />
+                        <span asp-validation-for="PriceAfterDiscount" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CategoryId" class="form-label" data-en="Category" data-ar="الفئة"></label>
+                        <div class="input-group">
+                            <select asp-for="CategoryId" class="form-select" asp-items="@Model.CategoryList">
+                                <option value="" data-ar="-- اختار الفئة --" data-en="-- Select Category --">-- Select Category --</option>
+                            </select>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#subCategoryManagementModal" title="Manage Categories">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-image me-1"></i>
+                    <span data-ar="صورة المنتج" data-en="Product Image">Product Image</span>
+                </div>
+                <div class="card-body text-center">
+                    <img id="imagePreview" src="https://placehold.co/300x300/f8f9fa/6c757d?text=Preview" class="img-thumbnail mb-3" alt="Image Preview" />
+                    <label for="ImageFile" class="form-label" data-en="Upload Image" data-ar="رفع صورة"></label>
+                    <input asp-for="ImageFile" class="form-control" onchange="document.getElementById('imagePreview').src = window.URL.createObjectURL(this.files[0])" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i> <span data-ar="إنشاء" data-en="Create">Create</span></button>
+        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i> <span data-ar="العودة للقائمة" data-en="Back to List">Back to List</span></a>
+    </div>
+</form>

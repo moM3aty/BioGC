@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BioGC.Models.Product>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            @await Html.PartialAsync("_ProductCard", product)
+        </div>
+    }
+}
+else
+{
+    <div class="col-12">
+        <p class="text-center text-muted" data-ar="لا توجد منتجات تطابق هذا الفلتر." data-en="No products match this filter.">No products match this filter.</p>
+    </div>
+}
