@@ -11,17 +11,17 @@ namespace BioGC.Models
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
 
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal TotalAmount { get; set; } 
+        public decimal TotalAmount { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal ShippingCost { get; set; } 
+        public decimal ShippingCost { get; set; }
 
         public string ShippingAddress { get; set; }
         public string OrderStatus { get; set; }
 
-        public string? StripeSessionId { get; set; }
+        public string? PaymentGatewayId { get; set; }
 
-        public int? ShippingZoneId { get; set; } 
+        public int? ShippingZoneId { get; set; }
         public virtual ShippingZone ShippingZone { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();

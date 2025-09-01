@@ -1,157 +1,167 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    const summaryList = document.getElementById('order-summary-list');
+    // --- GENERAL SETUP ---
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const orderSummaryList = document.getElementById('order-summary-list');
     const summarySubtotal = document.getElementById('summary-subtotal');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');
-    const placeOrderBtn = document.getElementById('place-order-btn');
-    const checkoutForm = document.getElementById('checkout-form');
-    const errorDiv = document.getElementById('checkout-error');
-    const spinner = placeOrderBtn?.querySelector('.spinner-border');
     const shippingZoneSelect = document.getElementById('ShippingZoneId');
+    const errorContainer = document.getElementById('checkout-error');
+    const loader = document.getElementById('loader');
+    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
-    // 1. Load the raw cart data from localStorage.
-    const rawCart = JSON.parse(localStorage.getItem('cart')) || [];
+    // --- FUNCTIONS ---
+    function updateSummary() {
+        if (!orderSummaryList || !summarySubtotal || !summaryShipping || !summaryTotal) return;
 
-    // 2. Create a new, clean version of the cart to ensure data types are correct.
-    const cart = rawCart.map(item => {
-        const priceString = String(item.price).replace(/[^0-9.]/g, '');
-        return {
-            ...item,
-            price: parseFloat(priceString) || 0,
-            quantity: parseInt(item.quantity, 10) || 0
-        };
-    });
-
-    let shippingZones = [];
-
-    if (cart.length === 0 && window.location.pathname.toLowerCase().includes('checkout')) {
-        window.location.href = '/Home/cart';
-        return;
-    }
-
-    if (shippingZoneSelect) {
-        // 3. Populate the shippingZones array from the HTML select options.
-        Array.from(shippingZoneSelect.options).forEach(option => {
-            if (option.value) {
-                const costMatch = option.text.match(/\(\+\$(\d+\.\d+)\)/);
-                if (costMatch) {
-                    shippingZones.push({
-                        id: parseInt(option.value),
-                        cost: parseFloat(costMatch[1])
-                    });
-                }
-            }
-        });
-        // **THE FIX IS HERE:** Attach the event listener to update summary on change.
-        shippingZoneSelect.addEventListener('change', renderAndCalculateSummary);
-    }
-
-    function renderAndCalculateSummary() {
-        if (!summaryList) return;
-        summaryList.innerHTML = '';
         let subtotal = 0;
-        const lang = document.documentElement.lang || 'en';
+        orderSummaryList.innerHTML = ''; // Clear previous summary
+
+        if (cart.length === 0) {
+            orderSummaryList.innerHTML = `<p data-en="Your cart is empty." data-ar="سلتك فارغة.">Your cart is empty.</p>`;
+            document.getElementById('paypal-button-container').style.display = 'none';
+        } else {
+            document.getElementById('paypal-button-container').style.display = 'block';
+        }
+
 
         cart.forEach(item => {
-            if (item.price > 0 && item.quantity > 0) {
-                subtotal += item.price * item.quantity;
-                const itemName = lang === 'ar' ? item.nameAr : item.nameEn;
-                summaryList.innerHTML += `<div class="d-flex justify-content-between mb-2"><span>${item.quantity} x ${itemName}</span><span>$${(item.price * item.quantity).toFixed(2)}</span></div>`;
-            }
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            const lang = document.documentElement.lang || 'en';
+            const itemName = lang === 'ar' ? item.nameAr : item.nameEn;
+
+            orderSummaryList.innerHTML += `
+                <div class="d-flex justify-content-between mb-2">
+                    <span>${itemName} x ${item.quantity}</span>
+                    <span>$${itemTotal.toFixed(2)}</span>
+                </div>
+            `;
         });
 
-        const selectedZoneId = shippingZoneSelect ? parseInt(shippingZoneSelect.value) : 0;
-        const selectedZone = shippingZones.find(z => z.id === selectedZoneId);
-        const shippingCost = selectedZone ? selectedZone.cost : 0;
-
         summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
+
+        let shippingCost = 0;
+        const selectedZone = shippingZoneSelect.options[shippingZoneSelect.selectedIndex];
+        if (selectedZone && selectedZone.value) {
+            // Extract cost from text like "Zone Name (+$10.00)"
+            const costMatch = selectedZone.text.match(/\(\+\$(\d+\.\d+)\)/);
+            if (costMatch && costMatch[1]) {
+                shippingCost = parseFloat(costMatch[1]);
+            }
+        }
+
         summaryShipping.textContent = `$${shippingCost.toFixed(2)}`;
-        summaryTotal.textContent = `$${(subtotal + shippingCost).toFixed(2)}`;
+        const total = subtotal + shippingCost;
+        summaryTotal.textContent = `$${total.toFixed(2)}`;
     }
 
-    if (placeOrderBtn) {
-        placeOrderBtn.addEventListener('click', async function () {
-            setLoading(true);
-            if (!validateForm()) {
-                setLoading(false);
-                return;
-            }
+    // --- EVENT LISTENERS ---
+    if (shippingZoneSelect) {
+        shippingZoneSelect.addEventListener('change', updateSummary);
+    }
 
-            const payload = {
-                shippingAddress: document.getElementById('ShippingAddress').value,
-                shippingZoneId: parseInt(document.getElementById('ShippingZoneId').value),
-                cartItems: cart.map(item => ({
-                    id: parseInt(item.id),
-                    quantity: item.quantity,
-                    nameEn: item.nameEn,
-                    price: item.price
-                }))
-            };
+    // --- PAYPAL BUTTONS RENDER ---
+    if (cart.length > 0) {
+        paypal.Buttons({
+            // Sets up the transaction when a payment button is clicked
+            createOrder: function (data, actions) {
+                errorContainer.style.display = 'none';
+                loader.style.display = 'block';
 
-            try {
-                const response = await fetch('/Checkout/CreateCheckoutSession', {
+                const payload = {
+                    shippingAddress: document.getElementById('ShippingAddress').value,
+                    shippingZoneId: parseInt(shippingZoneSelect.value, 10) || 0,
+                    cartItems: cart
+                };
+
+                return fetch('/Checkout/CreateOrder', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'RequestVerificationToken': getAntiForgeryToken()
+                        'RequestVerificationToken': token
                     },
                     body: JSON.stringify(payload)
-                });
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.error || 'Server error'); });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        loader.style.display = 'none';
+                        return data.orderId;
+                    })
+                    .catch(err => {
+                        loader.style.display = 'none';
+                        errorContainer.textContent = `Error creating order: ${err.message}`;
+                        errorContainer.style.display = 'block';
+                        return null;
+                    });
+            },
 
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.error || 'Failed to create checkout session.');
+            // Finalize the transaction after payer approval
+            onApprove: function (data, actions) {
+                loader.style.display = 'block';
+                errorContainer.style.display = 'none';
+
+                const payload = {
+                    PayPalOrderId: data.orderID
+                };
+
+                return fetch('/Checkout/CaptureOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': token
+                    },
+                    body: JSON.stringify(payload)
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            localStorage.removeItem('cart'); // Clear cart on success
+                            window.location.href = '/Checkout/OrderConfirmation?orderId=' + result.orderId;
+                        } else {
+                            throw new Error(result.message || 'Payment capture failed.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Capture Error:', error);
+                        errorContainer.textContent = 'An error occurred while finalizing your payment. Please try again.';
+                        errorContainer.style.display = 'block';
+                        loader.style.display = 'none';
+                    });
+            },
+
+            // Handle form validation before creating order
+            onClick: function () {
+                const fullName = document.getElementById('FullName').value;
+                const phone = document.getElementById('PhoneNumber').value;
+                const address = document.getElementById('ShippingAddress').value;
+                const zone = shippingZoneSelect.value;
+
+                if (!fullName || !phone || !address || !zone) {
+                    errorContainer.textContent = 'Please fill out all required shipping details.';
+                    errorContainer.style.display = 'block';
+                    return false; // prevent order creation
                 }
+                errorContainer.style.display = 'none';
+                return true; // proceed with order creation
+            },
 
-                const stripe = Stripe(checkoutForm.dataset.publishableKey);
-                const { error } = await stripe.redirectToCheckout({ sessionId: result.sessionId });
-                if (error) throw new Error(error.message);
-
-            } catch (error) {
-                showError(error.message);
-                setLoading(false);
+            // Handle errors from the PayPal button itself
+            onError: function (err) {
+                console.error('PayPal button error:', err);
+                errorContainer.textContent = 'An unexpected error occurred with PayPal. Please try again.';
+                errorContainer.style.display = 'block';
+                loader.style.display = 'none';
             }
-        });
+        }).render('#paypal-button-container');
     }
 
-    function setLoading(isLoading) {
-        if (!placeOrderBtn || !spinner) return;
-        placeOrderBtn.disabled = isLoading;
-        spinner.style.display = isLoading ? 'inline-block' : 'none';
-    }
-
-    function showError(message) {
-        if (!errorDiv) return;
-        errorDiv.textContent = message;
-        errorDiv.style.display = 'block';
-    }
-
-    function hideError() {
-        if (!errorDiv) return;
-        errorDiv.style.display = 'none';
-    }
-
-    function validateForm() {
-        hideError();
-        let isValid = true;
-        const requiredFields = ['FullName', 'PhoneNumber', 'ShippingAddress', 'ShippingZoneId'];
-        requiredFields.forEach(id => {
-            const input = document.getElementById(id);
-            if (input && !input.value.trim()) {
-                input.classList.add('is-invalid');
-                showError('Please fill out all required fields, including shipping zone.');
-                isValid = false;
-            } else if (input) {
-                input.classList.remove('is-invalid');
-            }
-        });
-        return isValid;
-    }
-
-    function getAntiForgeryToken() {
-        const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
-        return tokenInput ? tokenInput.value : '';
-    }
-
-    renderAndCalculateSummary();
+    // --- INITIAL LOAD ---
+    updateSummary();
 });
+

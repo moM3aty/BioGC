@@ -3,8 +3,8 @@ using BioGC.Services;
 using BioGC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Stripe;
 using BioGC.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
@@ -12,7 +12,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
+// Configure PayPal settings and HttpClient
+builder.Services.Configure<PayPalSettings>(builder.Configuration.GetSection("PayPal"));
+builder.Services.AddHttpClient<PayPalService>();
+builder.Services.AddScoped<PayPalService>();
+
 builder.Services.Configure<BioGC.Services.AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddSignalR();
 builder.Services.AddScoped<NotificationService>();
@@ -28,6 +33,12 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => {
     .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
+
+// Configure Anti-Forgery to look for the token in the header
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "RequestVerificationToken";
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -62,7 +73,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["SecretKey"];
 
 app.UseRouting();
 
@@ -71,11 +81,6 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
-       name: "stripe-webhook",
-       pattern: "webhook/stripe",
-       defaults: new { controller = "Webhook", action = "Stripe" });
-
     endpoints.MapControllerRoute(
       name: "areas",
       pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
@@ -89,3 +94,4 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+

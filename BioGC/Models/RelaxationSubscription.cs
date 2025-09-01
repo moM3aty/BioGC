@@ -3,9 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BioGC.Models
 {
-    /// <summary>
-    /// Represents a user's subscription to the relaxation service.
-    /// </summary>
+
     public class RelaxationSubscription
     {
         [Key]

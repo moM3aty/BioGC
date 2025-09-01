@@ -1,0 +1,102 @@
+﻿@model BioGC.Models.Order
+@{
+    ViewData["Title"] = "Complete Your Payment";
+}
+
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.ClientId&currency=USD"></script>
+
+<section class="padding-section">
+    <div class="container text-center">
+        <h2 class="mt-5 mb-3" data-ar="إتمام عملية الدفع" data-en="Complete Your Payment">Complete Your Payment</h2>
+        <p class="lead text-muted" data-ar="أنت على بعد خطوة واحدة من الحصول على وصول دائم." data-en="You are one step away from getting lifetime access.">You are one step away from getting lifetime access.</p>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" data-ar="ملخص الطلب" data-en="Order Summary">Order Summary</h5>
+                        <p class="card-text">
+                            <span data-ar="الخدمة:" data-en="Service:">Service:</span>
+                            <strong data-ar="وصول لمحتوى الاسترخاء" data-en="Relaxation Content Access">Relaxation Content Access</strong>
+                        </p>
+                        <p class="display-6 fw-bold">$@Model.TotalAmount.ToString("F2")</p>
+
+                        <!-- Anti-Forgery Token -->
+                        @Html.AntiForgeryToken()
+
+                        <!-- PayPal Button Container -->
+                        <div id="paypal-button-container" class="mt-4"></div>
+                        <div id="loader" class="text-center mt-2" style="display: none;">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <div id="checkout-error" class="alert alert-danger mt-3" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const paypalOrderId = '@ViewBag.PayPalOrderId';
+            const internalOrderId = @ViewBag.OrderId;
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            const loader = document.getElementById('loader');
+            const errorContainer = document.getElementById('checkout-error');
+
+            paypal.Buttons({
+                // Sets up the transaction when a payment button is clicked
+                createOrder: function(data, actions) {
+                    return paypalOrderId;
+                },
+
+                // Finalize the transaction after payer approval
+                onApprove: function(data, actions) {
+                    loader.style.display = 'block';
+                    errorContainer.style.display = 'none';
+
+                    const payload = {
+                        PayPalOrderId: data.orderID,
+                        InternalOrderId: internalOrderId
+                    };
+
+                    return fetch('/Checkout/CaptureOrder', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': token
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            window.location.href = '/Checkout/OrderConfirmation?orderId=' + result.orderId;
+                        } else {
+                            throw new Error(result.message || 'Payment capture failed.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Capture Error:', error);
+                        errorContainer.textContent = 'An error occurred while finalizing your payment. Please contact support.';
+                        errorContainer.style.display = 'block';
+                        loader.style.display = 'none';
+                    });
+                },
+
+                // Handle errors from the PayPal button
+                onError: function (err) {
+                    console.error('PayPal button error:', err);
+                    errorContainer.textContent = 'An unexpected error occurred with PayPal. Please try again.';
+                    errorContainer.style.display = 'block';
+                }
+            }).render('#paypal-button-container');
+        });
+    </script>
+}
+

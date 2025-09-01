@@ -29,6 +29,6 @@ namespace BioGC.ViewModels
 
         public IEnumerable<SelectListItem> ShippingZones { get; set; }
 
-        public string StripePublishableKey { get; set; }
+        public string PayPalClientId { get; set; }
     }
 }

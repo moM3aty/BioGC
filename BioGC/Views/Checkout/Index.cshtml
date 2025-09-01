@@ -3,7 +3,8 @@
     ViewData["Title"] = "Checkout";
 }
 
-<script src="https://js.stripe.com/v3/"></script>
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=@Model.PayPalClientId&currency=USD"></script>
 
 <section class="padding-section">
     <div class="container">
@@ -13,8 +14,10 @@
             <div class="col-md-7">
                 <h4 data-ar="بيانات الشحن" data-en="Shipping Details">Shipping Details</h4>
                 <hr />
-                <div id="checkout-form" data-publishable-key="@Model.StripePublishableKey">
+                <div id="checkout-form">
+                    @* --- THIS IS THE FIX --- *@
                     @Html.AntiForgeryToken()
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="FullName" class="form-label"></label>
@@ -65,10 +68,13 @@
                             <span id="summary-total">$0.00</span>
                         </div>
                         <div class="d-grid gap-2 mt-4">
-                            <button id="place-order-btn" class="btn btn-primary btn-lg">
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
-                                <span data-ar="الانتقال للدفع" data-en="Proceed to Payment">Proceed to Payment</span>
-                            </button>
+                            <!-- PayPal Button Container -->
+                            <div id="paypal-button-container"></div>
+                            <div id="loader" class="text-center mt-2" style="display: none;">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,3 +86,4 @@
 @section Scripts {
     <script src="~/js/checkout.js" asp-append-version="true"></script>
 }
+
