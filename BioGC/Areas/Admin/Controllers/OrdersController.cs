@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 
 namespace BioGC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
-    public class OrdersController : Controller
+    public class OrdersController : AdminBaseController
     {
         private readonly ApplicationDbContext _context;
 

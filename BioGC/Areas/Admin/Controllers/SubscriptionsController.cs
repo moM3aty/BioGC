@@ -1,13 +1,10 @@
 ﻿using BioGC.Data;
-using BioGC.Hubs;
 using BioGC.Models;
 using BioGC.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,25 +15,24 @@ namespace BioGC.Areas.Admin.Controllers
     public class SubscriptionsController : AdminBaseController
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly NotificationService _notificationService;
-        private readonly ILogger<SubscriptionsController> _logger;
-        private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly UserManager<ApplicationUser> _userManager; // Add UserManager
 
-        public SubscriptionsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, NotificationService notificationService, ILogger<SubscriptionsController> logger, IHubContext<NotificationHub> hubContext)
+        public SubscriptionsController(ApplicationDbContext context, NotificationService notificationService, UserManager<ApplicationUser> userManager) // Inject UserManager
         {
             _context = context;
-            _userManager = userManager;
-            _signInManager = signInManager;
             _notificationService = notificationService;
-            _logger = logger;
-            _hubContext = hubContext;
+            _userManager = userManager; // Assign it
         }
 
         public async Task<IActionResult> Index()
         {
-            var subscriptions = await _context.RelaxationSubscriptions.Include(s => s.ApplicationUser).Include(s => s.Order).OrderByDescending(s => s.SubscriptionDate).ToListAsync();
+            var subscriptions = await _context.RelaxationSubscriptions
+                .Include(s => s.ApplicationUser)
+                .Include(s => s.Order)
+                .Include(s => s.RelaxationPackage)
+                .OrderByDescending(s => s.SubscriptionDate)
+                .ToListAsync();
             return View(subscriptions);
         }
 
@@ -46,19 +42,44 @@ namespace BioGC.Areas.Admin.Controllers
         {
             var subscription = await _context.RelaxationSubscriptions.FindAsync(id);
             if (subscription == null) { TempData["ToastMessage"] = "Error:SubscriptionNotFound"; return RedirectToAction("Index"); }
+
             var user = await _userManager.FindByIdAsync(subscription.ApplicationUserId);
             if (user == null) { TempData["ToastMessage"] = "Error:UserNotFound"; return RedirectToAction("Index"); }
+
+            // 1. Grant access by adding a record to UserRelaxationPackages
+            var userHasPackage = await _context.UserRelaxationPackages.AnyAsync(p =>
+                p.ApplicationUserId == subscription.ApplicationUserId &&
+                p.RelaxationPackageId == subscription.RelaxationPackageId);
+
+            if (!userHasPackage)
+            {
+                _context.UserRelaxationPackages.Add(new UserRelaxationPackage
+                {
+                    ApplicationUserId = subscription.ApplicationUserId,
+                    RelaxationPackageId = subscription.RelaxationPackageId
+                });
+            }
+
+            // 2. Upgrade user role to PremiumUser if they aren't already
             if (!await _userManager.IsInRoleAsync(user, "PremiumUser"))
             {
-                var result = await _userManager.AddToRoleAsync(user, "PremiumUser");
-                if (!result.Succeeded) { TempData["ToastMessage"] = "Error:RoleUpgradeFailed"; return RedirectToAction("Index"); }
-                await _signInManager.RefreshSignInAsync(user);
+                await _userManager.AddToRoleAsync(user, "PremiumUser");
             }
+
+            // 3. Update subscription status
             subscription.Status = "Approved";
             _context.Update(subscription);
             await _context.SaveChangesAsync();
-            await _notificationService.SendNotificationToUserAsync(user.Id, "Your Relaxation Space subscription is now active!", "تم تفعيل اشتراكك في مساحة الاسترخاء بنجاح!", "/Relaxation/RedirectToContent");
-            TempData["ToastMessage"] = "Success:UserUpgraded";
+
+            // 4. Notify user
+            var package = await _context.RelaxationPackages.FindAsync(subscription.RelaxationPackageId);
+            await _notificationService.SendNotificationToUserAsync(
+                subscription.ApplicationUserId,
+                $"Your subscription for '{package.TitleEn}' is now active!",
+                $"تم تفعيل اشتراكك في '{package.TitleAr}' بنجاح!",
+                "/Relaxation/MyContent");
+
+            TempData["ToastMessage"] = "Success:SubscriptionApproved";
             return RedirectToAction("Index");
         }
 
@@ -69,26 +90,32 @@ namespace BioGC.Areas.Admin.Controllers
             var subscription = await _context.RelaxationSubscriptions.FindAsync(id);
             if (subscription == null) { TempData["ToastMessage"] = "Error:SubscriptionNotFound"; return RedirectToAction("Index"); }
 
-            var user = await _userManager.FindByIdAsync(subscription.ApplicationUserId);
-            if (user == null) { TempData["ToastMessage"] = "Error:UserNotFound"; return RedirectToAction("Index"); }
+            // 1. Revoke access by removing the record from UserRelaxationPackages
+            var userPackageAccess = await _context.UserRelaxationPackages.FirstOrDefaultAsync(p =>
+                p.ApplicationUserId == subscription.ApplicationUserId &&
+                p.RelaxationPackageId == subscription.RelaxationPackageId);
 
-            if (await _userManager.IsInRoleAsync(user, "PremiumUser"))
+            if (userPackageAccess != null)
             {
-                var result = await _userManager.RemoveFromRoleAsync(user, "PremiumUser");
-                if (!result.Succeeded) { TempData["ToastMessage"] = "Error:RoleDowngradeFailed"; return RedirectToAction("Index"); }
-
-                await _signInManager.RefreshSignInAsync(user);
-                await _hubContext.Clients.User(user.Id).SendAsync("SubscriptionStatusChanged");
+                _context.UserRelaxationPackages.Remove(userPackageAccess);
             }
 
+            // 2. Update subscription status
             subscription.Status = "Cancelled";
             _context.Update(subscription);
             await _context.SaveChangesAsync();
 
-            await _notificationService.SendNotificationToUserAsync(user.Id, "Your Relaxation Space subscription has been cancelled.", "تم إلغاء اشتراكك في مساحة الاسترخاء.", "/Relaxation/RedirectToContent");
+            // 3. Notify user
+            var package = await _context.RelaxationPackages.FindAsync(subscription.RelaxationPackageId);
+            await _notificationService.SendNotificationToUserAsync(
+                 subscription.ApplicationUserId,
+                 $"Your subscription for '{package.TitleEn}' has been cancelled.",
+                 $"تم إلغاء اشتراكك في '{package.TitleAr}'.",
+                 "/Relaxation/Index");
 
             TempData["ToastMessage"] = "Success:SubscriptionCancelled";
             return RedirectToAction("Index");
         }
     }
 }
+

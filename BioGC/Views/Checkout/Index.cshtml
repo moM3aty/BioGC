@@ -3,87 +3,157 @@
     ViewData["Title"] = "Checkout";
 }
 
-<!-- PayPal SDK -->
-<script src="https://www.paypal.com/sdk/js?client-id=@Model.PayPalClientId&currency=USD"></script>
-
-<section class="padding-section">
-    <div class="container">
-        <h2 class="text-center mt-5 mb-5" data-ar="الدفع" data-en="Checkout">Checkout</h2>
-        <div class="row g-5">
-            <!-- Shipping Details Column -->
-            <div class="col-md-7">
-                <h4 data-ar="بيانات الشحن" data-en="Shipping Details">Shipping Details</h4>
-                <hr />
-                <div id="checkout-form">
-                    @* --- THIS IS THE FIX --- *@
-                    @Html.AntiForgeryToken()
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="FullName" class="form-label"></label>
-                            <input asp-for="FullName" class="form-control" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="PhoneNumber" class="form-label"></label>
-                            <input asp-for="PhoneNumber" class="form-control" />
-                        </div>
+<div class="container my-5 pt-5">
+    <div class="row g-5">
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3" data-en="Shipping Address" data-ar="عنوان الشحن">Shipping Address</h4>
+            <form id="checkout-form" novalidate>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="FullName" class="form-label" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                        <input type="text" class="form-control" id="FullName" value="@Model.FullName" required>
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control" disabled />
+                    <div class="col-12">
+                        <label for="PhoneNumber" class="form-label" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                        <input type="tel" class="form-control" id="PhoneNumber" value="@Model.PhoneNumber" required>
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="ShippingAddress" class="form-label"></label>
-                        <textarea asp-for="ShippingAddress" class="form-control" rows="3"></textarea>
+                    <div class="col-12">
+                        <label for="ShippingAddress" class="form-label" data-en="Address" data-ar="العنوان">Address</label>
+                        <textarea class="form-control" id="ShippingAddress" rows="3" required></textarea>
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="ShippingZoneId" class="form-label"></label>
-                        <select asp-for="ShippingZoneId" class="form-select" asp-items="@Model.ShippingZones">
-                            <option value="" data-ar="اختر منطقة الشحن..." data-en="Select a shipping zone...">Select a shipping zone...</option>
+                    <div class="col-12">
+                        <label for="ShippingZoneId" class="form-label" data-en="Shipping Zone" data-ar="منطقة الشحن">Shipping Zone</label>
+                        <select class="form-select" id="ShippingZoneId" asp-items="@Model.ShippingZones" required>
+                            <option value="">Choose...</option>
                         </select>
                     </div>
                 </div>
-                <div id="checkout-error" class="alert alert-danger mt-3" style="display: none;"></div>
-            </div>
-
-            <!-- Order Summary Column -->
-            <div class="col-md-5">
-                <div class="card shadow-sm sticky-top" style="top: 100px;">
-                    <div class="card-body">
-                        <h4 class="card-title" data-ar="ملخص الطلب" data-en="Order Summary">Order Summary</h4>
-                        <hr />
-                        <div id="order-summary-list"></div>
-                        <hr />
-                        <div class="d-flex justify-content-between">
-                            <span data-ar="الإجمالي الفرعي" data-en="Subtotal">Subtotal</span>
-                            <span id="summary-subtotal">$0.00</span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span data-ar="الشحن" data-en="Shipping">Shipping</span>
-                            <span id="summary-shipping">$0.00</span>
-                        </div>
-                        <hr />
-                        <div class="d-flex justify-content-between fw-bold fs-5">
-                            <span data-ar="الإجمالي" data-en="Total">Total</span>
-                            <span id="summary-total">$0.00</span>
-                        </div>
-                        <div class="d-grid gap-2 mt-4">
-                            <!-- PayPal Button Container -->
-                            <div id="paypal-button-container"></div>
-                            <div id="loader" class="text-center mt-2" style="display: none;">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
+        </div>
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary" data-en="Your Cart" data-ar="سلتك">Your Cart</span>
+                <span class="badge bg-primary rounded-pill" id="cart-item-count">0</span>
+            </h4>
+            <ul class="list-group mb-3" id="order-summary-list">
+                <!-- Cart items will be injected here by JS -->
+            </ul>
+            <div id="paypal-button-container" class="mt-4"></div>
+            <div id="checkout-error" class="alert alert-danger mt-3" style="display: none;"></div>
         </div>
     </div>
-</section>
+</div>
 
 @section Scripts {
-    <script src="~/js/checkout.js" asp-append-version="true"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=@Model.PayPalClientId&currency=USD"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const summaryList = document.getElementById('order-summary-list');
+            const cartItemCount = document.getElementById('cart-item-count');
+            const lang = document.documentElement.lang || 'en';
+
+            function updateSummary() {
+                summaryList.innerHTML = '';
+                let subtotal = 0;
+                let totalItems = 0;
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    totalItems += item.quantity;
+                    const itemName = lang === 'ar' ? item.nameAr : item.nameEn;
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item d-flex justify-content-between lh-sm';
+                    li.innerHTML = `
+                        <div>
+                            <h6 class="my-0">${itemName}</h6>
+                            <small class="text-muted">Quantity: ${item.quantity}</small>
+                        </div>
+                        <span class="text-muted">$${itemTotal.toFixed(2)}</span>
+                    `;
+                    summaryList.appendChild(li);
+                });
+                cartItemCount.textContent = totalItems;
+            }
+
+            updateSummary();
+
+            paypal.Buttons({
+                onClick: function() {
+                    const form = document.getElementById('checkout-form');
+                    const errorDiv = document.getElementById('checkout-error');
+                    if (!form.checkValidity()) {
+                        form.classList.add('was-validated');
+                        errorDiv.textContent = 'Please fill out all required shipping details.';
+                        errorDiv.style.display = 'block';
+                        return false;
+                    }
+                    errorDiv.style.display = 'none';
+                    return true;
+                },
+                createOrder: function(data, actions) {
+                    const cartItemsForPayload = cart.map(item => ({
+                        id: parseInt(item.id),
+                        quantity: item.quantity,
+                        nameEn: item.nameEn,
+                        price: item.price
+                    }));
+
+                    const payload = {
+                        shippingAddress: document.getElementById('ShippingAddress').value,
+                        shippingZoneId: parseInt(document.getElementById('ShippingZoneId').value),
+                        cartItems: cartItemsForPayload
+                    };
+
+                    return fetch('/Checkout/CreateOrder', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.json().then(err => { throw new Error(err.error || 'Server error'); });
+                        }
+                        return res.json();
+                    })
+                    .then(data => data.orderId)
+                    .catch(err => {
+                        document.getElementById('checkout-error').textContent = `Error creating order: ${err.message}`;
+                        document.getElementById('checkout-error').style.display = 'block';
+                        return null;
+                    });
+                },
+                onApprove: function(data, actions) {
+                    const formData = new URLSearchParams();
+                    formData.append('PayPalOrderId', data.orderID);
+
+                    return fetch('/Checkout/CaptureOrder', {
+                        method: 'POST',
+                        headers: {
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.success) {
+                            localStorage.removeItem('cart');
+                            window.location.href = '/Checkout/OrderConfirmation?orderId=' + result.orderId;
+                        } else {
+                            throw new Error(result.message || 'Payment capture failed.');
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('checkout-error').textContent = `An error occurred while finalizing your payment: ${error.message}`;
+                        document.getElementById('checkout-error').style.display = 'block';
+                    });
+                }
+            }).render('#paypal-button-container');
+        });
+    </script>
 }
 

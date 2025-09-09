@@ -17,7 +17,7 @@ namespace BioGC.Models
         [Display(Name = "Bunny.net Audio GUID")]
         public string AudioGuid { get; set; }
 
-        public int RelaxationContentId { get; set; }
-        public virtual RelaxationContent RelaxationContent { get; set; }
+        public int RelaxationPackageId { get; set; }
+        public virtual RelaxationPackage Package { get; set; }
     }
 }

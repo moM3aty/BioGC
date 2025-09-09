@@ -130,10 +130,10 @@ F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\staticwebassets.build.json
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\staticwebassets.build.json.cache
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\staticwebassets.development.json
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\BioGC.csproj.Up2Date
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\BioGC.dll
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\refint\BioGC.dll
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\BioGC.pdb
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\BioGC.genruntimeconfig.cache
 F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\ref\BioGC.dll
+F:\GitHub\BioGC\BioGC\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

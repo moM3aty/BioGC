@@ -1,0 +1,112 @@
+﻿@model BioGC.Areas.Admin.ViewModels.RelaxationMediaViewModel
+@{
+    ViewData["Title"] = "Manage Media";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+}
+
+<h1 data-ar="إدارة المحتوى" data-en="Manage Content">Manage Content</h1>
+<p class="text-muted">@Model.PackageTitle</p>
+<hr />
+
+@if (TempData["MediaSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["MediaSuccess"]</div>
+}
+@if (TempData["MediaError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MediaError"]</div>
+}
+
+<div class="row">
+    <!-- Videos Column -->
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-video me-2"></i><span data-ar="الفيديوهات" data-en="Videos">Videos</span></h6>
+            </div>
+            <div class="card-body">
+                @foreach (var video in Model.Videos)
+                {
+                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
+                        <span>@video.Title</span>
+                        <form asp-action="DeleteVideo" method="post" onsubmit="return confirm('@(lang == "ar" ? "هل أنت متأكد من الحذف؟" : "Are you sure you want to delete this?")');">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@video.Id" />
+                            <input type="hidden" name="packageId" value="@Model.PackageId" />
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
+                }
+                <hr />
+                <h5 data-ar="إضافة فيديو جديد" data-en="Add New Video">Add New Video</h5>
+                <form asp-action="AddVideo" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="PackageId" />
+                    <div class="mb-3">
+                        <label asp-for="NewItemTitle" class="form-label"></label>
+                        <input asp-for="NewItemTitle" class="form-control" placeholder="@(lang == "ar" ? "عنوان الفيديو" : "Video Title")" />
+                        <span asp-validation-for="NewItemTitle" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItemLibraryId" class="form-label"></label>
+                        <input asp-for="NewItemLibraryId" class="form-control" placeholder="e.g., 123456" />
+                        <span asp-validation-for="NewItemLibraryId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItemGuid" class="form-label"></label>
+                        <input asp-for="NewItemGuid" class="form-control" placeholder="e.g., ab12c-de34-f56..." />
+                        <span asp-validation-for="NewItemGuid" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span data-ar="إضافة فيديو" data-en="Add Video">Add Video</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audios Column -->
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-music me-2"></i><span data-ar="الصوتيات" data-en="Audios">Audios</span></h6>
+            </div>
+            <div class="card-body">
+                @foreach (var audio in Model.Audios)
+                {
+                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
+                        <span>@audio.Title</span>
+                        <form asp-action="DeleteAudio" method="post" onsubmit="return confirm('@(lang == "ar" ? "هل أنت متأكد من الحذف؟" : "Are you sure you want to delete this?")');">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@audio.Id" />
+                            <input type="hidden" name="packageId" value="@Model.PackageId" />
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
+                }
+                <hr />
+                <h5 data-ar="إضافة مقطع صوتي جديد" data-en="Add New Audio">Add New Audio</h5>
+                <form asp-action="AddAudio" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="PackageId" />
+                    <div class="mb-3">
+                        <label asp-for="NewItemTitle" class="form-label"></label>
+                        <input asp-for="NewItemTitle" class="form-control" placeholder="@(lang == "ar" ? "عنوان المقطع" : "Audio Title")" />
+                        <span asp-validation-for="NewItemTitle" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItemLibraryId" class="form-label"></label>
+                        <input asp-for="NewItemLibraryId" class="form-control" placeholder="e.g., 123456" />
+                        <span asp-validation-for="NewItemLibraryId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NewItemGuid" class="form-label"></label>
+                        <input asp-for="NewItemGuid" class="form-control" placeholder="e.g., ab12c-de34-f56..." />
+                        <span asp-validation-for="NewItemGuid" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span data-ar="إضافة مقطع" data-en="Add Audio">Add Audio</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left me-2"></i> <span data-ar="العودة لقائمة الباقات" data-en="Back to Packages List">Back to Packages List</span></a>

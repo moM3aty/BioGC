@@ -17,7 +17,7 @@ namespace BioGC.Models
         [Display(Name = "Bunny.net Video GUID")]
         public string VideoGuid { get; set; }
 
-        public int RelaxationContentId { get; set; }
-        public virtual RelaxationContent RelaxationContent { get; set; }
+        public int RelaxationPackageId { get; set; }
+        public virtual RelaxationPackage Package { get; set; }
     }
 }

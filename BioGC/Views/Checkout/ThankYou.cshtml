@@ -1,40 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Thank You";
+    var orderId = ViewBag.OrderId;
 }
 
-<section class="padding-section text-center">
-    <div class="container">
-        <div class="py-5">
-            <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
-            <h1 class="display-4" data-ar="شكراً لك!" data-en="Thank You!">Thank You!</h1>
-            <p class="lead" data-ar="تم استلام طلبك بنجاح." data-en="Your order has been placed successfully.">Your order has been placed successfully.</p>
-            
-            @if (ViewBag.OrderId != null)
-            {
-                <p data-ar="رقم طلبك هو:" data-en="Your order number is:">Your order number is: <strong>#@ViewBag.OrderId</strong></p>
-            }
-            else
-            {
-                 <p data-ar="تمت عملية الشراء بنجاح." data-en="Your purchase was successful.">Your purchase was successful.</p>
-            }
-
-            <hr>
-            <p data-ar="سنتواصل معك قريباً لتأكيد تفاصيل الشحن." data-en="We will contact you shortly to confirm shipping details.">We will contact you shortly to confirm shipping details.</p>
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3" data-ar="العودة للرئيسية" data-en="Back to Home">Back to Home</a>
-        </div>
+<div class="container text-center my-5 py-5">
+    <div class="py-5">
+        <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+        <h1 class="display-4" data-ar="شكراً لك!" data-en="Thank You!">Thank You!</h1>
+        <p class="lead" data-ar="تم استلام طلبك بنجاح." data-en="Your order has been placed successfully.">Your order has been placed successfully.</p>
+        @if (orderId != null)
+        {
+            <p><strong><span data-ar="رقم طلبك هو:" data-en="Your order number is:">Your order number is:</span> #@orderId</strong></p>
+        }
+        <hr class="my-4">
+        <p data-ar="سيتم التواصل معك قريباً بخصوص تفاصيل الشحن." data-en="You will be contacted shortly with shipping details.">You will be contacted shortly with shipping details.</p>
+        <a class="btn btn-primary btn-lg mt-3" asp-controller="Home" asp-action="Index" role="button" data-ar="العودة للصفحة الرئيسية" data-en="Back to Homepage">Back to Homepage</a>
     </div>
-</section>
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            localStorage.removeItem('cart');
-            
-            const cartCount = document.getElementById('cart-count');
-            if(cartCount) {
-                cartCount.textContent = '0';
-                cartCount.style.display = 'none';
-            }
-        });
-    </script>
-}
+</div>

@@ -1,6 +1,6 @@
 ﻿using BioGC.Data;
 using BioGC.Models;
-using BioGC.Services; 
+using BioGC.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace BioGC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
-    public class StocksController : Controller
+    public class StocksController : AdminBaseController
     {
         private readonly ApplicationDbContext _context;
-        private readonly NotificationService _notificationService; 
+        private readonly NotificationService _notificationService;
 
-        public StocksController(ApplicationDbContext context, NotificationService notificationService) 
+        public StocksController(ApplicationDbContext context, NotificationService notificationService)
         {
             _context = context;
             _notificationService = notificationService;
@@ -67,7 +65,7 @@ namespace BioGC.Areas.Admin.Controllers
             return View(productsWithStock);
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateStock(int productId, int quantity)

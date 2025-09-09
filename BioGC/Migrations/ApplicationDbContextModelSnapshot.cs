@@ -337,7 +337,7 @@ namespace BioGC.Migrations
                     b.Property<int>("LibraryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RelaxationContentId")
+                    b.Property<int>("RelaxationPackageId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -346,12 +346,12 @@ namespace BioGC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RelaxationContentId");
+                    b.HasIndex("RelaxationPackageId");
 
                     b.ToTable("RelaxationAudios");
                 });
 
-            modelBuilder.Entity("BioGC.Models.RelaxationContent", b =>
+            modelBuilder.Entity("BioGC.Models.RelaxationPackage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -359,14 +359,40 @@ namespace BioGC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("DescriptionAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("TitleAr")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("TitleEn")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("RelaxationContents");
+                    b.ToTable("RelaxationPackages");
                 });
 
             modelBuilder.Entity("BioGC.Models.RelaxationSubscription", b =>
@@ -384,6 +410,9 @@ namespace BioGC.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<int>("RelaxationPackageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -396,6 +425,8 @@ namespace BioGC.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("RelaxationPackageId");
 
                     b.ToTable("RelaxationSubscriptions");
                 });
@@ -411,7 +442,7 @@ namespace BioGC.Migrations
                     b.Property<int>("LibraryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RelaxationContentId")
+                    b.Property<int>("RelaxationPackageId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -424,7 +455,7 @@ namespace BioGC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RelaxationContentId");
+                    b.HasIndex("RelaxationPackageId");
 
                     b.ToTable("RelaxationVideos");
                 });
@@ -515,6 +546,21 @@ namespace BioGC.Migrations
                         .IsUnique();
 
                     b.ToTable("Stocks");
+                });
+
+            modelBuilder.Entity("BioGC.Models.UserRelaxationPackage", b =>
+                {
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("RelaxationPackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ApplicationUserId", "RelaxationPackageId");
+
+                    b.HasIndex("RelaxationPackageId");
+
+                    b.ToTable("UserRelaxationPackages");
                 });
 
             modelBuilder.Entity("BioGC.Models.Wishlist", b =>
@@ -753,22 +799,24 @@ namespace BioGC.Migrations
 
             modelBuilder.Entity("BioGC.Models.RelaxationAudio", b =>
                 {
-                    b.HasOne("BioGC.Models.RelaxationContent", "RelaxationContent")
+                    b.HasOne("BioGC.Models.RelaxationPackage", "Package")
                         .WithMany("Audios")
-                        .HasForeignKey("RelaxationContentId")
+                        .HasForeignKey("RelaxationPackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RelaxationContent");
+                    b.Navigation("Package");
                 });
 
-            modelBuilder.Entity("BioGC.Models.RelaxationContent", b =>
+            modelBuilder.Entity("BioGC.Models.RelaxationPackage", b =>
                 {
-                    b.HasOne("BioGC.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
+                    b.HasOne("BioGC.Models.Category", "Category")
+                        .WithMany("RelaxationPackages")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BioGC.Models.RelaxationSubscription", b =>
@@ -782,23 +830,31 @@ namespace BioGC.Migrations
                     b.HasOne("BioGC.Models.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BioGC.Models.RelaxationPackage", "RelaxationPackage")
+                        .WithMany()
+                        .HasForeignKey("RelaxationPackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Order");
+
+                    b.Navigation("RelaxationPackage");
                 });
 
             modelBuilder.Entity("BioGC.Models.RelaxationVideo", b =>
                 {
-                    b.HasOne("BioGC.Models.RelaxationContent", "RelaxationContent")
+                    b.HasOne("BioGC.Models.RelaxationPackage", "Package")
                         .WithMany("Videos")
-                        .HasForeignKey("RelaxationContentId")
+                        .HasForeignKey("RelaxationPackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RelaxationContent");
+                    b.Navigation("Package");
                 });
 
             modelBuilder.Entity("BioGC.Models.Review", b =>
@@ -829,6 +885,25 @@ namespace BioGC.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BioGC.Models.UserRelaxationPackage", b =>
+                {
+                    b.HasOne("BioGC.Models.ApplicationUser", "User")
+                        .WithMany("PurchasedRelaxationPackages")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BioGC.Models.RelaxationPackage", "Package")
+                        .WithMany("PurchasedByUsers")
+                        .HasForeignKey("RelaxationPackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Package");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BioGC.Models.Wishlist", b =>
@@ -909,12 +984,16 @@ namespace BioGC.Migrations
 
                     b.Navigation("Orders");
 
+                    b.Navigation("PurchasedRelaxationPackages");
+
                     b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("BioGC.Models.Category", b =>
                 {
                     b.Navigation("Products");
+
+                    b.Navigation("RelaxationPackages");
 
                     b.Navigation("SubCategories");
                 });
@@ -934,9 +1013,11 @@ namespace BioGC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BioGC.Models.RelaxationContent", b =>
+            modelBuilder.Entity("BioGC.Models.RelaxationPackage", b =>
                 {
                     b.Navigation("Audios");
+
+                    b.Navigation("PurchasedByUsers");
 
                     b.Navigation("Videos");
                 });

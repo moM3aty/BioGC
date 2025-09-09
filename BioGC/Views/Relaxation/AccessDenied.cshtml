@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var isRtl = lang == "ar";
+}
+
+<style>
+    .access-denied-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        text-align: center;
+    }
+
+    .access-denied-card {
+        padding: 40px;
+        border-radius: 12px;
+        background-color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+        .access-denied-card i {
+            font-size: 4rem;
+            color: #dc3545;
+        }
+
+        .access-denied-card h1 {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        .access-denied-card p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+</style>
+
+<div class="access-denied-container" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="access-denied-card">
+        <i class="fas fa-lock"></i>
+        <h1>@(isRtl ? "الوصول مرفوض" : "Access Denied")</h1>
+        <p>@(isRtl ? "ليس لديك الصلاحية للوصول إلى هذا المحتوى. يرجى الاشتراك أولاً." : "You do not have permission to access this content. Please subscribe first.")</p>
+        <a href="@Url.Action("Index", "Relaxation")" class="btn btn-primary mt-3">@(isRtl ? "تصفح الباقات" : "Browse Packages")</a>
+    </div>
+</div>

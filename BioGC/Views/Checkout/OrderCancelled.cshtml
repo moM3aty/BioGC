@@ -2,13 +2,13 @@
     ViewData["Title"] = "Order Cancelled";
 }
 
-<section class="padding-section text-center">
-    <div class="container">
-        <div class="py-5">
-            <i class="fas fa-times-circle fa-5x text-danger mb-4"></i>
-            <h1 class="display-4" data-ar="تم إلغاء الطلب" data-en="Order Cancelled">Order Cancelled</h1>
-            <p class="lead" data-ar="تم إلغاء عملية الدفع. يمكنك العودة للسلة والمحاولة مرة أخرى." data-en="Your payment process was cancelled. You can return to your cart and try again.">Your payment process was cancelled. You can return to your cart and try again.</p>
-            <a asp-controller="Home" asp-action="cart" class="btn btn-secondary mt-3" data-ar="العودة للسلة" data-en="Back to Cart">Back to Cart</a>
-        </div>
+<div class="container text-center my-5 py-5">
+    <div class="py-5">
+        <i class="fas fa-exclamation-triangle fa-5x text-warning mb-4"></i>
+        <h1 class="display-4" data-ar="تم إلغاء الطلب" data-en="Order Cancelled">Order Cancelled</h1>
+        <p class="lead" data-ar="لقد قمت بإلغاء عملية الدفع." data-en="You have cancelled the payment process.">You have cancelled the payment process.</p>
+        <hr class="my-4">
+        <p data-ar="لم يتم خصم أي مبلغ. يمكنك العودة للمتجر والمحاولة مرة أخرى." data-en="No payment was taken. You can return to the shop and try again.">No payment was taken. You can return to the shop and try again.</p>
+        <a class="btn btn-primary btn-lg mt-3" asp-controller="Products" asp-action="List" role="button" data-ar="العودة للمتجر" data-en="Back to Shop">Back to Shop</a>
     </div>
-</section>
+</div>

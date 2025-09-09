@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BioGC.Models.RelaxationPackage>
+@{
+    ViewData["Title"] = "Relaxation Packages";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+}
+
+<h1 data-ar="باقات الاسترخاء" data-en="Relaxation Packages">Relaxation Packages</h1>
+<p data-ar="إدارة باقات محتوى الاسترخاء والفيديوهات والصوتيات." data-en="Manage relaxation content packages, videos, and audios.">Manage relaxation content packages, videos, and audios.</p>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i><span data-ar="إضافة باقة جديدة" data-en="Add New Package">Add New Package</span>
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-spa me-1"></i>
+        <span data-ar="قائمة الباقات" data-en="Packages List">Packages List</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;" data-ar="الصورة" data-en="Image">Image</th>
+                        <th data-ar="العنوان" data-en="Title">Title</th>
+                        <th data-ar="الفئة" data-en="Category">Category</th>
+                        <th data-ar="السعر" data-en="Price">Price</th>
+                        <th style="width: 20%;" class="text-end" data-ar="الإجراءات" data-en="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><img src="/images/packages/@item.ImageUrl" class="img-thumbnail" alt="@item.TitleEn" onerror="this.onerror=null;this.src='https://placehold.co/70x70/E0E5EC/666?text=No+Img';" /></td>
+                            <td>
+                                <div>@item.TitleEn</div>
+                                <small class="text-muted">@item.TitleAr</small>
+                            </td>
+                            <td>@(lang == "ar" ? item.Category?.NameAr : item.Category?.NameEn)</td>
+                            <td>$@item.Price.ToString("F2")</td>
+                            <td class="text-end">
+                                <a asp-action="ManageMedia" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" title="Manage Media"><i class="fas fa-photo-video"></i></a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

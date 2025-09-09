@@ -1,0 +1,249 @@
+﻿@model BioGC.Models.RelaxationPackage
+@{
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    ViewData["Title"] = lang == "ar" ? Model.TitleAr : Model.TitleEn;
+    var isRtl = lang == "ar";
+    var allMedia = Model.Videos.Select(v => new { Type = "video", Title = v.Title, LibraryId = v.LibraryId.ToString(), Guid = v.VideoGuid })
+                               .Concat(Model.Audios.Select(a => new { Type = "audio", Title = a.Title, LibraryId = a.LibraryId.ToString(), Guid = a.AudioGuid }))
+                               .ToList();
+}
+
+<style>
+    .content-viewer-body {
+        background-color: #f1f5f9;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .content-container {
+        max-width: 1600px;
+        margin: auto;
+        padding: 100px 15px;
+    }
+
+    .main-content-area {
+        display: flex;
+        gap: 30px;
+    }
+
+    [dir="rtl"] .main-content-area {
+        flex-direction: row-reverse;
+    }
+
+    .media-player-wrapper {
+        flex: 3;
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        aspect-ratio: 16 / 9;
+    }
+
+    #media-player {
+        width: 100%;
+        height: 100%;
+    }
+
+    .playlist-wrapper {
+        flex: 1;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        padding: 20px;
+        height: 80vh;
+        overflow-y: auto;
+    }
+
+    .playlist-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c5aa0;
+        margin-bottom: 20px;
+    }
+
+    .playlist-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+    }
+
+        .playlist-item:hover {
+            background-color: #eef2ff;
+            border-color: #a5b4fc;
+        }
+
+        .playlist-item.active {
+            background-color: #2c5aa0;
+            color: #fff;
+            border-color: #2c5aa0;
+        }
+
+            .playlist-item.active .playlist-item-icon {
+                color: #fff;
+            }
+
+            .playlist-item.active .playlist-item-title {
+                color: #fff;
+            }
+
+    .playlist-item-icon {
+        font-size: 1.5rem;
+        color: #2c5aa0;
+        margin-right: 15px;
+        transition: color 0.3s ease;
+    }
+
+    [dir="rtl"] .playlist-item-icon {
+        margin-left: 15px;
+        margin-right: 0;
+    }
+
+    .playlist-item-title {
+        font-weight: 600;
+        color: #2c3e50;
+        transition: color 0.3s ease;
+    }
+
+    .package-header {
+        margin-bottom: 30px;
+    }
+
+    .package-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c5aa0;
+    }
+
+    .package-description {
+        font-size: 1.1rem;
+        color: #6c757d;
+        max-width: 800px;
+        margin-top: 10px;
+    }
+
+    #audio-player-ui {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background: linear-gradient(135deg, #374151, #111827);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+
+    #audio-icon {
+        font-size: 8rem;
+        opacity: 0.3;
+    }
+
+    #audio-title {
+        font-size: 1.5rem;
+        margin-top: 20px;
+    }
+
+    audio {
+        margin-top: 30px;
+        width: 80%;
+    }
+
+    @@media (max-width: 992px) {
+        .main-content-area {
+            flex-direction: column;
+        }
+
+        .playlist-wrapper {
+            height: auto;
+            max-height: 400px;
+        }
+    }
+</style>
+
+<div class="content-viewer-body">
+    <div class="container-fluid content-container" dir="@(isRtl ? "rtl" : "ltr")">
+        <header class="package-header">
+            <h1 class="package-title">@(isRtl? Model.TitleAr: Model.TitleEn)</h1>
+            <p class="package-description">@(isRtl? Model.DescriptionAr: Model.DescriptionEn)</p>
+        </header>
+
+        <div class="main-content-area">
+            <div class="media-player-wrapper" id="player-wrapper">
+                <div id="media-player"></div>
+            </div>
+            <div class="playlist-wrapper">
+                <h2 class="playlist-title">@(isRtl ? "قائمة التشغيل" : "Playlist")</h2>
+                <ul class="list-unstyled">
+                    @foreach (var media in allMedia)
+                    {
+                        <li>
+                            <div class="playlist-item" data-type="@media.Type" data-library-id="@media.LibraryId" data-guid="@media.Guid" data-title="@media.Title">
+                                <i class="playlist-item-icon fas fa-@(media.Type == "video" ? "play-circle" : "music")"></i>
+                                <span class="playlist-item-title">@media.Title</span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const playlistItems = document.querySelectorAll('.playlist-item');
+            const playerContainer = document.getElementById('media-player');
+
+            function playMedia(item) {
+                playlistItems.forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+
+                const type = item.dataset.type;
+                const libraryId = item.dataset.libraryId;
+                const guid = item.dataset.guid;
+                const title = item.dataset.title;
+
+                playerContainer.innerHTML = '';
+
+                if (type === 'video') {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://iframe.mediadelivery.net/embed/${libraryId}/${guid}?autoplay=true`;
+                    iframe.loading = 'lazy';
+                    iframe.style.border = 'none';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;';
+                    iframe.allowFullscreen = true;
+                    playerContainer.appendChild(iframe);
+                } else if (type === 'audio') {
+                    const audioUI = document.createElement('div');
+                    audioUI.id = 'audio-player-ui';
+                    audioUI.innerHTML = `<i id="audio-icon" class="fas fa-headphones-alt"></i><h3 id="audio-title">${title}</h3>`;
+
+                    const audio = document.createElement('audio');
+                    audio.src = `https://iframe.mediadelivery.net/${guid}/audio.mp3`;
+                    audio.controls = true;
+                    audio.autoplay = true;
+                    audioUI.appendChild(audio);
+                    playerContainer.appendChild(audioUI);
+                }
+            }
+
+            playlistItems.forEach(item => {
+                item.addEventListener('click', () => playMedia(item));
+            });
+
+            if (playlistItems.length > 0) {
+                playMedia(playlistItems[0]);
+            } else {
+                playerContainer.innerHTML = `<div id="audio-player-ui"><h3 id="audio-title">@(isRtl ? "لا يوجد محتوى متاح في هذه الباقة حالياً." : "No media available in this package yet.")</h3></div>`;
+            }
+        });
+    </script>
+}
+

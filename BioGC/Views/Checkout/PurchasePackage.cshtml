@@ -1,0 +1,85 @@
+﻿@model BioGC.ViewModels.PurchasePackageViewModel
+@{
+    ViewData["Title"] = "Purchase Package";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+}
+
+<div class="container my-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body p-5 text-center">
+                    <h2 class="card-title" data-en="Confirm Your Purchase" data-ar="تأكيد الشراء">Confirm Your Purchase</h2>
+                    <p class="text-muted">@(lang == "ar" ? "أنت على وشك شراء الباقة التالية:" : "You are about to purchase the following package:")</p>
+                    <h3 class="my-4">@(lang == "ar" ? Model.TitleAr : Model.TitleEn)</h3>
+                    <div class="display-4 fw-bold text-primary mb-4">$@Model.Price.ToString("F2")</div>
+
+                    <div id="paypal-button-container"></div>
+                    <div id="payment-error" class="alert alert-danger mt-3" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=@Model.PayPalClientId&currency=USD"></script>
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                const formData = new URLSearchParams();
+                formData.append('PackageId', '@Model.PackageId');
+
+                return fetch('/Checkout/CreatePackageOrder', {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: formData
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw new Error(err.error || 'Failed to create order on server.'); });
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.orderId) {
+                        return data.orderId;
+                    }
+                    throw new Error('Order ID not received from server.');
+                })
+                .catch(err => {
+                    document.getElementById('payment-error').textContent = err.message;
+                    document.getElementById('payment-error').style.display = 'block';
+                    return null;
+                });
+            },
+            onApprove: function(data, actions) {
+                const formData = new URLSearchParams();
+                formData.append('PayPalOrderId', data.orderID);
+
+                return fetch('/Checkout/CaptureOrder', {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        window.location.href = '/Checkout/OrderConfirmation?orderId=' + result.orderId;
+                    } else {
+                        throw new Error(result.message || 'Failed to finalize payment.');
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('payment-error').textContent = `An error occurred: ${error.message}`;
+                    document.getElementById('payment-error').style.display = 'block';
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+}
+

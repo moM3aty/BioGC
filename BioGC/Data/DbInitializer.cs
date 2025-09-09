@@ -18,7 +18,7 @@ namespace BioGC.Data
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
 
-            // Ensure database is created
+            // Ensure database is created and migrated
             await context.Database.MigrateAsync();
 
             // Seed Roles
@@ -48,55 +48,13 @@ namespace BioGC.Data
                 }
             }
 
-            // Seed Relaxation Service Product
-            await SeedRelaxationProduct(context, configuration);
-        }
-
-        private static async Task SeedRelaxationProduct(ApplicationDbContext context, IConfiguration configuration)
-        {
-            var productId = configuration.GetValue<int>("AppSettings:RelaxationServiceProductId");
-            if (productId == 0) return; 
-
-            // Check if the product already exists
-            if (!await context.Products.AnyAsync(p => p.Id == productId))
+            // Seed a parent category for Relaxation Packages
+            var relaxationCategory = await context.Categories.FirstOrDefaultAsync(c => c.NameEn == "Relaxation Programs");
+            if (relaxationCategory == null)
             {
-                // Ensure a category exists for it
-                var category = await context.Categories.FirstOrDefaultAsync(c => c.NameEn == "Digital Services");
-                if (category == null)
-                {
-                    category = new Category { NameEn = "Digital Services", NameAr = "خدمات رقمية" };
-                    context.Categories.Add(category);
-                    await context.SaveChangesAsync();
-                }
-
-                // Create the new product
-                var relaxationProduct = new Product
-                {
-                    Id = productId,
-                    NameEn = "Relaxation Content Access",
-                    NameAr = "اشتراك محتوى الاسترخاء",
-                    DescriptionEn = "Lifetime access to our exclusive library of relaxation videos and audio.",
-                    DescriptionAr = "وصول دائم لمكتبتنا الحصرية من فيديوهات وصوتيات الاسترخاء.",
-                    ImageUrl = "default-service.jpg", 
-                    PriceBeforeDiscount = 10.00m,
-                    PriceAfterDiscount = 10.00m,
-                    CategoryId = category.Id,
-                    IsListed = false,
-                    Stock = new Stock { Quantity = 999999 } 
-                };
-
-                await context.Database.OpenConnectionAsync();
-                try
-                {
-                    await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.Products ON");
-                    context.Products.Add(relaxationProduct);
-                    await context.SaveChangesAsync();
-                    await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.Products OFF");
-                }
-                finally
-                {
-                    await context.Database.CloseConnectionAsync();
-                }
+                relaxationCategory = new Category { NameEn = "Relaxation Programs", NameAr = "برامج الاسترخاء" };
+                context.Categories.Add(relaxationCategory);
+                await context.SaveChangesAsync();
             }
         }
     }

@@ -1,0 +1,165 @@
+﻿@model IEnumerable<IGrouping<BioGC.Models.Category, BioGC.Models.RelaxationPackage>>
+@{
+    ViewData["Title"] = "My Content Library";
+    var lang = Context.Request.Cookies["language"] ?? "en";
+    var isRtl = lang == "ar";
+    var pageTitle = isRtl ? "مكتبة المحتوى الخاصة بي" : "My Content Library";
+    var pageSubtitle = isRtl ? "هنا تجد جميع باقات الاسترخاء التي قمت بالاشتراك بها. استمتع بالمحتوى الحصري." : "Here you will find all the relaxation packages you have subscribed to. Enjoy the exclusive content.";
+    var viewContentBtnText = isRtl ? "عرض المحتوى" : "View Content";
+    var browsePackagesText = isRtl ? "تصفح باقات أخرى" : "Browse More Packages";
+}
+
+<style>
+    .library-body {
+        background-color: #f1f5f9;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .library-container {
+        padding: 100px 15px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .section-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2c5aa0;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+    .category-section {
+        margin-bottom: 40px;
+    }
+
+    .category-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #2c5aa0;
+    }
+
+    .package-card {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+    .package-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .package-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .package-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #2c5aa0;
+        margin-bottom: 10px;
+        flex-grow: 1;
+    }
+
+    .package-footer {
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .btn-view {
+        background: linear-gradient(135deg, #2c5aa0 0%, #1a4480 100%);
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: block;
+        text-align: center;
+    }
+
+        .btn-view:hover {
+            color: #fff;
+            opacity: 0.9;
+        }
+
+    .no-content {
+        text-align: center;
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+    }
+</style>
+
+<div class="library-body">
+    <div class="container library-container" dir="@(isRtl ? "rtl" : "ltr")">
+        <div class="section-header">
+            <h1>@pageTitle</h1>
+            <p>@pageSubtitle</p>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="no-content">
+                <p>@(isRtl ? "لم تشترك في أي باقة بعد." : "You haven't subscribed to any packages yet.")</p>
+                <a href="@Url.Action("Index", "Relaxation")" class="btn-view">@browsePackagesText</a>
+            </div>
+        }
+        else
+        {
+            @foreach (var group in Model)
+            {
+                var category = group.Key;
+                <section class="category-section">
+                    <h2 class="category-title">@(isRtl? category.NameAr: category.NameEn)</h2>
+                    <div class="row g-4">
+                        @foreach (var package in group)
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="package-card">
+                                    <div class="package-image" style="background-image: url('/images/packages/@package.ImageUrl')"></div>
+                                    <div class="package-content">
+                                        <h3 class="package-title">@(isRtl? package.TitleAr: package.TitleEn)</h3>
+                                        <div class="package-footer">
+                                            <a href="@Url.Action("Details", "Relaxation", new { id = package.Id })" class="btn-view">
+                                                @viewContentBtnText
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
+        }
+    </div>
+</div>

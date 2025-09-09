@@ -1,10 +1,11 @@
 ﻿using BioGC.Data;
 using BioGC.Models;
+using BioGC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,100 +15,97 @@ namespace BioGC.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<RelaxationController> _logger;
 
-        public RelaxationController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<RelaxationController> logger)
+        public RelaxationController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> RedirectToContent()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                    return RedirectToAction("Offer");
-                }
-
-                var userRoles = await _userManager.GetRolesAsync(user);
-                if (userRoles.Contains("Admin") || userRoles.Contains("PremiumUser"))
-                {
-                    return RedirectToAction("Index");
-                }
-
-                var hasPendingSubscription = await _context.RelaxationSubscriptions
-                    .AnyAsync(s => s.ApplicationUserId == user.Id && s.Status == "Pending Approval");
-
-                if (hasPendingSubscription)
-                {
-                    return RedirectToAction("SubscriptionPending");
-                }
-            }
-
-            return RedirectToAction("Offer");
-        }
-
-        [Authorize(Roles = "Admin,PremiumUser")]
         public async Task<IActionResult> Index()
         {
-            var content = await _context.RelaxationContents
-                .Include(c => c.Videos.OrderBy(v => v.Title))
-                .Include(c => c.Audios.OrderBy(a => a.Title))
-                .FirstOrDefaultAsync();
+            var user = await _userManager.GetUserAsync(User);
+            var approvedPackageIds = new HashSet<int>();
+            var pendingPackageIds = new HashSet<int>();
+            
+            var allPackages = await _context.RelaxationPackages
+                .Include(p => p.Category)
+                .Where(p => p.Category != null)
+                .GroupBy(p => p.Category)
+                .ToListAsync();
 
-            if (content == null || (!content.Videos.Any() && !content.Audios.Any()))
+            var viewModel = new RelaxationIndexViewModel
             {
-                return View("ContentNotAvailable");
-            }
+                AllPackages = allPackages,
+                ApprovedPackageIds = approvedPackageIds,
+                PendingPackageIds = pendingPackageIds
+            };
 
-            return View(content);
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> Offer()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                if (user != null)
-                {
-                    var userRoles = await _userManager.GetRolesAsync(user);
-                    if (userRoles.Contains("PremiumUser"))
-                    {
-                        return RedirectToAction("Index");
-                    }
-
-                    var hasPendingSubscription = await _context.RelaxationSubscriptions
-                        .AnyAsync(s => s.ApplicationUserId == user.Id && s.Status == "Pending Approval");
-
-                    if (hasPendingSubscription)
-                    {
-                        return RedirectToAction("SubscriptionPending");
-                    }
-                }
-            }
-
-
-            var relaxationServiceProduct = await _context.Products.FindAsync(1);
-
-            if (relaxationServiceProduct == null)
-            {
-                _logger.LogError("CRITICAL: The Relaxation Service Product with ID=1 was not found in the database. The offer page cannot be displayed.");
-                return View("ContentNotAvailable");
-            }
-
-            return View(relaxationServiceProduct);
+            return View(viewModel);
         }
 
         [Authorize]
-        public IActionResult SubscriptionPending()
+        public async Task<IActionResult> MyContent()
+        {
+            var userId = _userManager.GetUserId(User);
+            var userPackageIds = new List<int>();
+
+            if (User.IsInRole("Admin"))
+            {
+                userPackageIds = await _context.RelaxationPackages.Select(p => p.Id).ToListAsync();
+            }
+            else
+            {
+                userPackageIds = await _context.UserRelaxationPackages
+                                     .Where(up => up.ApplicationUserId == userId)
+                                     .Select(up => up.RelaxationPackageId)
+                                     .ToListAsync();
+            }
+
+            if (!userPackageIds.Any())
+            {
+                return View("AccessDenied");
+            }
+
+            var packages = await _context.RelaxationPackages
+                .Where(p => userPackageIds.Contains(p.Id))
+                .Include(p => p.Category)
+                .GroupBy(p => p.Category)
+                .ToListAsync();
+
+            return View(packages);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Details(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            bool hasAccess = await _context.UserRelaxationPackages
+                .AnyAsync(p => p.ApplicationUserId == userId && p.RelaxationPackageId == id);
+
+            if (!User.IsInRole("Admin") && !hasAccess)
+            {
+                return RedirectToAction("AccessDenied");
+            }
+
+            var package = await _context.RelaxationPackages
+                .Include(p => p.Videos)
+                .Include(p => p.Audios)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (package == null)
+            {
+                return NotFound();
+            }
+
+            return View(package);
+        }
+
+        [Authorize]
+        public IActionResult AccessDenied()
         {
             return View();
         }
     }
 }
+

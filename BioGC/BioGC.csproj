@@ -19,4 +19,10 @@
 		<PackageReference Include="Stripe.net" Version="48.3.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\packages\" />
+	  <Folder Include="wwwroot\images\products\" />
+	  <Folder Include="wwwroot\uploads\avatars\" />
+	</ItemGroup>
+
 </Project>

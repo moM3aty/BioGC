@@ -1,0 +1,84 @@
+﻿@model BioGC.Areas.Admin.ViewModels.RelaxationPackageViewModel
+@{
+    ViewData["Title"] = "Edit Relaxation Package";
+}
+
+<h1 data-ar="تعديل باقة" data-en="Edit Package">Edit Package</h1>
+<hr />
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ExistingImageUrl" />
+
+    <div class="row g-4">
+        <!-- Left Column: Details -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle me-1"></i>
+                    <span data-ar="تفاصيل الباقة" data-en="Package Details">Package Details</span>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="mb-3">
+                        <label asp-for="TitleEn" class="form-label"></label>
+                        <input asp-for="TitleEn" class="form-control" />
+                        <span asp-validation-for="TitleEn" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="TitleAr" class="form-label"></label>
+                        <input asp-for="TitleAr" class="form-control" />
+                        <span asp-validation-for="TitleAr" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DescriptionEn" class="form-label"></label>
+                        <textarea asp-for="DescriptionEn" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DescriptionAr" class="form-label"></label>
+                        <textarea asp-for="DescriptionAr" class="form-control" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Column: Meta -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-dollar-sign me-1"></i>
+                    <span data-ar="التسعير والفئة" data-en="Pricing & Category">Pricing & Category</span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CategoryId" class="form-label"></label>
+                        <select asp-for="CategoryId" class="form-select" asp-items="@Model.CategoryList">
+                            <option value="" data-ar="-- اختر الفئة --" data-en="-- Select Category --">-- Select Category --</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-image me-1"></i>
+                    <span data-ar="صورة الباقة" data-en="Package Image">Package Image</span>
+                </div>
+                <div class="card-body text-center">
+                    <img id="imagePreview" src="/images/packages/@Model.ExistingImageUrl" class="img-thumbnail mb-3" alt="Image Preview" onerror="this.onerror=null;this.src='https://placehold.co/300x300/f8f9fa/6c757d?text=Preview';" />
+                    <label asp-for="ImageFile" class="form-label" data-ar="تغيير الصورة (اختياري)" data-en="Change Image (Optional)"></label>
+                    <input asp-for="ImageFile" class="form-control" onchange="document.getElementById('imagePreview').src = window.URL.createObjectURL(this.files[0])" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i> <span data-ar="حفظ التغييرات" data-en="Save Changes">Save Changes</span></button>
+        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i> <span data-ar="العودة للقائمة" data-en="Back to List">Back to List</span></a>
+    </div>
+</form>

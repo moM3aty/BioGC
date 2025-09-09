@@ -15,6 +15,8 @@ namespace BioGC.Models
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
         public virtual ICollection<ContactMessage> ContactMessages { get; set; } = new List<ContactMessage>();
         public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        public virtual ICollection<UserRelaxationPackage> PurchasedRelaxationPackages { get; set; } = new List<UserRelaxationPackage>();
+
 
     }
 }
